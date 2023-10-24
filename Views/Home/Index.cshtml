@@ -1,8 +1,103 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    Layout = null;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <!-- Use Unicode character encoding - multi-language compatibility -->
+        <meta charset="utf-8">
+
+        <!-- Set the initial view zooming scale for mobile device -->
+        <meta name="viewport" content="width = device-width,
+     initial-scale = 1" />
+
+        <title>OCBC</title>
+
+        <!-- Reference to customized styling for this website -->
+        <link rel="stylesheet" type="text/css" href="~/css/Site.css">
+    </head>
+
+    <body>
+        <div class="Login">
+            <form id="form">
+                <h2 class="h2_inner">OCBC</h2>
+                <input type="email" id="email" placeholder="Email" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="submit" id="submit">Login</button>
+            </form>
+        </div>
+    </body>
+
+</html>
+
+
+<style>
+
+    * {
+        font-family: 'Montserrat', sans-serif;
+        background-color: red;
+        background-size: cover;
+    }
+
+
+    .Login {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .h2_inner {
+        background-color: white;
+        text-align: center;
+    }
+
+
+    .a_inner {
+        background-color: white;
+        margin-top: 10px;
+    }
+
+    form {
+        background: white;
+        display: flex;
+        flex-direction: column;
+        padding: 2vw 4vw;
+        width: 90%;
+        max-width: 600px;
+        border-radius: 10px;
+    }
+
+
+        form h2 {
+            color: #555;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+
+        form input, form textarea {
+            border: 0;
+            margin: 10px 0;
+            padding: 20px;
+            outline: none;
+            background: #f5f5f5;
+            font-size: 16px;
+        }
+
+        form button {
+            padding: 15px;
+            background: black;
+            color: white;
+            font-size: 18px;
+            border: 0;
+            outline: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+</style>
