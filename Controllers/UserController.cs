@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using PFD_GroupA.Controllers;
-using PFD_GroupA.DAL;
+﻿using Microsoft.AspNetCore.Mvc;
 using PFD_GroupA.Models;
 using System.Text.Json;
+
 
 
 namespace PFD_GroupA.Controllers
@@ -13,7 +11,10 @@ namespace PFD_GroupA.Controllers
         // GET: UserController
         public ActionResult Index()
         {
-          
+            /*if ((HttpContext.Session.GetString("AccountType") == null))
+            {
+
+            } */
             return View();
         }
 
