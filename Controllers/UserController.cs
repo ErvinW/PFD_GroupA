@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using PFD_GroupA.Controllers;
+using PFD_GroupA.DAL;
+using PFD_GroupA.Models;
+using System.Text.Json;
 
 
 namespace PFD_GroupA.Controllers
@@ -10,6 +13,7 @@ namespace PFD_GroupA.Controllers
         // GET: UserController
         public ActionResult Index()
         {
+          
             return View();
         }
 
