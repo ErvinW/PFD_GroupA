@@ -8,27 +8,26 @@ namespace PFD_GroupA.Models
 	public class User
 	{
 
-		[Display(Name = "ID")]
+		[Display(Name = "UserID")]
         [Required(ErrorMessage = "Account ID required")]
         [StringLength(50, ErrorMessage = "Length cannot exceed 50 characters")]
-        public string id { get; set; }
+        public string UserID { get; set; }
 
 		///
-
+		[Display(Name= "UserName")]
 		[Required(ErrorMessage ="Account name required")]
 		[StringLength(50, ErrorMessage ="Length cannot exceed 50 characters")]
 
-        public string Name { get; set; }
+        public string UserName { get; set; }
 
 		///
 
-		[Display(Name = "PIN")]
+		[Display(Name = "PinNum")]
 		[Required(ErrorMessage = "Account pin required")]
-		public string PIN {  get; set; }
+		public string PinNum {  get; set; }
 
 
-		[Display(Name = "Account Number")]
-		public double AccNo {  get; set; }
+		
 
 		
 
