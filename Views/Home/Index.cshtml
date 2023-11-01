@@ -27,6 +27,14 @@
 </head>
 <body>
 
+	<!-- Header Start -->
+	<section class="header">
+		<nav>
+			<a href="~/User/Index"><img src="/images/logo.png" alt=""></a>
+		</nav>
+	</section>
+	<!-- Header End -->
+
 	<!-- Login Page Start -->
 	<div class="section">
 		<div class="container">
@@ -88,6 +96,10 @@
 												Submit
 												<input type="submit" value="Submit" />
 											</label>
+											<p class="mb-0 mt-4 text-center">
+												<span class="non-bold-text">Already a member? </span>
+												<a href="#0" class="link" id="login-link">Login Now.</a>
+											</p>
 										</div>
 									</div>
 								</div>
@@ -102,6 +114,14 @@
 
 
 	<script>
+		document.getElementById("login-link").addEventListener("click", function (event) {
+			event.preventDefault(); // Prevent the default behavior of the link
+			const checkbox = document.getElementById("reg-log");
+			if (checkbox) {
+				checkbox.checked = !checkbox.checked; // Toggle the checkbox
+			}
+		});
+
 		document.getElementById("signup-link").addEventListener("click", function (event) {
 			event.preventDefault(); // Prevent the default behavior of the link
 			const checkbox = document.getElementById("reg-log");
