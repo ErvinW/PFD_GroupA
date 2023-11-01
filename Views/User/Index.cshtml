@@ -1,13 +1,107 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-<!DOCTYPE html>
-
+﻿<!DOCTYPE html>
 <html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OCBC Bank</title>
 
-    <h1>
-        hello
-    </h1>
+    <!-- CSS File -->
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <!-- Unicons -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+
+    <!-- Box Icons -->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Header & Home Section Start -->
+    <section class="header">
+        <nav>
+            <a href="~/User/Index"><img src="/images/logo.png" alt=""></a>
+            <div class="nav-links" id="navLinks">
+                <i class="fa fa-times" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="~/User/Index">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="#promotions">Promotions</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="~/Home/Index">Login</a></li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+
+        <div class="text-box">
+            <h1>Guaranteed return of 3.5% p.a. 
+                <br>
+                upon maturity in 2 years</h1>
+            <br>
+            <br>
+            <a href="" class="hi-btn">Find out more</a>
+            <br>
+            <br>
+            <br>
+            <p>
+                T&Cs apply. Protected up to specified limits by SDIC. 
+                <br>
+                This advertisement has not been reviewed by the Monetary Authority of Singapore.
+            </p>
+
+        </div>
+    </section>
+    <!-- Header & Home Section End -->
+
+
+    <section class="section" id="promotions">
+        <h1>Exclusive Offers and Services</h1>
+        <div class="row">
+            <div class="section-col">
+                <h3>Cash Reward Promotion for OCBC 360 Account</h3>
+                <p>
+                    Unlock a Reward of Up to S$180
+                    Experience the privilege of earning up to S$180 in cash rewards by initiating the opening of your OCBC 360 Account and seamlessly crediting your salary within a span of 2 months.
+                    <br>
+                    <br>
+                    Discover Further Details
+                    This exclusive offer remains valid until December 31, 2023, with a limited number of redemptions available. Please be advised that terms and conditions are applicable. Your deposits are insured up to S$75,000 by the Singapore Deposit Insurance Corporation (SDIC).
+                </p>
+            </div>
+            <div class="section-col">
+                <h3>Hassle-free Tax Refunds with Global Blue and OCBC Cards</h3>
+                <p>
+                    Effortless Tax Refunds with Global Blue and OCBC Cards
+                    Savor a streamlined and efficient Tax Free shopping experience while traveling abroad, courtesy of Global Blue and OCBC Cards.
+                    <br>
+                    <br>
+                    Explore Additional Information
+                    Global Blue Tax Free Shopping is a third-party service generously provided by Global Blue. Be mindful that Global Blue Tax Free Shopping is subject to Global Blue's Terms & Conditions. OCBC Bank, however, does not assume any responsibility or liability arising from, or related to, the usage of the Global Blue Tax Free Shopping service.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+
+
+    
+
+
+
+
+
+    <!-- Tracking Js Section -->
+    <script src="~/js/tracking.js" asp-append-version="true"></script>
+</body>
 </html>
