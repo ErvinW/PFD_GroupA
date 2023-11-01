@@ -1,105 +1,115 @@
-﻿@{
-    Layout = null;
-}
-
+﻿
 <!DOCTYPE html>
-
 <html>
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>OCBC Bank</title>
 
-    <head>
-        <!-- Use Unicode character encoding - multi-language compatibility -->
-        <meta charset="utf-8">
+	<!-- CSS File -->
+	<link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css'>
 
-        <!-- Set the initial view zooming scale for mobile device -->
-        <meta name="viewport" content="width = device-width,
-     initial-scale = 1" />
+	<!-- Unicons -->
+	<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
 
-        <title>OCBC</title>
+	<!-- Box Icons -->
+	<link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 
-        <!-- Reference to customized styling for this website -->
-        <link rel="stylesheet" type="text/css" href="~/css/Site.css">
-    </head>
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 
-    <body>
-        <div class="Login">
-            <form id="form">
-                <h2 class="h2_inner">OCBC</h2>
-                <input type="email" id="email" placeholder="Email" required>
-                <input type="password" id="password" placeholder="Password" required>
-                <button type="submit" id="submit">Login</button>
-            </form>
-        </div>
-    </body>
+	<!-- Google Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
 
-    <a href="~/User/Index">Hello</a> 
+	<!-- Login Page Start -->
+	<div class="section">
+		<div class="container">
+			<div class="row full-height justify-content-center">
+				<div class="col-12 text-center align-self-center py-5">
 
+					<div class="section pb-5 pt-5 pt-sm-2 text-center">
+						<h6 class="mb-0 pb-3"><span>Log In </span><span>Sign Up</span></h6>
+						<input class="checkbox" type="checkbox" id="reg-log" name="reg-log" />
+						<label for="reg-log"></label>
+						<div class="card-3d-wrap mx-auto">
+							<div class="card-3d-wrapper">
+
+
+								<div class="card-front">
+									<div class="center-wrap">
+										<div class="section text-center">
+											<h4 class="mb-4 pb-3">Log In</h4>
+											<div class="form-group">
+												<input type="text" name="logemail" class="form-style" placeholder="Access Code" id="logemail" autocomplete="off">
+												<i class="input-icon uil uil-at"></i>
+											</div>
+											<div class="form-group mt-2">
+												<input type="password" inputmode="numeric" pattern="[0-9]*" name="logpass" class="form-style" placeholder="PIN" id="logpass" autocomplete="off">
+												<i class="input-icon uil uil-lock-alt"></i>
+											</div>
+											<br>
+											<label class="submit-button">
+												Submit
+												<input type="submit" value="Submit" />
+											</label>
+											<p class="mb-0 mt-4 text-center">
+												<span class="non-bold-text">Don't have Online Banking? </span>
+												<a href="#0" class="link" id="signup-link">Sign up now.</a>
+											</p>
+										</div>
+									</div>
+								</div>
+
+
+								<div class="card-back">
+									<div class="center-wrap">
+										<div class="section text-center">
+											<h4 class="mb-4 pb-3">Sign Up</h4>
+											<div class="form-group">
+												<input type="text" name="logname" class="form-style" placeholder="Your Full Name" id="logname" autocomplete="off">
+												<i class="input-icon uil uil-user"></i>
+											</div>
+											<div class="form-group mt-2">
+												<input type="text" name="logemail" class="form-style" placeholder="Access Code" id="logemail" autocomplete="off">
+												<i class="input-icon uil uil-at"></i>
+											</div>
+											<div class="form-group mt-2">
+												<input type="password" inputmode="numeric" pattern="[0-9]*" name="logpass" class="form-style" placeholder="PIN" id="logpass" autocomplete="off">
+												<i class="input-icon uil uil-lock-alt"></i>
+											</div>
+											<br>
+											<label class="submit-button">
+												Submit
+												<input type="submit" value="Submit" />
+											</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Login Page End -->
+
+
+	<script>
+		document.getElementById("signup-link").addEventListener("click", function (event) {
+			event.preventDefault(); // Prevent the default behavior of the link
+			const checkbox = document.getElementById("reg-log");
+			if (checkbox) {
+				checkbox.checked = !checkbox.checked; // Toggle the checkbox
+			}
+		});
+	</script>
+
+</body>
 </html>
-
-
-<style>
-
-    * {
-        font-family: 'Montserrat', sans-serif;
-        background-color: red;
-        background-size: cover;
-    }
-
-
-    .Login {
-        width: 100%;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .h2_inner {
-        background-color: white;
-        text-align: center;
-    }
-
-
-    .a_inner {
-        background-color: white;
-        margin-top: 10px;
-    }
-
-    form {
-        background: white;
-        display: flex;
-        flex-direction: column;
-        padding: 2vw 4vw;
-        width: 90%;
-        max-width: 600px;
-        border-radius: 10px;
-    }
-
-
-        form h2 {
-            color: #555;
-            font-weight: 800;
-            margin-bottom: 20px;
-        }
-
-
-        form input, form textarea {
-            border: 0;
-            margin: 10px 0;
-            padding: 20px;
-            outline: none;
-            background: #f5f5f5;
-            font-size: 16px;
-        }
-
-        form button {
-            padding: 15px;
-            background: black;
-            color: white;
-            font-size: 18px;
-            border: 0;
-            outline: none;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-
-</style>
