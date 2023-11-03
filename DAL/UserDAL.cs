@@ -23,5 +23,43 @@ namespace PFD_GroupA.DAL
 
             conn = new SqlConnection(strConn);  
         }
+
+
+        public User Login(string loginId, string password)
+        {
+            //Create a SqlCommand object from connection object
+            SqlCommand cmd = conn.CreateCommand();
+            //Specify the SELECT SQL statement 
+            cmd.CommandText = @"SELECT * FROM UserAccount where UserID = @loginID";
+            cmd.Parameters.AddWithValue("@loginID", loginId);
+            //Open a database connection
+            conn.Open();
+            //Execute the SELECT SQL through a DataReader
+            SqlDataReader reader = cmd.ExecuteReader();
+            //Read all records until the end
+            User? user = null;
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    // Convert email address to lowercase for comparison
+                    // Password comparison is case-sensitive
+                    if ((reader.GetString(0).ToLower() == loginId) &&
+                    (reader.GetString(2) == password))
+                    {
+
+                        user = new User();
+                        user.UserID = reader.GetString(0);
+                        user.UserName = reader.GetString(1);
+                        user.PinNum = reader.GetString(2);
+                        break; // Exit the while loop
+                    }
+                }
+            }
+
+            reader.Close();
+            conn.Close();
+            return user;
+        }
     }
 }
