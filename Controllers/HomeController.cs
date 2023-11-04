@@ -15,58 +15,37 @@ namespace PFD_GroupA.Controllers
         private UserDAL userContext = new UserDAL();
 
 
-		public HomeController(ILogger<HomeController> logger)
-		{
-			_logger = logger;
-		}
-
 		public IActionResult Index()
 		{
 			return View();
 		}
 
-		public IActionResult Privacy()
+
+		[HttpPost]
+		public ActionResult Login(IFormCollection account)
 		{
-			return View();
+
+			string loginID = account["UserID"].ToString().ToLower();
+			string Name = account["name"].ToString().ToLower();
+			string password = account["PinNum"].ToString();
+			User? user = userContext.Login(loginID, password);
+			if (user != null)
+			{
+				//Store account deets in Session
+				HttpContext.Session.SetString("LoginID", loginID);
+				HttpContext.Session.SetString("Name", Name);
+				return RedirectToAction("Index", "User");
+			}
+			else
+			{
+				TempData["Message"] = "Invalid Login Credentials";
+				return RedirectToAction("Index");
+			}
 		}
 
-		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-		public IActionResult Error()
-		{
-			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-		}
 
 
-        public IActionResult Login()
-        {
-
-            return View();
-
-        }
-        [HttpPost]
-
-        public ActionResult Login(IFormCollection account)
-        {
-
-            string loginID = account["UserID"].ToString().ToLower();
-
-            string password = account["PinNum"].ToString();
-            User? user = userContext.Login(loginID, password);
-            if (user != null)
-            {
-                /*string role = user.Appointment.Replace(" ", "");
-                var jsonString = JsonSerializer.Serialize(user);
-                HttpContext.Session.SetString("AccountObject", jsonString);
-                HttpContext.Session.SetString("AccountType", staff.Appointment);*/
-                return RedirectToAction("Index", "User");
-            }
-            else
-            {
-                ViewData["Invalid"] = true;
-                return View();
-            }
-        }
-    }
+	}
 }
 
 //test commit

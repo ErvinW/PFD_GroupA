@@ -18,6 +18,11 @@ namespace PFD_GroupA.Controllers
             return View();
         }
 
+        public ActionResult Transfer()
+        {
+            return View();
+        }
+
         // GET: UserController/Details/5
         public ActionResult Details(int id)
         {
