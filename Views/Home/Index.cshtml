@@ -65,12 +65,12 @@
 
                                     <div class="form-outline mb-4">
                                         <label class="form-label" asp-for="UserID"></label>
-                                        <input  asp-for = "UserID" class="form-control form-control-lg" />
+										<input asp-for="UserID" class="form-control form-control-lg" id="usernameLogin" />
                                     </div>
 
                                     <div class="form-outline mb-4">
                                         <label class="form-label" asp-for = "PinNum">Password</label>
-                                        <input asp-for = "PinNum" class="form-control form-control-lg" />
+                                        <input asp-for = "PinNum" class="form-control form-control-lg" id="usernamePassword"/>
                                         <br />
                                             @{
                                                 if (ViewData["Invalid"] != null)
@@ -85,7 +85,7 @@
                                     </div>
 
                                     <div class="pt-1 mb-4">
-                                        <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
+                                        <button class="btn btn-dark btn-lg btn-block" type="submit" id="loginBtn">Login</button>
                                         
                                     </div>
 
@@ -129,8 +129,8 @@
 		</div>
 	</div>
 	<!-- Login Page End -->
-
-
+	<!-- Javascript Section -->
+	<script src="~/js/login.js" asp-append-version="true"></script>
 	<script>
 		document.getElementById("login-link").addEventListener("click", function (event) {
 			event.preventDefault(); // Prevent the default behavior of the link
