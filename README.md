@@ -1,5 +1,4 @@
 # PFD_GroupA
-# Project Name
 OCBC Hackathon: Increasing Accesibility for people with mobility disabilities
 
 ## Description
