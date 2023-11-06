@@ -20,6 +20,11 @@ namespace PFD_GroupA.Controllers
 			return View();
 		}
 
+		public IActionResult Landing()
+		{
+			return View();
+		}
+
 
 		[HttpPost]
 		public ActionResult Login(IFormCollection account)
