@@ -30,15 +30,15 @@ namespace PFD_GroupA.Controllers
 		public ActionResult Login(IFormCollection account)
 		{
 
-			string loginID = account["UserID"].ToString().ToLower();
-			string Name = account["name"].ToString().ToLower();
-			string password = account["PinNum"].ToString();
+			string loginID = account["logemail"].ToString().ToLower();
+			string password = account["logpass"].ToString().ToLower();
+            //string password = account["PinNum"].ToString();
 			User? user = userContext.Login(loginID, password);
-			if (user != null)
+            if (user != null)
 			{
 				//Store account deets in Session
 				HttpContext.Session.SetString("LoginID", loginID);
-				HttpContext.Session.SetString("Name", Name);
+				HttpContext.Session.SetString("Name", password);
 				return RedirectToAction("Index", "User");
 			}
 			else

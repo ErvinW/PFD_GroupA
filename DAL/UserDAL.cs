@@ -1,4 +1,5 @@
 ﻿using System.Data.SqlClient;
+using System.Security.Cryptography.Xml;
 using PFD_GroupA.Models;
 
 
@@ -42,17 +43,15 @@ namespace PFD_GroupA.DAL
             {
                 while (reader.Read())
                 {
-                    // Convert email address to lowercase for comparison
-                    // Password comparison is case-sensitive
+					// Password comparison is case-sensitive
                     if ((reader.GetString(0).ToLower() == loginId) &&
                     (reader.GetString(2) == password))
                     {
-
-                        user = new User();
+						user = new User();
                         user.UserID = reader.GetString(0);
                         user.UserName = reader.GetString(1);
                         user.PinNum = reader.GetString(2);
-                        break; // Exit the while loop
+                        break;
                     }
                 }
             }
