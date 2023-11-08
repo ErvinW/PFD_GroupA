@@ -1,13 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PFD_GroupA.DAL;
 using PFD_GroupA.Models;
 using System.Text.Json;
-
-
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Runtime.ConstrainedExecution;
+using System.Diagnostics;
 
 namespace PFD_GroupA.Controllers
 {
     public class UserController : Controller
     {
+
+
         // GET: UserController
         public ActionResult Index()
         {

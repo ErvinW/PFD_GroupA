@@ -3,11 +3,13 @@
 @{
     ViewData["Title"] = "USER HOME";
     var AccountString = Context.Session.GetString("AccountObject");
+    var BankAccString = Context.Session.GetString("BankAcc");
     var type = Context.Session.GetString("AccountType");
     var AccountObject = JsonSerializer.Deserialize<User>(AccountString);
+    var BankObject = JsonSerializer.Deserialize<Account>(BankAccString);
     string AccountName = AccountObject.UserName;
     string AccountID = AccountObject.UserID;
-
+    string AccountNum = BankObject.BankAccNo;
 }
 
 
@@ -56,7 +58,6 @@
                         <i class="fa-solid fa-user fa-beat fa-sm"></i> 
                         <a href="~/Home/Index">Logout</a>
                     </li>
-
                 </ul>
             </div>
             <i class="fa fa-bars" onclick="showMenu()"></i>

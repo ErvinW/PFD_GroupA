@@ -13,9 +13,12 @@ namespace PFD_GroupA.Controllers
 	{
 		private readonly ILogger<HomeController> _logger;
         private UserDAL userContext = new UserDAL();
+        private AccountDAL AccountContext = new AccountDAL();
 
 
-		public IActionResult Index()
+
+
+        public IActionResult Index()
 		{
 			return View();
 		}
@@ -25,6 +28,7 @@ namespace PFD_GroupA.Controllers
 			return View();
 		}
 
+		
 
 		[HttpPost]
 		public ActionResult Login(IFormCollection account)
@@ -32,14 +36,17 @@ namespace PFD_GroupA.Controllers
 
 			string loginID = account["logemail"].ToString().ToLower();
 			string password = account["logpass"].ToString().ToLower();
+			
             //string password = account["PinNum"].ToString();
 			User? user = userContext.Login(loginID, password);
             if (user != null)
 			{
-				//Console.WriteLine(user.UserID);
-				//Store account deets in Session
-				var jsonString = JsonSerializer.Serialize(user);
-				//Console.WriteLine(jsonString);
+                Account BankAccount = AccountContext.GetAccount(loginID);
+                //Console.WriteLine(user.UserID);
+                //Store account deets in Session
+                var jsonString = JsonSerializer.Serialize(user);
+				var jsonAccString = JsonSerializer.Serialize(BankAccount);
+				HttpContext.Session.SetString("BankAcc", jsonAccString);
 				HttpContext.Session.SetString("AccountObject", jsonString);
 				HttpContext.Session.SetString("AccountType", "User");
 				return RedirectToAction("Index", "User");

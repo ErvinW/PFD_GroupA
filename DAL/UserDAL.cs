@@ -1,7 +1,7 @@
 ﻿using System.Data.SqlClient;
 using System.Security.Cryptography.Xml;
 using PFD_GroupA.Models;
-
+using PFD_GroupA.DAL;
 
 namespace PFD_GroupA.DAL
 {
@@ -10,6 +10,8 @@ namespace PFD_GroupA.DAL
 
         private IConfiguration Configuration { get; }
         private SqlConnection conn;
+           
+
 
         public UserDAL()
         {
@@ -28,6 +30,7 @@ namespace PFD_GroupA.DAL
 
         public User Login(string loginId, string password)
         {
+            
             //Create a SqlCommand object from connection object
             SqlCommand cmd = conn.CreateCommand();
             //Specify the SELECT SQL statement 
