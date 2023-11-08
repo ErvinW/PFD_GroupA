@@ -36,9 +36,12 @@ namespace PFD_GroupA.Controllers
 			User? user = userContext.Login(loginID, password);
             if (user != null)
 			{
+				//Console.WriteLine(user.UserID);
 				//Store account deets in Session
-				HttpContext.Session.SetString("LoginID", loginID);
-				HttpContext.Session.SetString("Name", password);
+				var jsonString = JsonSerializer.Serialize(user);
+				//Console.WriteLine(jsonString);
+				HttpContext.Session.SetString("AccountObject", jsonString);
+				HttpContext.Session.SetString("AccountType", "User");
 				return RedirectToAction("Index", "User");
 			}
 			else
