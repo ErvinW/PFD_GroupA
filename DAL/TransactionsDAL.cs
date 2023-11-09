@@ -48,7 +48,8 @@ namespace PFD_GroupA.DAL
                     {
                         SenderAccount = reader.GetString(0),
                         RecipientAccount = reader.GetString(1),
-                        AmountSent = reader.GetDecimal(2)
+                        AmountSent = reader.GetDecimal(2),
+                        TransactionDate = reader.GetDateTime(3)
                     }
                     );
 

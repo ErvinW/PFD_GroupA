@@ -13,5 +13,9 @@ namespace PFD_GroupA.Models
 
         [Display(Name = "AmountSent")]
         public SqlMoney AmountSent { get; set; }
+
+
+        [Display(Name = "TransactionDate")]
+        public DateTime TransactionDate { get; set; }
     }
 }
