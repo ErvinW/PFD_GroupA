@@ -1,7 +1,19 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+
+@using System.Text.Json
+
 @{
+    ViewData["Title"] = "USER TRANSFER";
+    var AccountString = Context.Session.GetString("AccountObject");
+    var BankAccString = Context.Session.GetString("BankAcc");
+    var type = Context.Session.GetString("AccountType");
+    var AccountObject = JsonSerializer.Deserialize<User>(AccountString);
+    var BankObject = JsonSerializer.Deserialize<Account>(BankAccString);
+    string AccountName = AccountObject.UserName;
+    string AccountID = AccountObject.UserID;
+    string AccountNum = BankObject.BankAccNo;
 }
 
 <main>
