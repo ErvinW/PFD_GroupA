@@ -34,7 +34,7 @@ namespace PFD_GroupA.DAL
         {
             SqlCommand cmd = conn.CreateCommand();
             cmd.CommandText = @"SELECT * FROM Transactions WHERE SenderAccount = @SenderAccount";
-            cmd.Parameters.AddWithValue(@"UserID", SenderAccount);
+            cmd.Parameters.AddWithValue(@"SenderAccount", SenderAccount);
             conn.Open();
             SqlDataReader reader = cmd.ExecuteReader();
            List<Transactions> transactionList = new List<Transactions>();
