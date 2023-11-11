@@ -24,10 +24,10 @@ namespace PFD_GroupA.Controllers
 
         public ActionResult Transfer()
         {
-            string Object = HttpContext.Session.GetString("AccountObject");
+            /*string Object = HttpContext.Session.GetString("AccountObject");
             User AccountObject = JsonSerializer.Deserialize<User>(Object);
 			List<Transactions> OutgoingTransactions = transactionsContext.GetSenderTransactions(AccountObject.UserID);
-            
+            */
             return View();
         }
 

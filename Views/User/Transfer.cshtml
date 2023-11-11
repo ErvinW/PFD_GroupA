@@ -9,15 +9,130 @@
     var AccountString = Context.Session.GetString("AccountObject");
     var BankAccString = Context.Session.GetString("BankAcc");
     var type = Context.Session.GetString("AccountType");
-    var AccountObject = JsonSerializer.Deserialize<User>(AccountString);
+    /*var AccountObject = JsonSerializer.Deserialize<User>(AccountString);
     var BankObject = JsonSerializer.Deserialize<Account>(BankAccString);
     string AccountName = AccountObject.UserName;
     string AccountID = AccountObject.UserID;
-    string AccountNum = BankObject.BankAccNo;
+    string AccountNum = BankObject.BankAccNo;*/
 }
 
-<main>
-    <h1>
-        Hello
-    </h1>
-</main>
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transfer Page </title>
+
+    <!-- CSS File -->
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/backnavbar.css" />
+    <link rel="stylesheet" href="~/css/transferpg.css" />
+
+    <!-- Unicons -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+
+    <!-- Box Icons -->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+    <!-- Header & Home Section Start -->
+    <section class="header">
+        <nav>
+            <a href="~/User/Index"><img src="/images/logo.png" alt=""></a>
+            <div class="nav-links" id="navLinks">
+                <i class="fa fa-times" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="~/User/Index">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="#promotions">Promotions</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="~/User/Transfer">Transfer</a></li>
+                    <li>
+                        <i class="fa-solid fa-user fa-beat fa-sm"></i>
+                        <a href="~/Home/Index">Logout</a>
+                    </li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+        <div class="breadcrumbs">
+            &nbsp; <a href="~/User/Index">Home</a> >
+            <a href="~/User/Transfer">Transfer</a>
+        </div>
+
+    <div id="container">
+        <h1>Fund Transfer</h1>
+            <!--<hr style="width:60%;text-align:left;margin-left:90px">-->
+            <form action="#" method="post">
+                <div class="form-group">
+                    <label for="sender">From Account:</label>
+                    <input type="text" id="sender" name="sender" placeholder="Sender's Account" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="recipient">To Account:</label>
+                    <input type="text" id="recipient" name="recipient" placeholder="Recipient's Account" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="amount">Amount:</label>
+                    <input type="number" id="amount" name="amount" placeholder="Amount" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="currency">Currency:</label>
+                    <select id="currency" name="currency">
+                        <option value="usd">US Dollar (USD)</option>
+                        <option value="eur">Euro (EUR)</option>
+                        <option value="gbp">British Pound (GBP)</option>
+                        <option value="jpy">Japanese Yen (JPY)</option>
+                        <option value="aud">Australian Dollar (AUD)</option>
+                        <option value="sgd">Singapore Dollar (SGD)</option>
+                    </select>
+                    <!--<span id="currency-arrow" class="arrow-down"></span>-->
+
+                </div>
+
+                <div class="form-group">
+                    <div class="action-btn">
+                        
+                        <a class="back-button" href="~/User/Index" style="width: 150px;">Back</a>
+                        <button name="submit" class="submit-btn" type="submit" value="Save" onclick="myFunction()">Submit Transfer</button>
+                        <p id="saved"></p>
+                    </div>
+                </div>
+            </form>
+    </div>
+        <div class="sidebar">
+            <ul>
+                <li><a href="#section1">Funds Transfer</a></li>
+                    <ul>
+                        <li><a href="#subsection1">Local</a></li>
+                        <li><a href="#subsection2">Overseas</a></li>
+                    </ul>
+                <li><a href="#section2">Bills Payment</a></li>
+                <li><a href="#section3">GIRO</a></li>
+                <li><a href="#section4">Top Up Card</a></li>
+            </ul>
+        </div>
+
+        <!-- Javascript Section -->
+        <script src="~/js/transfer.js" ></script>
+</body>
+</html>
+
