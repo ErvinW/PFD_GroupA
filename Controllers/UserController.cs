@@ -31,6 +31,11 @@ namespace PFD_GroupA.Controllers
             return View();
         }
 
+        public ActionResult Keybind()
+        {
+            return View();
+        }
+
         // GET: UserController/Details/5
         public ActionResult Details(int id)
         {
