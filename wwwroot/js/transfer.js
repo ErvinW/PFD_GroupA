@@ -13,3 +13,4 @@ currencySelect.addEventListener('change', () => {
         currencyArrow.classList.remove('arrow-up');
     }
 });
+

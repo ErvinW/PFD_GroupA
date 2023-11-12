@@ -104,5 +104,13 @@ namespace PFD_GroupA.Controllers
                 return View();
             }
         }
+        public ActionResult Confirmation()
+        {
+            /*string Object = HttpContext.Session.GetString("AccountObject");
+            User AccountObject = JsonSerializer.Deserialize<User>(Object);
+			List<Transactions> OutgoingTransactions = transactionsContext.GetSenderTransactions(AccountObject.UserID);
+            */
+            return View();
+        }
     }
 }

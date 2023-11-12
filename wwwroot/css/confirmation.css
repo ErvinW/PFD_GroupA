@@ -1,0 +1,64 @@
+﻿.confirmation {
+    text-align: center;
+    padding: 20px;
+    /*background-color:white;
+    opacity:0.8;*/
+    color: white;
+    font-size: small;
+    font-size: 13px;
+    background-color: rgb(0, 0, 0, 0.1);  /*Translucent light gray background */
+    width: 80%; /* Adjust the width as needed */
+    height: 100%; /* Adjust the height as needed */
+    margin: 0 auto;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+}
+
+.payment-completed {
+    font-size: 40px;
+}
+
+.tick-icon {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    color: #fff;
+    font-size: 55px;
+}
+
+p {
+    margin: 0;
+    color:white;
+}
+
+.bold-text {
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.total-amount {
+    font-weight: 600;
+    font-size: 40px;
+}
+
+.return-button {
+    position: fixed;
+    bottom: 7%;
+    right: 10%;
+    padding: 10px 20px;
+    background-color: #6e6e6e;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+    .return-button:hover {
+        background-color: grey ; /* Change the background color on hover */
+    }
