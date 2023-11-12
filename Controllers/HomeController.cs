@@ -14,6 +14,7 @@ namespace PFD_GroupA.Controllers
 		private readonly ILogger<HomeController> _logger;
         private UserDAL userContext = new UserDAL();
         private AccountDAL AccountContext = new AccountDAL();
+		private UserKeybindsDAL userKeybindsContext = new UserKeybindsDAL();
 
 
 
@@ -39,6 +40,7 @@ namespace PFD_GroupA.Controllers
 			
             //string password = account["PinNum"].ToString();
 			User? user = userContext.Login(loginID, password);
+			UserKeybinds? userKeybinds = userKeybindsContext.GetUserKeybinds(loginID);
             if (user != null)
 			{
                 Account BankAccount = AccountContext.GetAccount(loginID);
