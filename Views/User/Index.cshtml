@@ -5,11 +5,11 @@
     var AccountString = Context.Session.GetString("AccountObject");
     var BankAccString = Context.Session.GetString("BankAcc");
     var type = Context.Session.GetString("AccountType");
-    /*var AccountObject = JsonSerializer.Deserialize<User>(AccountString);
+    var AccountObject = JsonSerializer.Deserialize<User>(AccountString);
     var BankObject = JsonSerializer.Deserialize<Account>(BankAccString);
     string AccountName = AccountObject.UserName;
     string AccountID = AccountObject.UserID;
-    string AccountNum = BankObject.BankAccNo;*/
+    string AccountNum = BankObject.BankAccNo;
 }
 
 <!DOCTYPE html>
@@ -293,6 +293,7 @@
     <!-- Javascript Section -->
     <script src="~/js/dashboard.js" asp-append-version="true"></script>
 	<script src="~/js/chart.js" asp-append-version="true"></script>
+	<script src="~/js/site.js"></script>
 
 </body>
 </html>
