@@ -12,8 +12,6 @@
     string AccountNum = BankObject.BankAccNo;*/
 }
 
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +21,7 @@
     <title>USER </title>
 
     <!-- CSS File -->
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/dashboard.css" asp-append-version="true" />
 
     <!-- Unicons -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
@@ -34,97 +32,267 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 
+	<!-- Flat Icons -->
+	<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    
-    <!-- Header & Home Section Start -->
-    <section class="header">
-        <nav>
-            <a href="~/User/Index"><img src="/images/logo.png" alt=""></a>
-            <div class="nav-links" id="navLinks">
-                <i class="fa fa-times" onclick="hideMenu()"></i>
-                <ul>
-                    <li><a href="~/User/Index">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="#promotions">Promotions</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="~/User/Transfer">Transfer</a></li>
-                    <li>
-                        <i class="fa-solid fa-user fa-beat fa-sm" style="color: white;"></i>
-                        <a href="~/Home/Index" style="color: white;">Logout</a>
-                    </li>
-                </ul>
-            </div>
-            <i class="fa fa-bars" onclick="showMenu()"></i>
-        </nav>
 
-        <div class="text-box">
-            <h1>Guaranteed return of 3.5% p.a. 
-                <br>
-                upon maturity in 2 years</h1>
-            <br>
-            <br>
-            <a href="" class="hi-btn">Find out more</a>
-            <br>
-            <br>
-            <br>
-            <p>
-                T&Cs apply. Protected up to specified limits by SDIC. 
-                <br>
-                This advertisement has not been reviewed by the Monetary Authority of Singapore.
-            </p>
+	
 
-        </div>
-    </section>
-    <!-- Header & Home Section End -->
+		<!-- Dashboard Side Bar Section Starts -->
+		<section id="sidebar">
+			<nav>
+		<a href="~/User/Index" class="brand">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/logo.png" alt="">
+			</a>
+			<ul class="side-menu top">
+				<li class="active">
+					<a href="#">
+						<i class='bx bxs-home'></i>
+						<span class="text">Home</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<i class='bx bx-line-chart'></i>
+						<span class="text"> Account</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<i class='bx bx-transfer'></i>
+						<span class="text">Transfer</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<i class='bx bx-credit-card'></i>
+						<span class="text">Cards</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<i class='bx bxs-cog'></i>
+						<span class="text">Settings</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<i class='bx bx-help-circle'></i>
+						<span class="text">Help</span>
+					</a>
+				</li>
+				<li>
+					<a href="~/Home/Index" class="logout">
+						<i class='bx bx-exit'></i>
+						<span class="text">Logout</span>
+					</a>
+				</li>
+			</ul>
+		</nav>
+		</section>
+		<!-- Dashboard Side Bar Section End -->
+
+		<!-- Search Bar & Light Switch Start -->
+			<section id="content">
+			<nav>
+				<i class='bx bx-menu'></i>
+				<form action="#">
+					<div class="form-input">
+						<input type="search" placeholder="Search...">
+						<button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+					</div>
+				</form>
+				<input type="checkbox" id="switch-mode" hidden>
+				<label for="switch-mode" class="switch-mode"></label>
+				<a href="#" class="notification">
+					<i class='bx bxs-bell'></i>
+					<span class="num">8</span>
+				</a>
+				<a href="#" class="profile">
+				<i class="fa-solid fa-user fa-beat fa-sm" style="color: #3c91e6;"></i>
+				</a>
+			</nav>
+		<!-- Search Bar & Light Switch End -->
+		<!-- Dashboard Section Start -->
+			<main>
+				<div class="head-title">
+					<div class="left">
+						<h1>Account Overview</h1>
+						<ul class="breadcrumb">
+							<li>
+								<a href="#">Home</a>
+							</li>
+							<li><i class='bx bx-chevron-right'></i></li>
+							<li>
+								<a class="active" href="#">Heaven</a>
+							</li>
+						</ul>
+					</div>
+					<a href="#" class="btn-download">
+						<i class='bx bxs-cloud-download'></i>
+						<span class="text">Download PDF</span>
+					</a>
+				</div>
+
+			<div class="table-data">
+				<div class="todo">
+					<div class="head">
+						<h3>Total Balance</h3>
+					</div>
+					<h1 class="custom-heading">$9,876.69</h1>
+					<br>
+					<div class="mypiechart">
+						<canvas id="myCanvas5" width="250" height="250"></canvas>
+					</div>
+				</div>
+
+				<div class="order">
+					<div class="head">
+						<h3>Transaction History</h3>
+						<i class='bx bx-search'></i>
+						<i class='bx bx-filter'></i>
+					</div>
+					<table>
+						<thead>
+							<tr>
+								<th>User</th>
+								<th>Date Order</th>
+								<th>Status</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<i class="fi fi-rr-coffee"></i>
+									<p>Great Coffee</p>
+								</td>
+								<td>Today</td>
+								<td><span class="status completed">Completed</span></td>
+							</tr>
+							<tr>
+								<td>
+									<i class="fi fi-rr-hamburger-soda"></i>
+									<p>Central Burger Cafe and Restaurant</p>
+								</td>
+								<td>11-11-2023</td>
+								<td><span class="status pending">Pending</span></td>
+							</tr>
+							<tr>
+								<td>
+									<i class="fi fi-rr-computer"></i>
+									<p>Computer Stuff</p>
+								</td>
+								<td>08-11-2023</td>
+								<td><span class="status process">Process</span></td>
+							</tr>
+							<tr>
+								<td>
+									<i class="fi fi-rr-pizza-slice"></i>
+									<p>Pizza Heaven</p>
+								</td>
+								<td>05-11-2023</td>
+								<td><span class="status pending">Pending</span></td>
+							</tr>
+							<tr>
+								<td>
+									<i class="fi fi-rr-cream"></i>
+									<p>Soap & Skin</p>
+								</td>
+								<td>04-11-2023</td>
+								<td><span class="status completed">Completed</span></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<br>
+			<h2 id="this-month-heading">This Month</h2>
+				<ul class="box-info">
+					<li>
+						<i class='bx bx-transfer-alt'></i>
+						<span class="text">
+						<p>Transactions</p>
+						<h3>$5,669</h3>
+						</span>
+					</li>
+					<li>
+						<i class='bx bxs-dollar-circle'></i>
+						<span class="text">
+						<p>Income</p>
+						<h3>$25,469</h3>
+						</span>
+					</li>
+					<li>
+					<i class='bx bx-line-chart-down'></i>
+						<span class="text">
+						<p>Expenses</p>
+						<h3>$10,625</h3>
+						</span>
+					</li>
+				</ul>
 
 
-    <section class="section" id="promotions">
-        <h1>Exclusive Offers and Services</h1>
-        <div class="row">
-            <div class="section-col">
-                <h3>Cash Reward Promotion for OCBC 360 Account</h3>
-                <p>
-                    Unlock a Reward of Up to S$180
-                    Experience the privilege of earning up to S$180 in cash rewards by initiating the opening of your OCBC 360 Account and seamlessly crediting your salary within a span of 2 months.
-                    <br>
-                    <br>
-                    Discover Further Details
-                    This exclusive offer remains valid until December 31, 2023, with a limited number of redemptions available. Please be advised that terms and conditions are applicable. Your deposits are insured up to S$75,000 by the Singapore Deposit Insurance Corporation (SDIC).
-                </p>
-            </div>
-            <div class="section-col">
-                <h3>
-                    Guaranteed return of 3.5% p.a. upon maturity in 2 yearss
-                </h3>
-                <p>
-                    Embark on a financial journey with the assurance of a radiant destination! Your money is not just invested; it's crafting its own success story.
-                    <br>
-                    <br>
-                    Enjoy the confidence of a guaranteed return, dancing at an impressive rate of 3.5% per annum, waiting to unveil its full glory upon the grand stage of maturity in just 2 splendid years. Let your wealth take center stage and embrace the spotlight!
-                </p>
-            </div>
-            <div class="section-col">
-                <h3>Hassle-free Tax Refunds with Global Blue and OCBC Cards</h3>
-                <p>
-                    Effortless Tax Refunds with Global Blue and OCBC Cards
-                    Savor a streamlined and efficient Tax Free shopping experience while traveling abroad, courtesy of Global Blue and OCBC Cards.
-                    <br>
-                    <br>
-                    Explore Additional Information
-                    Global Blue Tax Free Shopping is a third-party service generously provided by Global Blue. Be mindful that Global Blue Tax Free Shopping is subject to Global Blue's Terms & Conditions. OCBC Bank, however, does not assume any responsibility or liability arising from, or related to, the usage of the Global Blue Tax Free Shopping service.
-                </p>
-            </div>
-
-        </div>
-    </section>
+				<div class="table-data">
+					<div class="order">
+						<div class="head">
+							<h3>Monthly Statistics</h3>
+						</div>
+						<section class="charts mt-4">
+							<div class="row">
+								<div class="col-lg-6">
+									<div class="chart-container rounded-2 p-3">
+										<h3 class="fs-6 mb-3">Chart title number one</h3>
+										<canvas id="myChart"></canvas>
+									</div>
+								</div>
+								</div>
+						</section>
+						
+					</div>
+					<div class="todo">
+						<div class="head">
+							<h3>Financial Goal</h3>
+							<i class='bx bx-plus'></i>
+							<i class='bx bx-filter'></i>
+						</div>
+						<ul class="todo-list">
+							<li class="completed">
+								<p>Todo List</p>
+								<i class='bx bx-dots-vertical-rounded'></i>
+							</li>
+							<li class="completed">
+								<p>Todo List</p>
+								<i class='bx bx-dots-vertical-rounded'></i>
+							</li>
+							<li class="not-completed">
+								<p>Todo List</p>
+								<i class='bx bx-dots-vertical-rounded'></i>
+							</li>
+							<li class="completed">
+								<p>Todo List</p>
+								<i class='bx bx-dots-vertical-rounded'></i>
+							</li>
+							<li class="not-completed">
+								<p>Todo List</p>
+								<i class='bx bx-dots-vertical-rounded'></i>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</main>
+		</section>
+	<!-- Dashboard Section End -->
 
     <!-- Javascript Section -->
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/dashboard.js" asp-append-version="true"></script>
+	<script src="~/js/chart.js" asp-append-version="true"></script>
+
 </body>
 </html>
