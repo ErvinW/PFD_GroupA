@@ -11,9 +11,11 @@ namespace PFD_GroupA.Controllers
     public class UserController : Controller
     {
         TransactionsDAL transactionsContext = new TransactionsDAL();
+        KeybindDAL keybindContext = new KeybindDAL();
+		private List<SelectListItem> pageList = new List<SelectListItem>();
 
-        // GET: UserController
-        public ActionResult Index()
+		// GET: UserController
+		public ActionResult Index()
         {
             /*if ((HttpContext.Session.GetString("AccountType") == null))
             {
@@ -33,7 +35,8 @@ namespace PFD_GroupA.Controllers
 
         public ActionResult Keybind()
         {
-            return View();
+            List<Keybind> keybindList = keybindContext.GetAllKeybinds();
+            return View(keybindList);
         }
 
         // GET: UserController/Details/5

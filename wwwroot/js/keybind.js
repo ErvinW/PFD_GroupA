@@ -4,7 +4,10 @@ transfer_keybind.addEventListener('click', function (event) {
     event.preventDefault();
     document.querySelector('#transferkb').innerHTML = ``;
     alert("Click on the keys you want for keybind")
+    document.querySelector('#transferkb-btn').style.display = "none";
+    document.querySelector('#confirm-transferkb-btn').style.display = "block";
     select_keys();
+    
 
     function select_keys() {
         var key_letters = document.querySelectorAll('.key--letter');

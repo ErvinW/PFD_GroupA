@@ -137,3 +137,8 @@ h1 {
 .keyboard > .keyboard__row {
     text-align: center;
 }
+
+
+#confirm-transferkb-btn{
+    display: none;
+}
