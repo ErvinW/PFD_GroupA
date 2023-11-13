@@ -1,4 +1,8 @@
-﻿.header {
+﻿.done-keybind {
+    display: none;
+}
+
+.header {
     background-image:none;
     background-color:darkgrey;
 }
@@ -137,3 +141,5 @@ h1 {
 .keyboard > .keyboard__row {
     text-align: center;
 }
+
+

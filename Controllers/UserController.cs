@@ -11,9 +11,11 @@ namespace PFD_GroupA.Controllers
     public class UserController : Controller
     {
         TransactionsDAL transactionsContext = new TransactionsDAL();
+        UserKeybindsDAL keybindContext = new UserKeybindsDAL();
+		private List<SelectListItem> pageList = new List<SelectListItem>();
 
-        // GET: UserController
-        public ActionResult Index()
+		// GET: UserController
+		public ActionResult Index()
         {
             /*if ((HttpContext.Session.GetString("AccountType") == null))
             {
@@ -31,9 +33,22 @@ namespace PFD_GroupA.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult Keybind()
         {
-            return View();
+            UserKeybinds keybinds = keybindContext.GetUserKeybinds("1234");
+            return View(keybinds);
+        }
+
+
+        [HttpPost]
+        public ActionResult Keybind([FromBody] List<string> keys)
+        {
+            // Process the received keys
+            Console.WriteLine("Keys received: " + string.Join(", ", keys));
+
+            // You can return a response if needed
+            return Json(new { success = true, message = "Keys received successfully" });
         }
 
         // GET: UserController/Details/5

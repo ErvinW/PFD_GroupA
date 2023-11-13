@@ -50,13 +50,6 @@
             <i class="fa fa-bars" onclick="showMenu()"></i>
         </nav>
 
-        <form>
-            <p>Transfer</p>
-            <button id="transferkb-btn">Add keybind</button>
-            <div id="transferkb"></div>
-            <p>Home</p>
-        </form>
-
 
         <div class="keyboard">
             <div class="keyboard__row keyboard__row--h1">
@@ -276,7 +269,74 @@
 
     </section>
     <!-- Header & Home Section End -->
+    @model PFD_GroupA.Models.UserKeybinds
 
+    @using PFD_GroupA.Controllers
+
+    <div class="table-responsive">
+        <table id="viewStaff" class="table table-striped table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>Page</th>
+                    <th>Keys</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.TransferPage)</td>
+                    @if (!string.IsNullOrEmpty(Model.TransferPage))
+                    {
+                        <td>
+                            <kbd>@Model.TransferPage</kbd>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-sm btn-primary">Edit</button>
+                            <button type="button" class="btn btn-sm btn-danger">Delete</button>
+                        </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                        <td>
+                            <button type="button" class="btn btn-sm btn-success done-keybind" style="display:none">Done</button>
+                            <button type="button" class="btn btn-sm btn-success add-keybind">Add</button>
+                        </td>
+                    }
+
+                </tr>
+
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.HomePage)</td>
+                    @if (!string.IsNullOrEmpty(Model.HomePage))
+                    {
+                        <td>
+                            <kbd>@Model.HomePage</kbd>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-sm btn-primary">Edit</button>
+                            <button type="button" class="btn btn-sm btn-danger">Delete</button>
+                        </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                        <td>
+                            <button type="button" class="btn btn-sm btn-success done-keybind" style="display:none">Done</button>
+                            <button type="button" class="btn btn-sm btn-success add-keybind">Add</button>
+                        </td>
+                    }
+
+                </tr>
+
+
+
+
+            </tbody>
+        </table>
+    </div>
 
 
 
@@ -291,3 +351,4 @@
     <script src="~/js/keybind.js"></script>
 </body>
 </html>
+

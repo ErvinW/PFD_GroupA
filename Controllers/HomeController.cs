@@ -47,7 +47,8 @@ namespace PFD_GroupA.Controllers
                 //Console.WriteLine(user.UserID);
                 //Store account deets in Session
                 var jsonString = JsonSerializer.Serialize(user);
-				var jsonAccString = JsonSerializer.Serialize(BankAccount);
+                Console.WriteLine(BankAccount.BankAccNo);
+                var jsonAccString = JsonSerializer.Serialize(BankAccount);
 				HttpContext.Session.SetString("BankAcc", jsonAccString);
 				HttpContext.Session.SetString("AccountObject", jsonString);
 				HttpContext.Session.SetString("AccountType", "User");
