@@ -40,17 +40,12 @@ namespace PFD_GroupA.Controllers
             return View(keybinds);
         }
 
+
         [HttpPost]
         public ActionResult Keybind([FromBody] List<string> keys)
         {
             // Process the received keys
-            // You can access the keys in the 'keys' parameter
-            Console.WriteLine("hello");
-            foreach (var key in keys)
-            {
-                // Do something with each key
-                Console.WriteLine(key);
-            }
+            Console.WriteLine("Keys received: " + string.Join(", ", keys));
 
             // You can return a response if needed
             return Json(new { success = true, message = "Keys received successfully" });
