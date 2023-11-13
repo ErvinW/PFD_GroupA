@@ -7,7 +7,8 @@ transfer_keybind.addEventListener('click', function (event) {
     document.querySelector('#transferkb-btn').style.display = "none";
     document.querySelector('#confirm-transferkb-btn').style.display = "block";
     select_keys();
-    
+
+    var selectedKeys = []; // Array to store selected keys
 
     function select_keys() {
         var key_letters = document.querySelectorAll('.key--letter');
@@ -23,12 +24,42 @@ transfer_keybind.addEventListener('click', function (event) {
         }
 
         function letterClicked(event) {
-            tempElement = document.querySelector('#transferkb').innerHTML;
-            // Check if the letter exists 
-            tempElement.includes(`<kbd>${event.target.textContent}</kbd>`)
-                ? null // Letter already exists, do nothing
-                : document.querySelector('#transferkb').innerHTML += `<kbd>${event.target.textContent}</kbd>`;
+            var clickedKey = event.target.textContent;
 
+            // Check if the key already exists in the array
+            if (!selectedKeys.includes(clickedKey)) {
+                selectedKeys.push(clickedKey);
+                updateTransferKB(); // Update the displayed keys
+            }
+        }
+
+        function updateTransferKB() {
+            // Display the selected keys in the #transferkb element
+            document.querySelector('#transferkb').innerHTML = selectedKeys.map(function (key) {
+                return `<kbd>${key}</kbd>`;
+            }).join(' ');
         }
     }
+
+    var confirmButton = document.querySelector('#confirm-transferkb-btn');
+
+    confirmButton.addEventListener('click', function () {
+        // Assuming you are using the Fetch API for simplicity
+        // You may need to adjust the URL and payload structure based on your server implementation
+        fetch('/User/Keybind', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ keys: selectedKeys }),
+        })
+            .then(response => response.json())
+            .then(data => {
+                // Handle the response from the server if needed
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
 });

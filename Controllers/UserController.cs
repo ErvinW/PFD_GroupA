@@ -11,7 +11,7 @@ namespace PFD_GroupA.Controllers
     public class UserController : Controller
     {
         TransactionsDAL transactionsContext = new TransactionsDAL();
-        KeybindDAL keybindContext = new KeybindDAL();
+        UserKeybindsDAL keybindContext = new UserKeybindsDAL();
 		private List<SelectListItem> pageList = new List<SelectListItem>();
 
 		// GET: UserController
@@ -33,10 +33,27 @@ namespace PFD_GroupA.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult Keybind()
         {
-            List<Keybind> keybindList = keybindContext.GetAllKeybinds();
-            return View(keybindList);
+            UserKeybinds keybinds = keybindContext.GetUserKeybinds("1234");
+            return View(keybinds);
+        }
+
+        [HttpPost]
+        public ActionResult Keybind([FromBody] List<string> keys)
+        {
+            // Process the received keys
+            // You can access the keys in the 'keys' parameter
+            Console.WriteLine("hello");
+            foreach (var key in keys)
+            {
+                // Do something with each key
+                Console.WriteLine(key);
+            }
+
+            // You can return a response if needed
+            return Json(new { success = true, message = "Keys received successfully" });
         }
 
         // GET: UserController/Details/5
