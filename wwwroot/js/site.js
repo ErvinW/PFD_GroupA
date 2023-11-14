@@ -8,12 +8,19 @@
 
 document.addEventListener("keydown", e => {
     if (e.key.toLowerCase() === "t" && !window.location.pathname.endsWith('/Transfer')) {
-        window.location.href = 'User/Transfer';
+        if (window.location.pathname.endsWith('/User')) {
+            window.location.href = '/User/Transfer';
+        }
+
+        else {
+            window.location.href = 'Transfer';
+        }
+        
     }
 
 
-    else if (e.key.toLowerCase() === 'b') {
-        window.history.back();
+    else if (e.key.toLowerCase() === 'b' ) {
+        window.location.href = 'Index';
     }
 });
 
