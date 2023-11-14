@@ -19,7 +19,7 @@ document.addEventListener("keydown", e => {
     }
 
 
-    else if (e.key.toLowerCase() === 'b' ) {
+    else if (e.key.toLowerCase() === 'h' ) {
         window.location.href = 'Index';
     }
 });
