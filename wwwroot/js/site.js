@@ -34,7 +34,7 @@ recognition.onresult = function (event) {
     const result = event.results[event.results.length - 1][0].transcript;
     console.log(result)
 
-    if (result.toLowerCase().includes('go to transfer')) {
+    if (result.toLowerCase().includes('go to transfer') && !window.location.pathname.endsWith('/Transfer')) { //added extra condition here
         window.location.href = 'User/Transfer';
     }
     if (result.toLowerCase().includes('logout') || result.toLowerCase().includes('log out')) {
