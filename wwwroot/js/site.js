@@ -42,9 +42,21 @@ recognition.onresult = function (event) {
     console.log(result)
 
     if (result.toLowerCase().includes('go to transfer') && !window.location.pathname.endsWith('/Transfer')) { //added extra condition here
-        window.location.href = 'User/Transfer';
+        if (window.location.pathname.endsWith('/User')) {
+            window.location.href = '/User/Transfer';
+        }
+
+        else {
+            window.location.href = 'Transfer';
+        }
     }
-    if (result.toLowerCase().includes('logout') || result.toLowerCase().includes('log out')) {
+
+    else if (result.toLowerCase().includes('home') || result.toLowerCase().includes('index')) {
+        window.location.href = 'Index';
+    }
+
+
+    else if (result.toLowerCase().includes('logout') || result.toLowerCase().includes('log out')) {
         window.location.href = 'Home/Index';
     }
 };
