@@ -7,10 +7,19 @@
 // Keybinds
 
 document.addEventListener("keydown", e => {
-    if (e.key.toLowerCase() === "t") {
+    if (e.key.toLowerCase() === "t" && !window.location.pathname.endsWith('/Transfer')) {
         window.location.href = 'User/Transfer';
     }
+
+
+    else if (e.key.toLowerCase() === 'b') {
+        window.history.back();
+    }
 });
+
+
+
+
 
 
 // Speech to text recognition
