@@ -5,7 +5,7 @@
 	var AccountString = Context.Session.GetString("AccountObject");
 	var BankAccString = Context.Session.GetString("BankAcc");
 	var type = Context.Session.GetString("AccountType");
-	var Binds = Context.Session.GetString("Keybinds");
+	var Binds = Context.Session.GetString("KeyBinds");
 	var BindsObject = JsonSerializer.Deserialize<UserKeybinds>(Binds);
 	var AccountObject = JsonSerializer.Deserialize<User>(AccountString);
     var BankObject = JsonSerializer.Deserialize<Account>(BankAccString);

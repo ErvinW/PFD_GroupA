@@ -48,16 +48,30 @@ namespace PFD_GroupA.Controllers
             return View(keybinds);
         }
 
-
         [HttpPost]
-        public ActionResult Keybind([FromBody] List<string> keys)
+        public ActionResult Keybind([FromBody] KeybindRequest keybindRequest)
         {
-            // Process the received keys
-            Console.WriteLine("Keys received: " + string.Join(", ", keys));
+            // Process the received keys and pageName
+            Console.WriteLine("Keys received: " + string.Join(", ", keybindRequest.Keys));
+            Console.WriteLine("Page name received: " + keybindRequest.PageName);
+
+            //Update Keybind
+     
+            //Account retrieveAcc = HttpContext.Session.GetString("AccountObject");
+
 
             // You can return a response if needed
             return Json(new { success = true, message = "Keys received successfully" });
         }
+
+        public class KeybindRequest
+        {
+            public List<string> Keys { get; set; }
+            public string PageName { get; set; }
+        }
+
+
+
 
         // GET: UserController/Details/5
         public ActionResult Details(int id)
