@@ -15,16 +15,16 @@ namespace PFD_GroupA.Models
 
 
 		[Display(Name = "TransferPage")]
-		[StringLength(1, ErrorMessage = "Length cannot exceed 1 character")]
+		[StringLength(3, ErrorMessage = "Length cannot exceed 1 character")]
 		public string TransferPage { get; set; }
 
 		[Display(Name = "HomePage")]
-		[StringLength(1, ErrorMessage = "Length cannot exceed 1 character")]
+		[StringLength(3, ErrorMessage = "Length cannot exceed 1 character")]
 		public string HomePage { get; set; }
 
 
 		[Display(Name = "LogoutFunc")]
-		[StringLength(1, ErrorMessage = "Length cannot exceed 1 character")]
+		[StringLength(3, ErrorMessage = "Length cannot exceed 1 character")]
 		public string LogoutFunc { get; set; }
 
 

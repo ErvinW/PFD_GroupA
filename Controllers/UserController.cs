@@ -34,6 +34,13 @@ namespace PFD_GroupA.Controllers
         }
 
         [HttpGet]
+        public IActionResult GetKeybindData()
+        {
+            string kData = HttpContext.Session.GetString("Keybinds");
+            return Json(new { myData = kData });
+        }
+
+        [HttpGet]
         public ActionResult Keybind()
         {
             UserKeybinds keybinds = keybindContext.GetUserKeybinds("1234");
@@ -46,6 +53,9 @@ namespace PFD_GroupA.Controllers
             // Process the received keys and pageName
             Console.WriteLine("Keys received: " + string.Join(", ", keybindRequest.Keys));
             Console.WriteLine("Page name received: " + keybindRequest.PageName);
+
+            //Update Keybind
+            HttpContext.Session.GetString()
 
             // You can return a response if needed
             return Json(new { success = true, message = "Keys received successfully" });
