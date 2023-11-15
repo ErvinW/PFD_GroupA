@@ -58,19 +58,19 @@ h2#this-month-heading {
 }
 
 .second {
-    color: #4caf50;
+    color: #FF0000;
 }
 
 .third {
-    color: #ffc107;
+    color: #A9A9A9;
 }
 
 .fourth {
-    color: #9e9e9e;
+    color: #ffc107;
 }
 
 .fifth {
-    color: #e91e63;
+    color: #FFA500;
 }
 
 .expense-chart {
