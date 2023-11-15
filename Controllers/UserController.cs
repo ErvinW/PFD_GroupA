@@ -46,11 +46,12 @@ namespace PFD_GroupA.Controllers
 		}
 		public ActionResult Transfer()
         {
-            /*string Object = HttpContext.Session.GetString("AccountObject");
-            User AccountObject = JsonSerializer.Deserialize<User>(Object);
-			List<Transactions> OutgoingTransactions = transactionsContext.GetSenderTransactions(AccountObject.UserID);
-            */
-            return View();
+			var ID = HttpContext.Session.GetString("AccountObject");
+			var UID = JsonSerializer.Deserialize<User>(ID);
+			string UserID = UID.UserID;
+
+			UserKeybinds keybinds = keybindContext.GetUserKeybinds(UserID);
+			return View(keybinds);
         }
 
         [HttpGet]
