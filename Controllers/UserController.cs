@@ -3,6 +3,8 @@ using PFD_GroupA.DAL;
 using PFD_GroupA.Models;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
+using System.Reflection;
 using System.Runtime.ConstrainedExecution;
 using System.Diagnostics;
 
@@ -55,12 +57,30 @@ namespace PFD_GroupA.Controllers
         public ActionResult Keybind([FromBody] KeybindRequest keybindRequest)
         {
             // Process the received keys and pageName
-            Console.WriteLine("Keys received: " + string.Join(", ", keybindRequest.Keys));
+            Console.WriteLine("Keys received: " + string.Join(" ", keybindRequest.Keys));
             Console.WriteLine("Page name received: " + keybindRequest.PageName);
 
             //Update Keybind
             Account acc = JsonSerializer.Deserialize<Account>(HttpContext.Session.GetString("AccountObject"));
             UserKeybinds keybinds = keybindContext.GetUserKeybinds(acc.UserID);
+
+            Type keybindsType = typeof(UserKeybinds);
+
+            // Get all properties of the class
+            PropertyInfo[] properties = keybindsType.GetProperties();
+
+            // Display the property names
+            foreach (var property in properties)
+            {
+                if (property.Name == keybindRequest.PageName)
+                {
+                    // Use SetValue to update the value of the property
+                    property.SetValue(keybinds, string.Join(" ", keybindRequest.Keys));
+                }
+            }
+            keybindContext.UpdateKeybinds(keybinds);
+
+            // Now keybinds object has the updated property value
 
 
 
@@ -136,14 +156,25 @@ namespace PFD_GroupA.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
         {
-            try
+            Account acc = JsonSerializer.Deserialize<Account>(HttpContext.Session.GetString("AccountObject"));
+            UserKeybinds keybinds = keybindContext.GetUserKeybinds(acc.UserID);
+
+            // Iterate through properties of the object
+            foreach (var property in keybinds.GetType().GetProperties())
             {
-                return RedirectToAction(nameof(Index));
+                // Check if the property is UserID
+                if (property.Name == "UserID")
+                {
+                    // Skip setting UserID to an empty string
+                    continue;
+                }
+
+                // Set other properties to an empty string
+                property.SetValue(keybinds, "");
             }
-            catch
-            {
-                return View();
-            }
+
+            keybindContext.UpdateKeybinds(keybinds);
+            return RedirectToAction("Index","User");
         }
         public ActionResult Confirmation()
         {
