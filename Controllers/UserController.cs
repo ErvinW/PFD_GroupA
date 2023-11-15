@@ -49,19 +49,51 @@ namespace PFD_GroupA.Controllers
             var UID = JsonSerializer.Deserialize<User>(ID);
             string UserID = UID.UserID;
 
-            //RunPythonScript(); 
-
-            return View();
+			UserKeybinds keybinds = keybindContext.GetUserKeybinds(UserID);
+			return View(keybinds);
+			
         }
+		public ActionResult Account()
+		{
+			var ID = HttpContext.Session.GetString("AccountObject");
+			var UID = JsonSerializer.Deserialize<User>(ID);
+			string UserID = UID.UserID;
 
-        public ActionResult Transfer()
+			UserKeybinds keybinds = keybindContext.GetUserKeybinds(UserID);
+			return View(keybinds);
+		}
+		public ActionResult Cards()
+		{
+			var ID = HttpContext.Session.GetString("AccountObject");
+			var UID = JsonSerializer.Deserialize<User>(ID);
+			string UserID = UID.UserID;
+
+			UserKeybinds keybinds = keybindContext.GetUserKeybinds(UserID);
+			return View(keybinds);
+		}
+		public ActionResult Settings()
+		{
+			var ID = HttpContext.Session.GetString("AccountObject");
+			var UID = JsonSerializer.Deserialize<User>(ID);
+			string UserID = UID.UserID;
+
+			UserKeybinds keybinds = keybindContext.GetUserKeybinds(UserID);
+			return View(keybinds);
+		}
+		public ActionResult Help()
+		{
+			var ID = HttpContext.Session.GetString("AccountObject");
+			var UID = JsonSerializer.Deserialize<User>(ID);
+			string UserID = UID.UserID;
+
+			UserKeybinds keybinds = keybindContext.GetUserKeybinds(UserID);
+			return View(keybinds);
+		}
+		public ActionResult Transfer()
         {
-            /*string Object = HttpContext.Session.GetString("AccountObject");
-            User AccountObject = JsonSerializer.Deserialize<User>(Object);
-			List<Transactions> OutgoingTransactions = transactionsContext.GetSenderTransactions(AccountObject.UserID);
-            */
-            return View();
-        
+			var ID = HttpContext.Session.GetString("AccountObject");
+			var UID = JsonSerializer.Deserialize<User>(ID);
+			string UserID = UID.UserID;
 
 			//UserKeybinds keybinds = keybindContext.GetUserKeybinds(UserID);
 			//return View(keybinds);
