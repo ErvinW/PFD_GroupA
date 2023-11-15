@@ -142,67 +142,14 @@
 							<label for="amount">Amount:</label>
 							<input type="number" id="amount" name="amount" placeholder="Amount" required>
 						</div>
+						<div class="row mb-3">
+							<div class="col-sm-9 offset-sm-3">
+								<input type="submit" asp-controller="User" asp-action="Transfer"
+									   class="btn btn-primary" />
+							</div>
+						</div>
 
 					</div>
-
-
-					<table class="profile-table">
-						<tr>
-							<td>
-								<div class="profile-card">
-									<i class="bx bxs-user"></i>
-									<h3>John Doe</h3>
-									<p>Web Developer</p>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<div class="profile-card">
-									<i class="bx bxs-user"></i>
-									<h3>Jane Smith</h3>
-									<p>UI/UX Designer</p>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<div class="profile-card">
-									<i class="bx bxs-user"></i>
-									<h3>Mike Johnson</h3>
-									<p>Data Scientist</p>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<div class="profile-card">
-									<i class="bx bxs-user"></i>
-									<h3>John Doe</h3>
-									<p>Web Developer</p>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<div class="profile-card">
-									<i class="bx bxs-user"></i>
-									<h3>Jane Smith</h3>
-									<p>UI/UX Designer</p>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<div class="profile-card">
-									<i class="bx bxs-user"></i>
-									<h3>Mike Johnson</h3>
-									<p>Data Scientist</p>
-								</div>
-							</td>
-						</tr>
-					</table>
-
 
 				</div>
 			</div>
@@ -275,6 +222,8 @@
 	<script>
 		var bindsObject = @Json.Serialize(Model);
 	</script>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 	<script src="~/js/dashboard.js" asp-append-version="true"></script>
 	<script src="~/js/site.js" asp-append-version="true"></script>
 	<script src="~/js/transfer.js" asp-append-version="true"></script>

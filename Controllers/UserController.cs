@@ -158,10 +158,16 @@ namespace PFD_GroupA.Controllers
         }
 
 
+		public ActionResult Logout()
+		{
+			HttpContext.Session.Clear();
+			return RedirectToAction("Index", "Home");
+		}
 
 
-        // GET: UserController/Details/5
-        public ActionResult Details(int id)
+
+		// GET: UserController/Details/5
+		public ActionResult Details(int id)
         {
             return View();
         }

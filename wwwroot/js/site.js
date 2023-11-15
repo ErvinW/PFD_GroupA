@@ -12,7 +12,7 @@ var TransBind = bindsObject.transferPage;
 
 var HomeBind = bindsObject.homePage;
 
-
+var LogoutBind = bindsObject.logoutFunc
 
 
 
@@ -33,6 +33,11 @@ document.addEventListener("keydown", e => {
 
     else if (e.key.toLowerCase() === HomeBind) {
         window.location.href = 'Index';
+    } 
+
+
+    else if (e.key.toLowerCase() === LogoutBind) {
+        window.location.href = 'Home/Index';
     }
 });
 
