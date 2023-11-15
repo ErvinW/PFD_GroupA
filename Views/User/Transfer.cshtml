@@ -1,4 +1,5 @@
 ﻿@model PFD_GroupA.Models.UserKeybinds
+
 @using System.Text.Json
 @{
 	ViewData["Title"] = "USER HOME";
@@ -131,6 +132,16 @@
 				<div class="order">
 					<div class="head">
 						<h3>Transaction</h3>
+						<!-- transfer form-->
+						<div class="form-group">
+							<label for="recipient">To Account:</label>
+							<input type="text" id="recipient" name="recipient" placeholder="Recipient's Account" required>
+						</div>
+						<div class="form-group">
+							<label for="amount">Amount:</label>
+							<input type="number" id="amount" name="amount" placeholder="Amount" required>
+						</div>
+
 					</div>
 					
 				</div>
