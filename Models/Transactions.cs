@@ -1,11 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.SqlTypes;
 
 namespace PFD_GroupA.Models
 {
     public class Transactions
     {
-        public int TransactionID { get; set; }
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		[Display(Name = "TransactionID")]
+		public int TransactionID { get; set; }
 
         [Display(Name = "SenderAccount")]
         public string SenderAccount { get; set; }

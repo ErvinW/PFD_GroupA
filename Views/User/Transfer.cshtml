@@ -1,4 +1,4 @@
-﻿@model PFD_GroupA.Models.UserKeybinds
+﻿@using PFD_GroupA.Models
 
 @using System.Text.Json
 @{
@@ -13,8 +13,6 @@
 	string AccountName = AccountObject.UserName;
 	string AccountID = AccountObject.UserID;
 	string AccountNum = BankObject.BankAccNo;
-	UserKeybinds test = Model;
-	Console.WriteLine(test);
 }
 
 <!DOCTYPE html>
@@ -132,22 +130,27 @@
 			<div class="table-data">
 				<div class="order">
 					<div class="head">
-						<h3>Transaction</h3>
-						<!-- transfer form-->
-						<div class="form-group">
-							<label for="recipient">To Account:</label>
-							<input type="text" id="recipient" name="recipient" placeholder="Recipient's Account" required>
-						</div>
-						<div class="form-group">
-							<label for="amount">Amount:</label>
-							<input type="number" id="amount" name="amount" placeholder="Amount" required>
-						</div>
-						<div class="row mb-3">
-							<div class="col-sm-9 offset-sm-3">
-								<input type="submit" asp-controller="User" asp-action="Transfer"
-									   class="btn btn-primary" />
+						<form asp-action="CreateTransaction" asp-controller="User">
+							<h3>Transaction</h3>
+							<!-- transfer form-->
+							<div class="form-group">
+								<label for="recipient">To Account:</label>
+								<input type="text" id="recipient" name="recipient" placeholder="Recipient's Account" required>
 							</div>
-						</div>
+
+							<div class="form-group">
+								<label for="amount">Amount:</label>
+								<input type="number" id="amount" name="amount" placeholder="Amount" required>
+							</div>
+							<br>
+							<label class="submit-button">
+								Confirm
+								<input type="submit" id="submitBtn" />
+							</label>
+						</form>
+						
+					
+						
 
 					</div>
 

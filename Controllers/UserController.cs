@@ -7,6 +7,8 @@ using System;
 using System.Reflection;
 using System.Runtime.ConstrainedExecution;
 using System.Diagnostics;
+using System.Data.SqlTypes;
+
 //using IronPython.Hosting;
 //using Microsoft.Scripting.Hosting;
 
@@ -17,7 +19,7 @@ namespace PFD_GroupA.Controllers
         TransactionsDAL transactionsContext = new TransactionsDAL();
         UserKeybindsDAL keybindContext = new UserKeybindsDAL();
 		private List<SelectListItem> pageList = new List<SelectListItem>();
-
+        UserDAL userContext = new UserDAL();
         /*public void RunPythonScript()
         {
             var engine = Python.CreateEngine();
@@ -263,6 +265,25 @@ namespace PFD_GroupA.Controllers
             start.LoadUserProfile = true;
             Console.ReadLine();
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateTransaction(IFormCollection transaction)
+        {
+			var ID = HttpContext.Session.GetString("AccountObject");
+			var UID = JsonSerializer.Deserialize<User>(ID);
+			string SenderID = UID.UserID;
+            string RecipientID = transaction["recipient"].ToString();
+            string AmountSent = transaction["amount"].ToString();
+			SqlMoney sqlAmountSent = SqlMoney.Parse(AmountSent);
+            DateTime TransactionDate = DateTime.Now;
+            User? user = userContext.Check(RecipientID);
+            if (user != null)
+            {
+                transactionsContext.AddTransaction(SenderID, RecipientID, sqlAmountSent, TransactionDate);
+
+			}
+			return View("Index");
         }
     }
 }
