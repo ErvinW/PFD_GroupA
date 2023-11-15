@@ -48,7 +48,7 @@ namespace PFD_GroupA.DAL
 					// Password comparison is case-sensitive
 					if (reader.GetString(0) == loginId)
 					{
-						userBinds = new UserKeybinds();
+                        userBinds = new UserKeybinds();
 						userBinds.UserID = reader.GetString(0);
 						userBinds.TransferPage = reader.GetString(1);
 						userBinds.HomePage = reader.GetString(2);

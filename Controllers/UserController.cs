@@ -22,8 +22,23 @@ namespace PFD_GroupA.Controllers
 			return View(keybinds);
 			
         }
-
-        public ActionResult Transfer()
+		public ActionResult Account()
+		{
+			return View();
+		}
+		public ActionResult Cards()
+		{
+			return View();
+		}
+		public ActionResult Settings()
+		{
+			return View();
+		}
+		public ActionResult Help()
+		{
+			return View();
+		}
+		public ActionResult Transfer()
         {
             /*string Object = HttpContext.Session.GetString("AccountObject");
             User AccountObject = JsonSerializer.Deserialize<User>(Object);
@@ -42,7 +57,10 @@ namespace PFD_GroupA.Controllers
         [HttpGet]
         public ActionResult Keybind()
         {
-            UserKeybinds keybinds = keybindContext.GetUserKeybinds("1234");
+            Account acc = JsonSerializer.Deserialize<Account>(HttpContext.Session.GetString("AccountObject"));
+            UserKeybinds keybinds = keybindContext.GetUserKeybinds(acc.UserID);
+            Console.WriteLine(keybinds.HomePage);
+            Console.WriteLine(keybinds.TransferPage);
             return View(keybinds);
         }
 
@@ -54,8 +72,9 @@ namespace PFD_GroupA.Controllers
             Console.WriteLine("Page name received: " + keybindRequest.PageName);
 
             //Update Keybind
-     
-            //Account retrieveAcc = HttpContext.Session.GetString("AccountObject");
+            Account acc = JsonSerializer.Deserialize<Account>(HttpContext.Session.GetString("AccountObject"));
+            UserKeybinds keybinds = keybindContext.GetUserKeybinds(acc.UserID);
+
 
 
             // You can return a response if needed
