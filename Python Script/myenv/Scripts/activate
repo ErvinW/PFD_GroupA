@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\New folder\myenv"
+VIRTUAL_ENV="D:\YEAR 2 SEM 2\PFD\Solution\Python Script\myenv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

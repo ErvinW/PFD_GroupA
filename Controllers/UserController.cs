@@ -7,7 +7,8 @@ using System;
 using System.Reflection;
 using System.Runtime.ConstrainedExecution;
 using System.Diagnostics;
-
+using IronPython.Hosting;
+using Microsoft.Scripting.Hosting;
 
 namespace PFD_GroupA.Controllers
 {
@@ -16,6 +17,30 @@ namespace PFD_GroupA.Controllers
         TransactionsDAL transactionsContext = new TransactionsDAL();
         UserKeybindsDAL keybindContext = new UserKeybindsDAL();
 		private List<SelectListItem> pageList = new List<SelectListItem>();
+
+        public void RunPythonScript()
+        {
+            var engine = Python.CreateEngine();
+            var searchPaths = engine.GetSearchPaths();
+
+            Console.WriteLine("IronPython Search Paths:");
+            foreach(var path in searchPaths)
+            {
+                Console.WriteLine(path + " lolol");
+            }
+
+            ICollection<string> paths = engine.GetSearchPaths();
+            paths.Add(".");
+            paths.Add("D:\\YEAR 2 SEM 2\\PFD\\Solution\\bin\\Debug\\net6.0\\lib");
+            paths.Add("D:\\YEAR 2 SEM 2\\PFD\\Solution\\bin\\Debug\\net6.0\\DLLs");
+            engine.SetSearchPaths(paths);
+            // Load the Python script
+            var scriptPath = "D:\\YEAR 2 SEM 2\\PFD\\Solution\\Python Script\\pythontest.py"; // Replace this with your script's path
+            var scope = engine.CreateScope();
+            var source = engine.CreateScriptSourceFromFile(scriptPath);
+            source.Execute(scope);
+            //engine.ExecuteFile(scriptPath);
+        }
 
 		// GET: UserController
 		public ActionResult Index()
@@ -30,27 +55,48 @@ namespace PFD_GroupA.Controllers
         }
 		public ActionResult Account()
 		{
-			return View();
+			var ID = HttpContext.Session.GetString("AccountObject");
+			var UID = JsonSerializer.Deserialize<User>(ID);
+			string UserID = UID.UserID;
+
+			UserKeybinds keybinds = keybindContext.GetUserKeybinds(UserID);
+			return View(keybinds);
 		}
 		public ActionResult Cards()
 		{
-			return View();
+			var ID = HttpContext.Session.GetString("AccountObject");
+			var UID = JsonSerializer.Deserialize<User>(ID);
+			string UserID = UID.UserID;
+
+			UserKeybinds keybinds = keybindContext.GetUserKeybinds(UserID);
+			return View(keybinds);
 		}
 		public ActionResult Settings()
 		{
-			return View();
+			var ID = HttpContext.Session.GetString("AccountObject");
+			var UID = JsonSerializer.Deserialize<User>(ID);
+			string UserID = UID.UserID;
+
+			UserKeybinds keybinds = keybindContext.GetUserKeybinds(UserID);
+			return View(keybinds);
 		}
 		public ActionResult Help()
 		{
-			return View();
+			var ID = HttpContext.Session.GetString("AccountObject");
+			var UID = JsonSerializer.Deserialize<User>(ID);
+			string UserID = UID.UserID;
+
+			UserKeybinds keybinds = keybindContext.GetUserKeybinds(UserID);
+			return View(keybinds);
 		}
 		public ActionResult Transfer()
         {
-            /*string Object = HttpContext.Session.GetString("AccountObject");
-            User AccountObject = JsonSerializer.Deserialize<User>(Object);
-			List<Transactions> OutgoingTransactions = transactionsContext.GetSenderTransactions(AccountObject.UserID);
-            */
-            return View();
+			var ID = HttpContext.Session.GetString("AccountObject");
+			var UID = JsonSerializer.Deserialize<User>(ID);
+			string UserID = UID.UserID;
+
+			UserKeybinds keybinds = keybindContext.GetUserKeybinds(UserID);
+			return View(keybinds);
         }
 
         [HttpGet]
@@ -210,6 +256,5 @@ namespace PFD_GroupA.Controllers
             Console.ReadLine();
             return View();
         }
-
     }
 }
