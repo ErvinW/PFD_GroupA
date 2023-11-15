@@ -6,11 +6,7 @@
 
 // Keybinds
 
-var yourScript = {
-    init: function (userKeybinds) {
-        console.log(userKeybinds);
-    }
-}
+console.log(bindsObject);
 
 
 

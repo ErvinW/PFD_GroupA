@@ -1,4 +1,22 @@
-﻿
+﻿@model PFD_GroupA.Models.UserKeybinds
+@using System.Text.Json
+
+@{
+    ViewData["Title"] = "USER KEYBIND";
+    var AccountString = Context.Session.GetString("AccountObject");
+    var BankAccString = Context.Session.GetString("BankAcc");
+    var type = Context.Session.GetString("AccountType");
+    var Binds = Context.Session.GetString("KeyBinds");
+    var BindsObject = JsonSerializer.Deserialize<UserKeybinds>(Binds);
+    var AccountObject = JsonSerializer.Deserialize<User>(AccountString);
+    var BankObject = JsonSerializer.Deserialize<Account>(BankAccString);
+    string AccountName = AccountObject.UserName;
+    string AccountID = AccountObject.UserID;
+    string AccountNum = BankObject.BankAccNo;
+}
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -268,8 +286,7 @@
         </div>
 
     </section>
-    <!-- Header & Home Section End -->
-    @model PFD_GroupA.Models.UserKeybinds
+  
 
     @using PFD_GroupA.Controllers
 
@@ -343,6 +360,9 @@
     
 
     <!-- Javascript Section -->
+    <script>
+        var bindsObject = @Json.Serialize(Model);
+    </script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/keybind.js" asp-append-version="true"></script>
 </body>
