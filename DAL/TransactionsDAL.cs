@@ -60,7 +60,22 @@ namespace PFD_GroupA.DAL
             return transactionList;
         }
 
+        public int AddTransaction(Transactions transaction)
+        {
+            SqlCommand cmd = conn.CreateCommand();
+            cmd.CommandText = @"INSERT INTO Transactions (SenderAccount, RecipientAccount, AmountSent, TransactionDate)
+                              OUTPUT INSERTED.TransactionID 
+                              VALUES(@senderAccount, @recipientAccount, @amountSent, @transactionDate)";
+            cmd.Parameters.AddWithValue("@senderAccount", transaction.SenderAccount);
+            cmd.Parameters.AddWithValue("@RecipientAccount", transaction.RecipientAccount);
+            cmd.Parameters.AddWithValue("@AmountSent", transaction.AmountSent);
+            cmd.Parameters.AddWithValue("@TransactionDate", transaction.TransactionDate);
 
+            conn.Open();
+            transaction.TransactionID = (int)cmd.ExecuteScalar();
+            conn.Close();
+            return transaction.TransactionID;
+        }
 
 
     }

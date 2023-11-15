@@ -5,6 +5,8 @@ namespace PFD_GroupA.Models
 {
     public class Transactions
     {
+        public int TransactionID { get; set; }
+
         [Display(Name = "SenderAccount")]
         public string SenderAccount { get; set; }
 

@@ -34,8 +34,7 @@ namespace PFD_GroupA.Controllers
 		[HttpPost]
 		public ActionResult Login(IFormCollection account)
 		{
-
-			string loginID = account["logemail"].ToString().ToLower();
+            string loginID = account["logemail"].ToString().ToLower();
 			string password = account["logpass"].ToString().ToLower();
 			
             //string password = account["PinNum"].ToString();
