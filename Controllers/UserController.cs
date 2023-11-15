@@ -23,8 +23,23 @@ namespace PFD_GroupA.Controllers
             } */
             return View();
         }
-
-        public ActionResult Transfer()
+		public ActionResult Account()
+		{
+			return View();
+		}
+		public ActionResult Cards()
+		{
+			return View();
+		}
+		public ActionResult Settings()
+		{
+			return View();
+		}
+		public ActionResult Help()
+		{
+			return View();
+		}
+		public ActionResult Transfer()
         {
             /*string Object = HttpContext.Session.GetString("AccountObject");
             User AccountObject = JsonSerializer.Deserialize<User>(Object);
