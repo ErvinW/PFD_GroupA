@@ -1,5 +1,5 @@
-﻿@using System.Text.Json
-
+﻿@model PFD_GroupA.Models.UserKeybinds
+@using System.Text.Json
 @{
 	ViewData["Title"] = "USER HOME";
 	var AccountString = Context.Session.GetString("AccountObject");
@@ -8,10 +8,12 @@
 	var Binds = Context.Session.GetString("KeyBinds");
 	var BindsObject = JsonSerializer.Deserialize<UserKeybinds>(Binds);
 	var AccountObject = JsonSerializer.Deserialize<User>(AccountString);
-    var BankObject = JsonSerializer.Deserialize<Account>(BankAccString);
-    string AccountName = AccountObject.UserName;
-    string AccountID = AccountObject.UserID;
-    string AccountNum = BankObject.BankAccNo;
+	var BankObject = JsonSerializer.Deserialize<Account>(BankAccString);
+	string AccountName = AccountObject.UserName;
+	string AccountID = AccountObject.UserID;
+	string AccountNum = BankObject.BankAccNo;
+	UserKeybinds test = Model;
+	Console.WriteLine(test);
 }
 
 <!DOCTYPE html>
@@ -290,12 +292,21 @@
 				</div>
 			</main>
 		</section>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+			integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+			crossorigin="anonymous"></script>
 	<!-- Dashboard Section End -->
 
     <!-- Javascript Section -->
+	<script>
+		var bindsObject = @Json.Serialize(Model);
+	</script>
     <script src="~/js/dashboard.js" asp-append-version="true"></script>
 	<script src="~/js/chart.js" asp-append-version="true"></script>
 	<script src="~/js/site.js" asp-append-version="true"></script>
+	
 
 </body>
 </html>

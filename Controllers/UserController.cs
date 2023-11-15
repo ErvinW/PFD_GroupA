@@ -18,11 +18,9 @@ namespace PFD_GroupA.Controllers
 		// GET: UserController
 		public ActionResult Index()
         {
-            /*if ((HttpContext.Session.GetString("AccountType") == null))
-            {
-
-            } */
-            return View();
+			UserKeybinds keybinds = keybindContext.GetUserKeybinds("1234");
+			return View(keybinds);
+			
         }
 
         public ActionResult Transfer()
