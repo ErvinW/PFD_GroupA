@@ -143,10 +143,11 @@ namespace PFD_GroupA.Controllers
             }
             keybindContext.UpdateKeybinds(keybinds);
 
-            return RedirectToAction("Index","User");
+            //return RedirectToAction("Index","User");
 
 
-            //return Json(new { success = true, message = "Keys received successfully" });
+
+            return Json(new { success = true, message = "Keys received successfully" });
         }
 
         public class KeybindRequest
@@ -230,7 +231,8 @@ namespace PFD_GroupA.Controllers
             }
             
             keybindContext.UpdateKeybinds(keybinds);
-            return RedirectToAction("Index","User");
+            //return RedirectToAction("Index","User");
+            return null;
         }
         public ActionResult Confirmation()
         {

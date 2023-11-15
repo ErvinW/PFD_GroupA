@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
+
+    
+
     var addbuttons = document.querySelectorAll('.add-keybind');
 
     for (var i = 0; i < addbuttons.length; i++) {
@@ -80,8 +83,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
 
-            window.location.href = '/User/Index';
-
+            setTimeout(function () {
+                location.reload();
+            }, 100);
         }
 
     }
@@ -108,8 +112,10 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!confirmation) {
             return;
         }
-        //var pageName = event.parentElement.previousElementSibling.previousElementSibling.textContent;
-        var pageName = "HomePage"
+
+        console.log(event)
+        var pageName = event.parentElement.previousElementSibling.previousElementSibling.textContent;
+        
         // Make an AJAX request to the server to call the Delete action
         $.ajax({
             url: '/User/Delete', // Replace with the actual URL of your Delete action
@@ -126,6 +132,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.error('Error deleting data', error);
             }
         });
+
+        setTimeout(function () {
+            location.reload();
+        }, 100);
     }
 
 
