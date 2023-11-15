@@ -57,13 +57,13 @@
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/logo.png" alt="">
 			</a>
 			<ul class="side-menu top">
-				<li class="active">
+				<li>
 					<a href="~/User/Index">
 						<i class='bx bxs-home'></i>
 						<span class="text">Home</span>
 					</a>
 				</li>
-				<li>
+				<li class="active">
 					<a href="~/User/Account">
 						<i class='bx bx-line-chart'></i>
 						<span class="text"> Account</span>
@@ -131,6 +131,8 @@
 	<script>
 		var bindsObject = @Json.Serialize(Model);
 	</script>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 	<script src="~/js/dashboard.js" asp-append-version="true"></script>
 	<script src="~/js/chart.js" asp-append-version="true"></script>
 	<script src="~/js/site.js" asp-append-version="true"></script>

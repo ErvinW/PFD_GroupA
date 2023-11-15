@@ -1,4 +1,5 @@
 ﻿@model PFD_GroupA.Models.UserKeybinds
+
 @using System.Text.Json
 @{
 	ViewData["Title"] = "USER HOME";
@@ -26,7 +27,7 @@
 
 	<!-- CSS File -->
 	<link rel="stylesheet" href="~/css/dashboard.css" asp-append-version="true" />
-	<link rel="stylesheet" href="~/css/dashboard.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/css/transfer.css" asp-append-version="true" />
 
 	<!-- Unicons -->
 	<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
@@ -56,7 +57,7 @@
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/logo.png" alt="">
 			</a>
 			<ul class="side-menu top">
-				<li class="active">
+				<li >
 					<a href="~/User/Index">
 						<i class='bx bxs-home'></i>
 						<span class="text">Home</span>
@@ -68,7 +69,8 @@
 						<span class="text"> Account</span>
 					</a>
 				</li>
-				<li>
+				<li class="active">
+					
 					<a href="~/User/Transfer">
 						<i class='bx bx-transfer'></i>
 						<span class="text">Transfer</span>
@@ -131,10 +133,27 @@
 				<div class="order">
 					<div class="head">
 						<h3>Transaction</h3>
+						<!-- transfer form-->
+						<div class="form-group">
+							<label for="recipient">To Account:</label>
+							<input type="text" id="recipient" name="recipient" placeholder="Recipient's Account" required>
+						</div>
+						<div class="form-group">
+							<label for="amount">Amount:</label>
+							<input type="number" id="amount" name="amount" placeholder="Amount" required>
+						</div>
+						<div class="row mb-3">
+							<div class="col-sm-9 offset-sm-3">
+								<input type="submit" asp-controller="User" asp-action="Transfer"
+									   class="btn btn-primary" />
+							</div>
+						</div>
+
 					</div>
-					
+
 				</div>
 			</div>
+			<!-- Transcaction History Section Start -->
 			<div class="table-data">
 				<div class="order">
 					<div class="head">
@@ -195,6 +214,7 @@
 					</table>
 				</div>
 			</div>
+			<!-- Transcaction History Section Start -->
 		</main>
 	</section>
 	<!-- Dashboard Section End -->
@@ -202,6 +222,8 @@
 	<script>
 		var bindsObject = @Json.Serialize(Model);
 	</script>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 	<script src="~/js/dashboard.js" asp-append-version="true"></script>
 	<script src="~/js/site.js" asp-append-version="true"></script>
 	<script src="~/js/transfer.js" asp-append-version="true"></script>
