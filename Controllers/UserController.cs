@@ -20,16 +20,26 @@ namespace PFD_GroupA.Controllers
 
         public void RunPythonScript()
         {
-            ScriptEngine engine = Python.CreateEngine();
-            ICollection<string> Paths = engine.GetSearchPaths();
-            Paths.Add("\"D:\\YEAR 2 SEM 2\\PFD\\Solution\\Python Script\\myenv\\Lib\\site-packages\\cv2\"");
-            Paths.Add("\"D:\\YEAR 2 SEM 2\\PFD\\Solution\\Python Script\\myenv\\Lib\\site-packages\\mediapipe\"");
-            Paths.Add("\"D:\\YEAR 2 SEM 2\\PFD\\Solution\\Python Script\\myenv\\Lib\\site-packages\\pyautogui\"");
-            engine.SetSearchPaths(Paths);
+            var engine = Python.CreateEngine();
+            var searchPaths = engine.GetSearchPaths();
 
+            Console.WriteLine("IronPython Search Paths:");
+            foreach(var path in searchPaths)
+            {
+                Console.WriteLine(path + " lolol");
+            }
+
+            ICollection<string> paths = engine.GetSearchPaths();
+            paths.Add(".");
+            paths.Add("D:\\YEAR 2 SEM 2\\PFD\\Solution\\bin\\Debug\\net6.0\\lib");
+            paths.Add("D:\\YEAR 2 SEM 2\\PFD\\Solution\\bin\\Debug\\net6.0\\DLLs");
+            engine.SetSearchPaths(paths);
             // Load the Python script
             var scriptPath = "D:\\YEAR 2 SEM 2\\PFD\\Solution\\Python Script\\pythontest.py"; // Replace this with your script's path
-            engine.ExecuteFile(scriptPath);
+            var scope = engine.CreateScope();
+            var source = engine.CreateScriptSourceFromFile(scriptPath);
+            source.Execute(scope);
+            //engine.ExecuteFile(scriptPath);
         }
 
 		// GET: UserController
