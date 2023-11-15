@@ -37,7 +37,7 @@ document.addEventListener("keydown", e => {
 
 
     else if (e.key.toLowerCase() === LogoutBind) {
-        window.location.href = 'Home/Index';
+        window.location.href = '/Home/Index';
     }
 });
 

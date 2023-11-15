@@ -7,8 +7,8 @@ using System;
 using System.Reflection;
 using System.Runtime.ConstrainedExecution;
 using System.Diagnostics;
-using IronPython.Hosting;
-using Microsoft.Scripting.Hosting;
+//using IronPython.Hosting;
+//using Microsoft.Scripting.Hosting;
 
 namespace PFD_GroupA.Controllers
 {
@@ -18,7 +18,7 @@ namespace PFD_GroupA.Controllers
         UserKeybindsDAL keybindContext = new UserKeybindsDAL();
 		private List<SelectListItem> pageList = new List<SelectListItem>();
 
-        public void RunPythonScript()
+        /*public void RunPythonScript()
         {
             var engine = Python.CreateEngine();
             var searchPaths = engine.GetSearchPaths();
@@ -41,7 +41,7 @@ namespace PFD_GroupA.Controllers
             source.Execute(scope);
             //engine.ExecuteFile(scriptPath);
         }
-
+        */
 		// GET: UserController
 		public ActionResult Index()
         {
