@@ -54,6 +54,9 @@ namespace PFD_GroupA.Controllers
             // Process the received keys
             Console.WriteLine("Keys received: " + string.Join(", ", keys));
 
+            //Update Keybind
+            HttpContext.Session.GetString()
+
             // You can return a response if needed
             return Json(new { success = true, message = "Keys received successfully" });
         }
