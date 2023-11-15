@@ -6,17 +6,20 @@
 
 // Keybinds
 
-var yourScript = {
-    init: function (userKeybinds) {
-        console.log(userKeybinds);
-    }
-}
+
+console.log(bindsObject);
+var TransBind = bindsObject.transferPage;
+
+var HomeBind = bindsObject.homePage;
+
+
+
 
 
 
 
 document.addEventListener("keydown", e => {
-    if (e.key.toLowerCase() === "t" && !window.location.pathname.endsWith('/Transfer')) {
+    if (e.key.toLowerCase() === TransBind && !window.location.pathname.endsWith('/Transfer')) {
         if (window.location.pathname.endsWith('/User')) {
             window.location.href = '/User/Transfer';
         }
@@ -28,7 +31,7 @@ document.addEventListener("keydown", e => {
     }
 
 
-    else if (e.key.toLowerCase() === 'h' ) {
+    else if (e.key.toLowerCase() === HomeBind) {
         window.location.href = 'Index';
     }
 });

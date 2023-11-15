@@ -145,7 +145,7 @@ h6 span{
     transition: all 600ms ease-out;
 }
 
-.card-front, .card-back {
+.card-front {
     width: 100%;
     height: 100%;
     background: rgba(255, 255, 255, 0.2); /* Use a semi-transparent white color */
@@ -159,8 +159,27 @@ h6 span{
     -moz-backface-visibility: hidden;
     -o-backface-visibility: hidden;
     backface-visibility: hidden;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); /* Add a subtle white box-shadow */
-    backdrop-filter: blur(10px); /* Apply a blur filter for the glass effect */
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); /* Add a subtle white box-shadow
+    /* No blur filter on the front card */
+}
+
+.card-back {
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2); /* Use a semi-transparent white color */
+    position: absolute;
+    border-radius: 6px;
+    left: 0;
+    top: 0;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); /* Add a subtle white box-shadow
+    /* Apply blur filter only to the back card */
+    backdrop-filter: blur(10px);
 }
 
 .card-back {

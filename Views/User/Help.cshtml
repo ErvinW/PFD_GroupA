@@ -1,22 +1,4 @@
-﻿@model PFD_GroupA.Models.UserKeybinds
-@using System.Text.Json
-@{
-	ViewData["Title"] = "USER HOME";
-	var AccountString = Context.Session.GetString("AccountObject");
-	var BankAccString = Context.Session.GetString("BankAcc");
-	var type = Context.Session.GetString("AccountType");
-	var Binds = Context.Session.GetString("KeyBinds");
-	var BindsObject = JsonSerializer.Deserialize<UserKeybinds>(Binds);
-	var AccountObject = JsonSerializer.Deserialize<User>(AccountString);
-	var BankObject = JsonSerializer.Deserialize<Account>(BankAccString);
-	string AccountName = AccountObject.UserName;
-	string AccountID = AccountObject.UserID;
-	string AccountNum = BankObject.BankAccNo;
-	UserKeybinds test = Model;
-	Console.WriteLine(test);
-}
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8" />
@@ -26,7 +8,7 @@
 
 	<!-- CSS File -->
 	<link rel="stylesheet" href="~/css/dashboard.css" asp-append-version="true" />
-	<link rel="stylesheet" href="~/css/dashboard.css" asp-append-version="true" />
+
 
 	<!-- Unicons -->
 	<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
@@ -122,91 +104,14 @@
 				<i class="fa-solid fa-user fa-beat fa-sm" style="color: #3c91e6;"></i>
 			</a>
 		</nav>
-		<!-- Search Bar & Light Switch End -->
-		<!-- Dashboard Section Start -->
-		<main>
-			<div class="head-title">
-			</div>
-			<div class="table-data">
-				<div class="order">
-					<div class="head">
-						<h3>Transaction</h3>
-					</div>
-					
-				</div>
-			</div>
-			<div class="table-data">
-				<div class="order">
-					<div class="head">
-						<h3>Transaction History</h3>
-						<i class='bx bx-search'></i>
-						<i class='bx bx-filter'></i>
-					</div>
-					<table>
-						<thead>
-							<tr>
-								<th>User</th>
-								<th>Date Order</th>
-								<th>Status</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>
-									<i class="fi fi-rr-coffee"></i>
-									<p>Great Coffee</p>
-								</td>
-								<td>Today</td>
-								<td><span class="status completed">Completed</span></td>
-							</tr>
-							<tr>
-								<td>
-									<i class="fi fi-rr-hamburger-soda"></i>
-									<p>Central Burger Cafe and Restaurant</p>
-								</td>
-								<td>11-11-2023</td>
-								<td><span class="status pending">Pending</span></td>
-							</tr>
-							<tr>
-								<td>
-									<i class="fi fi-rr-computer"></i>
-									<p>Computer Stuff</p>
-								</td>
-								<td>08-11-2023</td>
-								<td><span class="status process">Process</span></td>
-							</tr>
-							<tr>
-								<td>
-									<i class="fi fi-rr-pizza-slice"></i>
-									<p>Pizza Heaven</p>
-								</td>
-								<td>05-11-2023</td>
-								<td><span class="status pending">Pending</span></td>
-							</tr>
-							<tr>
-								<td>
-									<i class="fi fi-rr-cream"></i>
-									<p>Soap & Skin</p>
-								</td>
-								<td>04-11-2023</td>
-								<td><span class="status completed">Completed</span></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</main>
 	</section>
+	<!-- Search Bar & Light Switch End -->
+	<!-- Dashboard Section Start -->
 	<!-- Dashboard Section End -->
 	<!-- Javascript Section -->
-	<script>
-		var bindsObject = @Json.Serialize(Model);
-	</script>
 	<script src="~/js/dashboard.js" asp-append-version="true"></script>
+	<script src="~/js/chart.js" asp-append-version="true"></script>
 	<script src="~/js/site.js" asp-append-version="true"></script>
-	<script src="~/js/transfer.js" asp-append-version="true"></script>
-	<script src='https://cdn.josetxu.com/js/pure-pajinate.es5.min.js'></script>
 
 </body>
 </html>
-
