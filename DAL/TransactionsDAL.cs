@@ -61,6 +61,24 @@ namespace PFD_GroupA.DAL
         }
 
 
+        public void Create(Transactions transaction)
+        {
+            SqlCommand cmd = conn.CreateCommand();
+            cmd.CommandText = @"INSERT INTO Transactions (SenderAccount, RecipientAccount, AmountSent, TransactionDate)
+                                VALUES(@SenderAccount, @RecipientAccount, @AmountSent, TransactionDate)";
+
+            /*cmd.Parameters.AddWithValue("@SenderAccount", );
+			cmd.Parameters.AddWithValue("@RecipientAccount", );
+			cmd.Parameters.AddWithValue("@AmountSent", );
+			cmd.Parameters.AddWithValue("@TransactionDate", );*/
+
+            conn.Open();
+            cmd.ExecuteScalar();
+            conn.Close();
+
+		}
+
+
 
 
     }

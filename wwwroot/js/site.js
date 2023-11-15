@@ -6,6 +6,11 @@
 
 // Keybinds
 
+console.log(bindsObject);
+
+
+
+
 document.addEventListener("keydown", e => {
     if (e.key.toLowerCase() === "t" && !window.location.pathname.endsWith('/Transfer')) {
         if (window.location.pathname.endsWith('/User')) {

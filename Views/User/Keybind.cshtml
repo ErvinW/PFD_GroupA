@@ -1,4 +1,22 @@
-﻿
+﻿@model PFD_GroupA.Models.UserKeybinds
+@using System.Text.Json
+
+@{
+    ViewData["Title"] = "USER KEYBIND";
+    var AccountString = Context.Session.GetString("AccountObject");
+    var BankAccString = Context.Session.GetString("BankAcc");
+    var type = Context.Session.GetString("AccountType");
+    var Binds = Context.Session.GetString("KeyBinds");
+    var BindsObject = JsonSerializer.Deserialize<UserKeybinds>(Binds);
+    var AccountObject = JsonSerializer.Deserialize<User>(AccountString);
+    var BankObject = JsonSerializer.Deserialize<Account>(BankAccString);
+    string AccountName = AccountObject.UserName;
+    string AccountID = AccountObject.UserID;
+    string AccountNum = BankObject.BankAccNo;
+}
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -268,8 +286,7 @@
         </div>
 
     </section>
-    <!-- Header & Home Section End -->
-    @model PFD_GroupA.Models.UserKeybinds
+  
 
     @using PFD_GroupA.Controllers
 
@@ -283,57 +300,90 @@
                 </tr>
             </thead>
             <tbody>
+                <form>
+                <tr>
+                    <td class="display-page-name">@Html.DisplayNameFor(model => model.TransferPage)</td>
+
+                        @if (!string.IsNullOrEmpty(Model?.TransferPage))
+                        {
+                            
+                            <td>
+                                @foreach (var item in Model.TransferPage.Split(' '))
+                                {
+                                    <kbd>@item</kbd>
+                                }
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-primary">Edit</button>
+                                <button type="button" class="btn btn-sm btn-danger">Delete</button>
+                            </td>
+                        }
+                        else
+                            {
+                            <td></td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-success done-keybind" style="display:none">Done</button>
+                                <button type="button" class="btn btn-sm btn-success add-keybind">Add</button>
+                            </td>
+                        }
+                </tr>
 
 
                 <tr>
-                    <td>@Html.DisplayNameFor(model => model.TransferPage)</td>
-                    @if (!string.IsNullOrEmpty(Model.TransferPage))
-                    {
+                    <td class="display-page-name">@Html.DisplayNameFor(model => model.HomePage)</td>
+
+                        @if (!string.IsNullOrEmpty(Model?.HomePage))
+                        {
+
                         <td>
-                            <kbd>@Model.TransferPage</kbd>
+                                @foreach (var item in Model.HomePage.Split(' '))
+                                {
+                                <kbd>@item</kbd>
+                                }
                         </td>
                         <td>
                             <button type="button" class="btn btn-sm btn-primary">Edit</button>
                             <button type="button" class="btn btn-sm btn-danger">Delete</button>
                         </td>
-                    }
-                    else
-                    {
+                        }
+                        else
+                        {
                         <td></td>
                         <td>
                             <button type="button" class="btn btn-sm btn-success done-keybind" style="display:none">Done</button>
                             <button type="button" class="btn btn-sm btn-success add-keybind">Add</button>
                         </td>
-                    }
-
+                        }
                 </tr>
 
                 <tr>
-                    <td>@Html.DisplayNameFor(model => model.HomePage)</td>
-                    @if (!string.IsNullOrEmpty(Model.HomePage))
-                    {
+                    <td class="display-page-name">@Html.DisplayNameFor(model => model.LogoutFunc)</td>
+
+                        @if (!string.IsNullOrEmpty(Model?.LogoutFunc))
+                        {
+
                         <td>
-                            <kbd>@Model.HomePage</kbd>
+                                @foreach (var item in Model.LogoutFunc.Split(' '))
+                                {
+                                <kbd>@item</kbd>
+                                }
                         </td>
                         <td>
                             <button type="button" class="btn btn-sm btn-primary">Edit</button>
                             <button type="button" class="btn btn-sm btn-danger">Delete</button>
                         </td>
-                    }
-                    else
-                    {
+                        }
+                        else
+                        {
                         <td></td>
                         <td>
                             <button type="button" class="btn btn-sm btn-success done-keybind" style="display:none">Done</button>
                             <button type="button" class="btn btn-sm btn-success add-keybind">Add</button>
                         </td>
-                    }
-
+                        }
                 </tr>
 
-
-
-
+                </form>
             </tbody>
         </table>
     </div>
@@ -347,8 +397,11 @@
     
 
     <!-- Javascript Section -->
+    <script>
+        var bindsObject = @Json.Serialize(Model);
+    </script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/js/keybind.js"></script>
+    <script src="~/js/keybind.js" asp-append-version="true"></script>
 </body>
 </html>
 

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.ActionConstraints;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Runtime.ConstrainedExecution;
+using System.Security.Principal;
 
 namespace PFD_GroupA.Controllers
 {
@@ -40,19 +41,23 @@ namespace PFD_GroupA.Controllers
 			
             //string password = account["PinNum"].ToString();
 			User? user = userContext.Login(loginID, password);
-			UserKeybinds? userKeybinds = userKeybindsContext.GetUserKeybinds(loginID);
+			
             if (user != null)
 			{
                 Account BankAccount = AccountContext.GetAccount(loginID);
+                UserKeybinds userKeybinds = userKeybindsContext.GetUserKeybinds(loginID);
                 //Console.WriteLine(user.UserID);
                 //Store account deets in Session
                 var jsonString = JsonSerializer.Serialize(user);
-                Console.WriteLine(BankAccount.BankAccNo);
+                //Console.WriteLine(BankAccount.BankAccNo);
+				//Console.WriteLine(userKeybinds.TransferPage);
                 var jsonAccString = JsonSerializer.Serialize(BankAccount);
+				var KeyBinds = JsonSerializer.Serialize(userKeybinds);
+				HttpContext.Session.SetString("KeyBinds", KeyBinds); //
 				HttpContext.Session.SetString("BankAcc", jsonAccString);
 				HttpContext.Session.SetString("AccountObject", jsonString);
 				HttpContext.Session.SetString("AccountType", "User");
-				return RedirectToAction("Index", "User");
+                return RedirectToAction("Index", "User");
 			}
 			else
 			{
