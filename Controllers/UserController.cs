@@ -95,8 +95,8 @@ namespace PFD_GroupA.Controllers
 			var UID = JsonSerializer.Deserialize<User>(ID);
 			string UserID = UID.UserID;
 
-			//UserKeybinds keybinds = keybindContext.GetUserKeybinds(UserID);
-			//return View(keybinds);
+			UserKeybinds keybinds = keybindContext.GetUserKeybinds(UserID);
+			return View(keybinds);
         }
 
         [HttpGet]
