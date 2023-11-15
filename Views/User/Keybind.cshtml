@@ -286,49 +286,57 @@
                 <form>
                 <tr>
                     <td class="display-page-name">@Html.DisplayNameFor(model => model.TransferPage)</td>
-                        @if (!string.IsNullOrEmpty(Model.TransferPage))
+
+                        @if (!string.IsNullOrEmpty(Model?.TransferPage))
                         {
-                        <td>
-                            <kbd>@Model.TransferPage</kbd>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-sm btn-primary">Edit</button>
-                            <button type="button" class="btn btn-sm btn-danger">Delete</button>
-                        </td>
+                            @foreach (var item in Model.TransferPage.Split(' '))
+                            {
+                            <td>
+                                <kbd>@item</kbd>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-primary">Edit</button>
+                                <button type="button" class="btn btn-sm btn-danger">Delete</button>
+                            </td>
+                            }
                         }
                         else
-                        {
-                        <td></td>
-                        <td>
-                            <button type="button" class="btn btn-sm btn-success done-keybind" style="display:none">Done</button>
-                            <button type="button" class="btn btn-sm btn-success add-keybind">Add</button>
-                        </td>
+                            {
+                            <td></td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-success done-keybind" style="display:none">Done</button>
+                                <button type="button" class="btn btn-sm btn-success add-keybind">Add</button>
+                            </td>
                         }
-
                 </tr>
+
 
                 <tr>
                     <td class="display-page-name">@Html.DisplayNameFor(model => model.HomePage)</td>
-                        @if (!string.IsNullOrEmpty(Model.HomePage))
+
+                        @if (!string.IsNullOrEmpty(Model?.HomePage))
                         {
-                        <td>
-                            <kbd>@Model.HomePage</kbd>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-sm btn-primary">Edit</button>
-                            <button type="button" class="btn btn-sm btn-danger">Delete</button>
-                        </td>
+                            @foreach (var item in Model.HomePage.Split(' '))
+                            {
+                            <td>
+                                <kbd>@item</kbd>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-primary">Edit</button>
+                                <button type="button" class="btn btn-sm btn-danger">Delete</button>
+                            </td>
+                            }
                         }
                         else
                         {
-                        <td></td>
-                        <td>
-                            <button type="button" class="btn btn-sm btn-success done-keybind" style="display:none">Done</button>
-                            <button type="button" class="btn btn-sm btn-success add-keybind">Add</button>
-                        </td>
+                            <td></td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-success done-keybind" style="display:none">Done</button>
+                                <button type="button" class="btn btn-sm btn-success add-keybind">Add</button>
+                            </td>
                         }
-
                 </tr>
+
                 </form>
             </tbody>
         </table>
