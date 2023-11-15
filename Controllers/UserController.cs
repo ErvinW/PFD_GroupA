@@ -18,7 +18,11 @@ namespace PFD_GroupA.Controllers
 		// GET: UserController
 		public ActionResult Index()
         {
-			UserKeybinds keybinds = keybindContext.GetUserKeybinds("1234");
+            var ID = HttpContext.Session.GetString("AccountObject");
+            var UID = JsonSerializer.Deserialize<User>(ID);
+            string UserID = UID.UserID;
+
+			UserKeybinds keybinds = keybindContext.GetUserKeybinds(UserID);
 			return View(keybinds);
 			
         }
