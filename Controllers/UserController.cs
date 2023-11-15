@@ -97,12 +97,10 @@ namespace PFD_GroupA.Controllers
             }
             keybindContext.UpdateKeybinds(keybinds);
 
-            // Now keybinds object has the updated property value
+            return RedirectToAction("Index","User");
 
 
-
-            // You can return a response if needed
-            return Json(new { success = true, message = "Keys received successfully" });
+            //return Json(new { success = true, message = "Keys received successfully" });
         }
 
         public class KeybindRequest
@@ -162,17 +160,14 @@ namespace PFD_GroupA.Controllers
             }
         }
 
-        // GET: UserController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+       
+       
 
-        // POST: UserController/Delete/5
+        // POST: UserController/Delete
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete([FromBody]string pageName)
         {
+            Console.WriteLine("YOOOOOOO");
             Account acc = JsonSerializer.Deserialize<Account>(HttpContext.Session.GetString("AccountObject"));
             UserKeybinds keybinds = keybindContext.GetUserKeybinds(acc.UserID);
 
@@ -180,16 +175,14 @@ namespace PFD_GroupA.Controllers
             foreach (var property in keybinds.GetType().GetProperties())
             {
                 // Check if the property is UserID
-                if (property.Name == "UserID")
+                Console.WriteLine("p1"+property.Name);
+                Console.WriteLine("p2"+pageName);
+                if (property.Name == pageName)
                 {
-                    // Skip setting UserID to an empty string
-                    continue;
+                    property.SetValue(keybinds, "");
                 }
-
-                // Set other properties to an empty string
-                property.SetValue(keybinds, "");
             }
-
+            
             keybindContext.UpdateKeybinds(keybinds);
             return RedirectToAction("Index","User");
         }
@@ -217,5 +210,6 @@ namespace PFD_GroupA.Controllers
             Console.ReadLine();
             return View();
         }
+
     }
 }

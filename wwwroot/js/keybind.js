@@ -79,6 +79,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     console.error('Error sending keys to the server', error);
                 }
             });
+
+            window.location.href = '/User/Index';
+
         }
 
     }
@@ -89,8 +92,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // DELETE //
     // Add an event listener to the delete button
-    var deleteButton = document.querySelector('.delete-kb-btn'); // replace 'yourDeleteButtonId' with the actual ID of your delete button
-    deleteButton.addEventListener('click', deleteButtonClicked);
+    // Select all delete buttons
+    var deleteButtons = document.querySelectorAll('.delete-kb-btn');
+
+    // Attach click event handler to each delete button
+    deleteButtons.forEach(function (button) {
+        button.addEventListener('click', deleteButtonClicked);
+    });
 
     function deleteButtonClicked(event) {
         event.preventDefault();
@@ -100,12 +108,14 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!confirmation) {
             return;
         }
-
+        //var pageName = event.parentElement.previousElementSibling.previousElementSibling.textContent;
+        var pageName = "HomePage"
         // Make an AJAX request to the server to call the Delete action
         $.ajax({
             url: '/User/Delete', // Replace with the actual URL of your Delete action
             type: 'POST',
             contentType: 'application/json',
+            data: JSON.stringify(pageName), // Send the itemId to the server
             success: function (response) {
                 // Handle the success response if needed
                 console.log(response);
@@ -117,6 +127,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
+
 
 });
 
