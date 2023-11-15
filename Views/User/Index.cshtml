@@ -1,11 +1,13 @@
 ﻿@using System.Text.Json
 
 @{
-    ViewData["Title"] = "USER HOME";
-    var AccountString = Context.Session.GetString("AccountObject");
-    var BankAccString = Context.Session.GetString("BankAcc");
-    var type = Context.Session.GetString("AccountType");
-    var AccountObject = JsonSerializer.Deserialize<User>(AccountString);
+	ViewData["Title"] = "USER HOME";
+	var AccountString = Context.Session.GetString("AccountObject");
+	var BankAccString = Context.Session.GetString("BankAcc");
+	var type = Context.Session.GetString("AccountType");
+	var Binds = Context.Session.GetString("Keybinds");
+	var BindsObject = JsonSerializer.Deserialize<UserKeybinds>(Binds);
+	var AccountObject = JsonSerializer.Deserialize<User>(AccountString);
     var BankObject = JsonSerializer.Deserialize<Account>(BankAccString);
     string AccountName = AccountObject.UserName;
     string AccountID = AccountObject.UserID;
