@@ -111,6 +111,11 @@
     </section>
 
     <!-- Javascript Section -->
+    <script>
+        // Access the userKeybinds in JavaScript and pass it to your script
+        var userKeybinds = @Html.Raw(Json.Serialize(Model));
+        yourScript.init(userKeybinds);
+    </script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 </body>
 </html>

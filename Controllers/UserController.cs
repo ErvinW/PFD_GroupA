@@ -34,6 +34,13 @@ namespace PFD_GroupA.Controllers
         }
 
         [HttpGet]
+        public IActionResult GetKeybindData()
+        {
+            string kData = HttpContext.Session.GetString("Keybinds");
+            return Json(new { myData = kData });
+        }
+
+        [HttpGet]
         public ActionResult Keybind()
         {
             UserKeybinds keybinds = keybindContext.GetUserKeybinds("1234");
