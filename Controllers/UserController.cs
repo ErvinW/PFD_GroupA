@@ -55,7 +55,9 @@ namespace PFD_GroupA.Controllers
             Console.WriteLine("Page name received: " + keybindRequest.PageName);
 
             //Update Keybind
-            HttpContext.Session.GetString()
+     
+            //Account retrieveAcc = HttpContext.Session.GetString("AccountObject");
+
 
             // You can return a response if needed
             return Json(new { success = true, message = "Keys received successfully" });
