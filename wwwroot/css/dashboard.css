@@ -53,17 +53,56 @@ h2#this-month-heading {
     color: #342E37;
 }
 
+.first {
+    color: #00bcd4;
+}
+
+.second {
+    color: #4caf50;
+}
+
+.third {
+    color: #ffc107;
+}
+
+.fourth {
+    color: #9e9e9e;
+}
+
+.fifth {
+    color: #e91e63;
+}
+
+.expense-chart {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+}
+
+.chart-list {
+    line-height: 2.5em;
+}
+
+
+@media (max-width: 600px) {
+    .main-top {
+        display: grid;
+        grid-gap: 10px;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto, auto;
+    }
+
+    .top2 {
+        grid-column: 1/2;
+        grid-row: 2/3;
+    }
+}
+
 .fi {
     font-size: 24px; /* Adjust the size as needed */
 }
 
-.charts .chart-container {
-	background-color: var(--dk-dark-bg);
-}
 
-.charts .chart-container h3 {
-	color: var(--dk-gray-400)
-}
 
 
 /* SIDEBAR */
