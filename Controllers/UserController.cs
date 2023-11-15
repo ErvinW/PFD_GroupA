@@ -30,19 +30,39 @@ namespace PFD_GroupA.Controllers
         }
 		public ActionResult Account()
 		{
-			return View();
+			var ID = HttpContext.Session.GetString("AccountObject");
+			var UID = JsonSerializer.Deserialize<User>(ID);
+			string UserID = UID.UserID;
+
+			UserKeybinds keybinds = keybindContext.GetUserKeybinds(UserID);
+			return View(keybinds);
 		}
 		public ActionResult Cards()
 		{
-			return View();
+			var ID = HttpContext.Session.GetString("AccountObject");
+			var UID = JsonSerializer.Deserialize<User>(ID);
+			string UserID = UID.UserID;
+
+			UserKeybinds keybinds = keybindContext.GetUserKeybinds(UserID);
+			return View(keybinds);
 		}
 		public ActionResult Settings()
 		{
-			return View();
+			var ID = HttpContext.Session.GetString("AccountObject");
+			var UID = JsonSerializer.Deserialize<User>(ID);
+			string UserID = UID.UserID;
+
+			UserKeybinds keybinds = keybindContext.GetUserKeybinds(UserID);
+			return View(keybinds);
 		}
 		public ActionResult Help()
 		{
-			return View();
+			var ID = HttpContext.Session.GetString("AccountObject");
+			var UID = JsonSerializer.Deserialize<User>(ID);
+			string UserID = UID.UserID;
+
+			UserKeybinds keybinds = keybindContext.GetUserKeybinds(UserID);
+			return View(keybinds);
 		}
 		public ActionResult Transfer()
         {
