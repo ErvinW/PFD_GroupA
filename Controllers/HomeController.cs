@@ -22,6 +22,7 @@ namespace PFD_GroupA.Controllers
 
         public IActionResult Index()
 		{
+			
 			return View();
 		}
 
@@ -50,7 +51,7 @@ namespace PFD_GroupA.Controllers
                 //Store account deets in Session
                 var jsonString = JsonSerializer.Serialize(user);
                 //Console.WriteLine(BankAccount.BankAccNo);
-				//Console.WriteLine(userKeybinds.TransferPage);
+				Console.WriteLine(userKeybinds.TransferPage);
                 var jsonAccString = JsonSerializer.Serialize(BankAccount);
 				var KeyBinds = JsonSerializer.Serialize(userKeybinds);
 				HttpContext.Session.SetString("KeyBinds", KeyBinds); //

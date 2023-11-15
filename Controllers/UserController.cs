@@ -20,14 +20,31 @@ namespace PFD_GroupA.Controllers
 		// GET: UserController
 		public ActionResult Index()
         {
-            /*if ((HttpContext.Session.GetString("AccountType") == null))
-            {
+            var ID = HttpContext.Session.GetString("AccountObject");
+            var UID = JsonSerializer.Deserialize<User>(ID);
+            string UserID = UID.UserID;
 
-            } */
-            return View();
+			UserKeybinds keybinds = keybindContext.GetUserKeybinds(UserID);
+			return View(keybinds);
+			
         }
-
-        public ActionResult Transfer()
+		public ActionResult Account()
+		{
+			return View();
+		}
+		public ActionResult Cards()
+		{
+			return View();
+		}
+		public ActionResult Settings()
+		{
+			return View();
+		}
+		public ActionResult Help()
+		{
+			return View();
+		}
+		public ActionResult Transfer()
         {
             /*string Object = HttpContext.Session.GetString("AccountObject");
             User AccountObject = JsonSerializer.Deserialize<User>(Object);
