@@ -63,12 +63,13 @@ namespace PFD_GroupA.DAL
 			return userBinds;
 		}
 
-		public int UpdateKeybinds (UserKeybinds userBinds)
+		public int UpdateKeybinds (UserKeybinds? userBinds)
 		{
 			SqlCommand cmd = conn.CreateCommand();
-
-			//Define parameters
-			cmd.CommandText = @"UPDATE UserKeybinds SET TransferPage=@transferPage, HomePage=@homePage, LogoutFunc=@logoutFunc WHERE UserID=@loginID";
+            Console.WriteLine("trans:"+ userBinds.TransferPage);
+            Console.WriteLine("home:" + userBinds.HomePage);
+            //Define parameters
+            cmd.CommandText = @"UPDATE UserKeybinds SET TransferPage=@transferPage, HomePage=@homePage, LogoutFunc=@logoutFunc WHERE UserID=@loginID";
 			cmd.Parameters.AddWithValue("@transferPage", userBinds.TransferPage);
 			cmd.Parameters.AddWithValue("@homePage", userBinds.HomePage);
 			cmd.Parameters.AddWithValue("@logoutFunc", userBinds.LogoutFunc);
@@ -84,5 +85,5 @@ namespace PFD_GroupA.DAL
 			return count;
         }
 
-	}
+    }
 }

@@ -82,5 +82,41 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
     }
+
+
+
+
+
+    // DELETE //
+    // Add an event listener to the delete button
+    var deleteButton = document.querySelector('.delete-kb-btn'); // replace 'yourDeleteButtonId' with the actual ID of your delete button
+    deleteButton.addEventListener('click', deleteButtonClicked);
+
+    function deleteButtonClicked(event) {
+        event.preventDefault();
+
+        // Confirm the deletion with the user if needed
+        var confirmation = confirm("Are you sure you want to delete?");
+        if (!confirmation) {
+            return;
+        }
+
+        // Make an AJAX request to the server to call the Delete action
+        $.ajax({
+            url: '/User/Delete', // Replace with the actual URL of your Delete action
+            type: 'POST',
+            contentType: 'application/json',
+            success: function (response) {
+                // Handle the success response if needed
+                console.log(response);
+                // Redirect to another page or update the UI as necessary
+                window.location.href = '/User/Index'; // Redirect to the Index page, for example
+            },
+            error: function (error) {
+                console.error('Error deleting data', error);
+            }
+        });
+    }
+
 });
 
