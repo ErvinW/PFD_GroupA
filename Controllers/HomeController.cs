@@ -21,8 +21,7 @@ namespace PFD_GroupA.Controllers
 		{
 			string pythonInterpreterPath = @"C:\Users\ervin\anaconda3\python.exe";
 			string pythonScriptPath = @"C:\Users\ervin\NGEE ANN FILES\PFD repo\PFD_GroupA\Python Script\pythontest.py";
-            string pythonInterpreterPath = @"C:\Users\ervin\anaconda3\python.exe";
-            string pythonScriptPath = @"C:\Users\ervin\NGEE ANN FILES\PFD repo\PFD_GroupA\Python Script\pythontest.py";
+           
 
             ProcessStartInfo startInfo = new ProcessStartInfo
 			{
