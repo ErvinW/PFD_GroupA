@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Runtime.ConstrainedExecution;
 using System.Diagnostics;
 using System.Data.SqlTypes;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 //using IronPython.Hosting;
 //using Microsoft.Scripting.Hosting;
@@ -196,25 +197,25 @@ namespace PFD_GroupA.Controllers
             }
         }
 
-        // GET: UserController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: UserController/Edit/5
+        // POST: UserController/Edit
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit([FromBody] KeybindRequest keybindRequest)
         {
-            try
+            Account acc = JsonSerializer.Deserialize<Account>(HttpContext.Session.GetString("AccountObject"));
+            UserKeybinds keybinds = keybindContext.GetUserKeybinds(acc.UserID);
+
+
+            // Iterate through properties of the object
+            foreach (var property in keybinds.GetType().GetProperties())
             {
-                return RedirectToAction(nameof(Index));
+                // Check if the property is not UserID
+                if (property.Name == keybindRequest.PageName)
+                {
+                    property.SetValue(keybinds, string.Join(" ", keybindRequest.Keys));
+                }
             }
-            catch
-            {
-                return View();
-            }
+            keybindContext.UpdateKeybinds(keybinds);
+            return Json(new { success = true, message = "Keys received successfully" });
         }
 
        
@@ -224,7 +225,6 @@ namespace PFD_GroupA.Controllers
         [HttpPost]
         public ActionResult Delete([FromBody]string pageName)
         {
-            Console.WriteLine("YOOOOOOO");
             Account acc = JsonSerializer.Deserialize<Account>(HttpContext.Session.GetString("AccountObject"));
             UserKeybinds keybinds = keybindContext.GetUserKeybinds(acc.UserID);
 
@@ -277,15 +277,16 @@ namespace PFD_GroupA.Controllers
 			string SenderID = UID.UserID;
             string RecipientID = transaction["recipient"].ToString();
             string AmountSent = transaction["amount"].ToString();
+            string Category = transaction["category"].ToString();
 			SqlMoney sqlAmountSent = SqlMoney.Parse(AmountSent);
             DateTime TransactionDate = DateTime.Now;
             User? user = userContext.Check(RecipientID);
             if (user != null)
             {
-                transactionsContext.AddTransaction(SenderID, RecipientID, sqlAmountSent, TransactionDate);
+                transactionsContext.AddTransaction(SenderID, RecipientID, sqlAmountSent, Category, TransactionDate);
 
 			}
-			return View("Index");
+			return RedirectToAction("Index", "User");
         }
     }
 }
