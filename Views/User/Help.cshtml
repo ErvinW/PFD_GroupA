@@ -5,7 +5,7 @@
 	var AccountString = Context.Session.GetString("AccountObject");
 	var BankAccString = Context.Session.GetString("BankAcc");
 	var type = Context.Session.GetString("AccountType");
-	var Binds = Context.Session.GetString("KeyBinds");
+	var Binds = Context.Session.GetString("KeyBinds");<!--
 	var BindsObject = JsonSerializer.Deserialize<UserKeybinds>(Binds);
 	var AccountObject = JsonSerializer.Deserialize<User>(AccountString);
 	var BankObject = JsonSerializer.Deserialize<Account>(BankAccString);
@@ -13,7 +13,7 @@
 	string AccountID = AccountObject.UserID;
 	string AccountNum = BankObject.BankAccNo;
 	UserKeybinds test = Model;
-	Console.WriteLine(test);
+	Console.WriteLine(test);-->
 }
 
 <!DOCTYPE html>
@@ -22,11 +22,11 @@
 	<meta charset="UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>TRANSFER </title>
+	<title>Help Page </title>
 
 	<!-- CSS File -->
 	<link rel="stylesheet" href="~/css/dashboard.css" asp-append-version="true" />
-
+	<link rel="stylesheet" href="~/css/help.css" asp-append-version="true" />
 
 	<!-- Unicons -->
 	<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
@@ -91,14 +91,15 @@
 						<i class='bx bxs-cog'></i>
 						<span class="text">Settings</span>
 					</a>
+
 				</li>
-				<li>
+				<li class="active">
 					<a href="~/User/Help">
 						<i class='bx bx-help-circle'></i>
 						<span class="text">Help</span>
 					</a>
 				</li>
-				<li class="active">
+				<li >
 					<a href="~/Home/Index" class="logout">
 						<i class='bx bx-exit'></i>
 						<span class="text">Logout</span>
@@ -130,8 +131,22 @@
 		</nav>
 	</section>
 	<!-- Search Bar & Light Switch End -->
-	<!-- Dashboard Section Start -->
-	<!-- Dashboard Section End -->
+	<!--Video tutorial list start-->
+	<main>
+		<div class="head-title">
+			<div class="left">
+				<h1>Tutorial</h1>
+			</div>
+		</div>
+	<div class="videogalcontain">
+		<div class="row">
+			<div class="col">
+				<img src="~/images/home.jpg" width="10%">
+			</div>
+		</div>
+	</div>
+	</main>
+	<!-- Video tut end-->
 	<!-- Javascript Section -->
 	<script>
 		var bindsObject = @Json.Serialize(Model);
@@ -141,6 +156,7 @@
 	<script src="~/js/dashboard.js" asp-append-version="true"></script>
 	<script src="~/js/chart.js" asp-append-version="true"></script>
 	<script src="~/js/site.js" asp-append-version="true"></script>
-
+	
+	
 </body>
 </html>
