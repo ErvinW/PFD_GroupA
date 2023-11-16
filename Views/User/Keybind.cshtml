@@ -26,7 +26,9 @@
 
     <!-- CSS File -->
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    
     <link rel="stylesheet" href="~/css/keybind.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/dashboard.css" asp-append-version="true" />
 
     <!-- Unicons -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
@@ -45,27 +47,32 @@
           integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 </head>
 <body class="">
-
+    
     <!-- Header & Home Section Start -->
-    <section class="header">
-        <nav>
-            <a href="~/User/Index"><img src="/images/logo.png" alt=""></a>
-            <div class="nav-links" id="navLinks">
-                <i class="fa fa-times" onclick="hideMenu()"></i>
-                <ul>
-                    <li><a href="~/User/Index">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="#promotions">Promotions</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="~/User/Transfer">Transfer</a></li>
-                    <li>
-                        <a href="~/Home/Landing">Login</a>
-                    </li>
-                </ul>
-            </div>
-            <i class="fa fa-bars" onclick="showMenu()"></i>
-        </nav>
+    
+	
+	<!-- Dashboard Side Bar Section End -->
+	<!-- Search Bar & Light Switch Start -->
+	<section id="content">
+		<nav>
+			<i class='bx bx-menu'></i>
+			<form action="#">
+				<div class="form-input">
+					<input type="search" placeholder="Search...">
+					<button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+				</div>
+			</form>
+			<input type="checkbox" id="switch-mode" hidden>
+			<label for="switch-mode" class="switch-mode"></label>
+			<a href="#" class="notification">
+				<i class='bx bxs-bell'></i>
+				<span class="num">8</span>
+			</a>
+			<a href="#" class="profile">
+				<i class="fa-solid fa-user fa-beat fa-sm" style="color: #3c91e6;"></i>
+			</a>
+		</nav>
+		<!-- Search Bar & Light Switch End -->
 
 
         <div class="keyboard">
@@ -313,7 +320,8 @@
                                 }
                             </td>
                             <td>
-                                <button type="button" class="btn btn-sm btn-primary">Edit</button>
+                                <button type="button" class="btn btn-sm btn-primary edit-kb-btn">Edit</button>
+                            <button type="button" class="btn btn-sm btn-primary" style="display:none">Done</button>
                             <button type="button" class="btn btn-sm btn-danger delete-kb-btn" asp-route-id="@Model.TransferPage" asp-controller="User" asp-action="DeleteKeybind">Delete</button>
                             </td>
                         }
@@ -341,7 +349,8 @@
                                 }
                         </td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-primary">Edit</button>
+                            <button type="button" class="btn btn-sm btn-primary edit-kb-btn">Edit</button>
+                            <button type="button" class="btn btn-sm btn-primary" style="display:none">Done</button>
                             <button type="button" class="btn btn-sm btn-danger delete-kb-btn">Delete</button>
                         </td>
                         }
@@ -368,7 +377,8 @@
                                 }
                         </td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-primary">Edit</button>
+                            <button type="button" class="btn btn-sm btn-primary edit-kb-btn">Edit</button>
+                            <button type="button" class="btn btn-sm btn-primary" style="display:none">Done</button>
                             <button type="button" class="btn btn-sm btn-danger delete-kb-btn">Delete</button>
                         </td>
                         }
