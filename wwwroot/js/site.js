@@ -58,7 +58,7 @@ recognition.onresult = function (event) {
     const result = event.results[event.results.length - 1][0].transcript;
     console.log(result)
 
-    if (result.toLowerCase().includes('go to transfer') && !window.location.pathname.endsWith('/Transfer')) { //added extra condition here
+    if (result.toLowerCase().includes('transfer') && !window.location.pathname.endsWith('/Transfer')) { //added extra condition here
         if (window.location.pathname.endsWith('/User')) {
             window.location.href = '/User/Transfer';
         }
@@ -68,13 +68,23 @@ recognition.onresult = function (event) {
         }
     }
 
-    else if (result.toLowerCase().includes('home') || result.toLowerCase().includes('index')) {
+    else if ((result.toLowerCase().includes('home') || result.toLowerCase().includes('index')) && !window.location.pathname.endsWith('/Index')) {
         window.location.href = 'Index';
     }
 
 
     else if (result.toLowerCase().includes('logout') || result.toLowerCase().includes('log out')) {
-        window.location.href = 'Home/Index';
+        window.location.href = '/Home/Index';
+    }
+
+    else if (result.toLowerCase().includes('keybind') && !window.location.pathname.endsWith('/Keybind')) {
+        if (window.location.pathname.endsWith('/User')) {
+            window.location.href = '/User/Keybind';
+        }
+
+        else {
+            window.location.href = 'Keybind';
+        }
     }
 };
 
