@@ -52,7 +52,8 @@ namespace PFD_GroupA.Controllers
             var ID = HttpContext.Session.GetString("AccountObject");
             var UID = JsonSerializer.Deserialize<User>(ID);
             string UserID = UID.UserID;
-
+            decimal balance = accountContext.GetAccountBalance(UserID);
+            HttpContext.Session.SetString("Balance", balance.ToString());
 			UserKeybinds keybinds = keybindContext.GetUserKeybinds(UserID);
 			return View(keybinds);
 			
@@ -71,7 +72,7 @@ namespace PFD_GroupA.Controllers
 			var ID = HttpContext.Session.GetString("AccountObject");
 			var UID = JsonSerializer.Deserialize<User>(ID);
 			string UserID = UID.UserID;
-
+			
 			UserKeybinds keybinds = keybindContext.GetUserKeybinds(UserID);
 			return View(keybinds);
 		}
