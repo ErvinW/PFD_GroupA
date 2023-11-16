@@ -3,7 +3,7 @@ using System.Data.SqlClient;
 using System.Security.Cryptography.Xml;
 using PFD_GroupA.Models;
 using System.Text.Json;
-
+using System.Data.SqlTypes;
 
 namespace PFD_GroupA.DAL
 {
@@ -60,21 +60,22 @@ namespace PFD_GroupA.DAL
             return transactionList;
         }
 
-        public int AddTransaction(Transactions transaction)
+        public bool AddTransaction(string SenderAccount, string RecipientAccount, SqlMoney AmountSent, DateTime TransactionDate)
         {
             SqlCommand cmd = conn.CreateCommand();
-            cmd.CommandText = @"INSERT INTO Transactions (SenderAccount, RecipientAccount, AmountSent, TransactionDate)
-                              OUTPUT INSERTED.TransactionID 
-                              VALUES(@senderAccount, @recipientAccount, @amountSent, @transactionDate)";
-            cmd.Parameters.AddWithValue("@senderAccount", transaction.SenderAccount);
-            cmd.Parameters.AddWithValue("@RecipientAccount", transaction.RecipientAccount);
-            cmd.Parameters.AddWithValue("@AmountSent", transaction.AmountSent);
-            cmd.Parameters.AddWithValue("@TransactionDate", transaction.TransactionDate);
+            cmd.CommandText = @"INSERT INTO Transactions (TransactionID, SenderAccount, RecipientAccount, AmountSent, TransactionDate)
+                              
+                              VALUES(@RecordID, @senderAccount, @recipientAccount, @amountSent, @transactionDate)";
+            cmd.Parameters.AddWithValue("@senderAccount", SenderAccount);
+            cmd.Parameters.AddWithValue("@RecipientAccount", RecipientAccount);
+            cmd.Parameters.AddWithValue("@AmountSent", AmountSent);
+            cmd.Parameters.AddWithValue("@TransactionDate", TransactionDate);
+            cmd.Parameters.AddWithValue("@RecordID", 3);
 
             conn.Open();
-            transaction.TransactionID = (int)cmd.ExecuteScalar();
+            cmd.ExecuteScalar();
             conn.Close();
-            return transaction.TransactionID;
+            return true;
         }
 
 
