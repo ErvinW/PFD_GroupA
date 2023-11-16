@@ -15,6 +15,6 @@ namespace PFD_GroupA.Models
         public string BankAccNo { get; set; }
 
         [Display(Name ="Balance")]
-        public SqlMoney Balance { get; set; }   
+        public decimal Balance { get; set; }   
     }
 }

@@ -17,6 +17,7 @@ namespace PFD_GroupA.Controllers
     public class UserController : Controller
     {
         TransactionsDAL transactionsContext = new TransactionsDAL();
+        AccountDAL accountContext = new AccountDAL();
         UserKeybindsDAL keybindContext = new UserKeybindsDAL();
 		private List<SelectListItem> pageList = new List<SelectListItem>();
         UserDAL userContext = new UserDAL();
@@ -273,17 +274,38 @@ namespace PFD_GroupA.Controllers
         public ActionResult CreateTransaction(IFormCollection transaction)
         {
 			var ID = HttpContext.Session.GetString("AccountObject");
+            var IDBank = HttpContext.Session.GetString("BankAcc");
+            var UIDBank = JsonSerializer.Deserialize<Account>(IDBank);
 			var UID = JsonSerializer.Deserialize<User>(ID);
 			string SenderID = UID.UserID;
+            decimal BankBalance = UIDBank.Balance;
             string RecipientID = transaction["recipient"].ToString();
             string AmountSent = transaction["amount"].ToString();
             string Category = transaction["category"].ToString();
-			SqlMoney sqlAmountSent = SqlMoney.Parse(AmountSent);
+			decimal sqlAmountSent = decimal.Parse(AmountSent);
             DateTime TransactionDate = DateTime.Now;
             User? user = userContext.Check(RecipientID);
+            decimal Balance = accountContext.GetAccountBalance(RecipientID);
             if (user != null)
             {
-                transactionsContext.AddTransaction(SenderID, RecipientID, sqlAmountSent, Category, TransactionDate);
+
+                Console.WriteLine(BankBalance);
+                
+                    
+                    bool deduction = accountContext.Deduct(SenderID, BankBalance, sqlAmountSent);
+                    if (deduction == true)
+                    {
+                        Console.WriteLine(12);
+					    bool increase = accountContext.Increase(RecipientID, Balance, sqlAmountSent);
+					    transactionsContext.AddTransaction(SenderID, RecipientID, sqlAmountSent, Category, TransactionDate);
+				    }
+
+                else
+                {
+                    Console.WriteLine("Failed");
+                }
+                   
+			
 
 			}
 			return RedirectToAction("Index", "User");

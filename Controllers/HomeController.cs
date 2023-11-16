@@ -57,6 +57,7 @@ namespace PFD_GroupA.Controllers
 				HttpContext.Session.SetString("BankAcc", jsonAccString);
 				HttpContext.Session.SetString("AccountObject", jsonString);
 				HttpContext.Session.SetString("AccountType", "User");
+				HttpContext.Session.SetString("BankBalance", BankAccount.Balance.ToString());
                 return RedirectToAction("Index", "User");
 			}
 			else
