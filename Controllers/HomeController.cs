@@ -17,12 +17,41 @@ namespace PFD_GroupA.Controllers
         private AccountDAL AccountContext = new AccountDAL();
 		private UserKeybindsDAL userKeybindsContext = new UserKeybindsDAL();
 
+		public async Task RunPythonScript()
+		{
+			string pythonInterpreterPath = @"C:\Users\Katana\AppData\Local\Microsoft\WindowsApps\python.exe";
+			string pythonScriptPath = @"D:\YEAR 2 SEM 2\PFD\Solution\Python Script\pythontest.py";
+
+			ProcessStartInfo startInfo = new ProcessStartInfo
+			{
+				FileName = pythonInterpreterPath,
+				Arguments = $"\"{pythonScriptPath}\"",
+				UseShellExecute = false,
+				RedirectStandardOutput = true,
+				RedirectStandardError = true,
+				CreateNoWindow = true
+			};
+
+			using (Process process = Process.Start(startInfo))
+			{
+				if (process != null)
+				{
+					await Task.Run(() =>
+					{
+						string output = process.StandardOutput.ReadToEnd();
+						Console.WriteLine(output);
+						process.WaitForExit();
+					});
+				}
+			}
+		}
 
 
 
-        public IActionResult Index()
+		public IActionResult Index()
 		{
 			HttpContext.Session.Clear();
+			RunPythonScript();
 			return View();
 		}
 
