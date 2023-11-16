@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-    
+
 
     var addbuttons = document.querySelectorAll('.add-keybind');
 
@@ -11,15 +11,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function addbuttonclicked(event) {
         event.preventDefault();
+        var selectedKeys = [];
+        console.log(selectedKeys)
         alert("Click on the keys you want for keybind");
         var button = event.target
         key_display = button.parentElement.previousElementSibling
         button.parentElement.previousElementSibling.innerHTML = ``
         button.style.display = "none";
         button.previousElementSibling.style.display = "block";
-        var selectedKeys = [];
+        //var selectedKeys = [];
         select_keys();
-        
+
 
         function select_keys() {
             var key_letters = document.querySelectorAll('.key--letter');
@@ -59,6 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var doneButton = button.parentElement.querySelector('.done-keybind');
         doneButton.addEventListener('click', function (e) {
             console.log(selectedKeys.join(' '))
+            console.log("RUN:" + keybindsExist(selectedKeys))
             if (keybindsExist(selectedKeys) == false) {
                 var pageName = doneButton.parentElement.previousElementSibling.previousElementSibling.textContent;
                 sendKeysToServer(selectedKeys, pageName);
@@ -73,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
         });
-        
+
 
         function sendKeysToServer(keys, pageName) {
             var dataToSend = {
@@ -101,7 +104,47 @@ document.addEventListener('DOMContentLoaded', function () {
             }, 100);
         }
 
+        function keybindsExist(keybindToCheck) {
+            var displaykbElements = document.querySelectorAll(".keybind-display");
+            var keybindDisplayList = [];
 
+            displaykbElements.forEach(function (element) {
+                var kbdItems = Array.from(element.querySelectorAll("kbd"));
+                var keybindText = kbdItems.map(function (kbdItem) {
+                    return kbdItem.textContent.trim();
+                }).join(' ');
+
+                if (keybindText !== "") {
+                    keybindDisplayList.push(keybindText);
+                }
+            });
+
+            for (var x = 0; x < keybindDisplayList.length; x++) {
+                temp = keybindDisplayList[x].split(' ')
+                if (areListsSimilar(temp, keybindToCheck)) {
+                    return true
+                };
+
+                function areListsSimilar(list1, list2) {
+                    // Check if the length of both lists is the same
+                    if (list1.length !== list2.length) {
+                        return false;
+                    }
+
+                    // Sort the lists and compare the sorted arrays
+                    var sortedList1 = list1.slice().sort();
+                    var sortedList2 = list2.slice().sort();
+                    console.log(sortedList1)
+                    console.log(sortedList2)
+
+                    // Convert the sorted arrays to strings and compare them    
+                    return sortedList1.join('') === sortedList2.join('');
+                }
+
+
+            }
+            return false
+        }
 
     }
 
@@ -128,13 +171,13 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         var pageName = event.target.parentElement.previousElementSibling.previousElementSibling.textContent;
-        
+
         // Make an AJAX request to the server to call the Delete action
         $.ajax({
-            url: '/User/Delete', 
+            url: '/User/Delete',
             type: 'POST',
             contentType: 'application/json',
-            data: JSON.stringify(pageName), 
+            data: JSON.stringify(pageName),
             success: function (response) {
                 console.log(response);
             },
@@ -173,23 +216,28 @@ document.addEventListener('DOMContentLoaded', function () {
         var doneEditButton = button.nextElementSibling
         console.log(store)
         doneEditButton.addEventListener('click', function (e) {
-            if (keybindsExist(selectedKeys) == false) {
+            console.log(keybindsExist(selectedKeys))
+            if (keybindsExist(selectedKeys) == false) {   //not same
                 var pageName = doneEditButton.parentElement.previousElementSibling.previousElementSibling.textContent;
                 sendKeysToServer(selectedKeys, pageName);
             }
-            else {
+            else {  //same
                 doneEditButton.previousElementSibling.style.display = "inline-block";
                 e.target.style.display = "none";
                 doneEditButton.nextElementSibling.style.display = "inline-block";
                 console.log(store)
                 //doneEditButton.parentElement.previousElementSibling.innerHTML = '';
-                doneEditButton.parentElement.previousElementSibling.innerHTML = store;
-                return
+                //doneEditButton.parentElement.previousElementSibling.innerHTML = store;
+                
+
+                setTimeout(function () {
+                    location.reload();
+                }, 100);
             }
-            
+
         });
 
-        
+
 
         function sendKeysToServer(keys, pageName) {
             // Include pageName in the data object
@@ -236,7 +284,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             function letterClicked(event) {
                 var clickedKey = event.target.textContent;
-                console.log(clickedKey)
+                console.log(clickedKey)  //O
 
                 // Check if the key already exists in the array
                 if (!selectedKeys.includes(clickedKey)) {
@@ -272,13 +320,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
         console.log(keybindDisplayList)
         console.log(keybindToCheck);
-        
+        var indexToRemove = keybindDisplayList.indexOf(keybindToCheck[0]);
+        if (indexToRemove !== -1) {
+            keybindDisplayList.splice(indexToRemove, 1);
+        }
+
         for (var x = 0; x < keybindDisplayList.length; x++) {
             temp = keybindDisplayList[x].split(' ')
             if (areListsSimilar(temp, keybindToCheck)) {
                 return true
             };
-            
+
             function areListsSimilar(list1, list2) {
                 // Check if the length of both lists is the same
                 if (list1.length !== list2.length) {
@@ -288,11 +340,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Sort the lists and compare the sorted arrays
                 var sortedList1 = list1.slice().sort();
                 var sortedList2 = list2.slice().sort();
+                console.log(sortedList1)
+                console.log(sortedList2)
 
                 // Convert the sorted arrays to strings and compare them    
                 return sortedList1.join('') === sortedList2.join('');
             }
-            
+
 
         }
         return false
@@ -300,4 +354,3 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 });
-

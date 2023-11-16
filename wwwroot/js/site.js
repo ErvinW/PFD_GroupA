@@ -19,7 +19,7 @@ var LogoutBind = bindsObject.logoutFunc
 
 
 document.addEventListener("keydown", e => {
-    if (e.key.toLowerCase() === TransBind && !window.location.pathname.endsWith('/Transfer')) {
+    if (e.key.toUpperCase() === TransBind && !window.location.pathname.endsWith('/Transfer')) {
         if (window.location.pathname.endsWith('/User')) {
             window.location.href = '/User/Transfer';
         }
@@ -31,12 +31,12 @@ document.addEventListener("keydown", e => {
     }
 
 
-    else if (e.key.toLowerCase() === HomeBind) {
+    else if (e.key.toUpperCase() === HomeBind) {
         window.location.href = 'Index';
     } 
 
 
-    else if (e.key.toLowerCase() === LogoutBind) {
+    else if (e.key.toUpperCase() === LogoutBind) {
         window.location.href = '/Home/Index';
     }
 });
