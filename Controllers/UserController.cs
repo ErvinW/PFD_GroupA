@@ -11,7 +11,6 @@ using System.Data.SqlTypes;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using static Microsoft.AspNetCore.Razor.Language.TagHelperMetadata;
-using Python.Runtime;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 
@@ -217,6 +216,9 @@ namespace PFD_GroupA.Controllers
         {
             Account acc = JsonSerializer.Deserialize<Account>(HttpContext.Session.GetString("AccountObject"));
             UserKeybinds keybinds = keybindContext.GetUserKeybinds(acc.UserID);
+
+            Console.WriteLine("220"+keybindRequest.PageName);
+            Console.WriteLine("221"+keybindRequest.Keys);
 
 
             // Iterate through properties of the object

@@ -182,6 +182,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 e.target.style.display = "none";
                 doneEditButton.nextElementSibling.style.display = "inline-block";
                 console.log(store)
+                //doneEditButton.parentElement.previousElementSibling.innerHTML = '';
                 doneEditButton.parentElement.previousElementSibling.innerHTML = store;
                 return
             }
