@@ -46,10 +46,11 @@ namespace PFD_GroupA.DAL
                     transactionList.Add(
                     new Transactions
                     {
-                        SenderAccount = reader.GetString(0),
-                        RecipientAccount = reader.GetString(1),
-                        AmountSent = reader.GetDecimal(2),
-                        TransactionDate = reader.GetDateTime(3)
+                        TransactionID = reader.GetInt32(0),
+                        SenderAccount = reader.GetString(1),
+                        RecipientAccount = reader.GetString(2),
+                        AmountSent = reader.GetDecimal(3),
+                        TransactionDate = reader.GetDateTime(4)
                     }
                     );
 
