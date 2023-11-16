@@ -46,26 +46,86 @@
 </head>
 <body class="">
 
-    <!-- Header & Home Section Start -->
-    <section class="header">
+    <!-- Dashboard Side Bar Section Starts -->
+    <section id="sidebar">
         <nav>
-            <a href="~/User/Index"><img src="/images/logo.png" alt=""></a>
-            <div class="nav-links" id="navLinks">
-                <i class="fa fa-times" onclick="hideMenu()"></i>
-                <ul>
-                    <li><a href="~/User/Index">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="#promotions">Promotions</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="~/User/Transfer">Transfer</a></li>
-                    <li>
-                        <a href="~/Home/Landing">Login</a>
-                    </li>
-                </ul>
-            </div>
-            <i class="fa fa-bars" onclick="showMenu()"></i>
+            <a href="~/User/Index" class="brand">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/logo.png" alt="">
+            </a>
+            <ul class="side-menu top">
+                <li>
+                    <a href="~/User/Index">
+                        <i class='bx bxs-home'></i>
+                        <span class="text">Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="~/User/Account">
+                        <i class='bx bx-line-chart'></i>
+                        <span class="text"> Account</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="~/User/Transfer">
+                        <i class='bx bx-transfer'></i>
+                        <span class="text">Transfer</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="~/User/Cards">
+                        <i class='bx bx-credit-card'></i>
+                        <span class="text">Cards</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="~/User/Keybind">
+                        <i class='bx bxs-keyboard'></i>
+                        <span class="text">Keybind</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="~/User/Settings">
+                        <i class='bx bxs-cog'></i>
+                        <span class="text">Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="~/User/Help">
+                        <i class='bx bx-help-circle'></i>
+                        <span class="text">Help</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="~/Home/Index" class="logout">
+                        <i class='bx bx-exit'></i>
+                        <span class="text">Logout</span>
+                    </a>
+                </li>
+            </ul>
         </nav>
+    </section>
+    <!-- Dashboard Side Bar Section End -->
+    <!-- Search Bar & Light Switch Start -->
+    <section id="content">
+        <nav>
+            <i class='bx bx-menu'></i>
+            <form action="#">
+                <div class="form-input">
+                    <input type="search" placeholder="Search...">
+                    <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+                </div>
+            </form>
+            <input type="checkbox" id="switch-mode" hidden>
+            <label for="switch-mode" class="switch-mode"></label>
+            <a href="#" class="notification">
+                <i class='bx bxs-bell'></i>
+                <span class="num">8</span>
+            </a>
+            <a href="#" class="profile">
+                <i class="fa-solid fa-user fa-beat fa-sm" style="color: #3c91e6;"></i>
+            </a>
+        </nav>
+        <!-- Search Bar & Light Switch End -->
 
 
         <div class="keyboard">

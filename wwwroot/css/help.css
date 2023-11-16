@@ -1,6 +1,7 @@
 ﻿
 
 .container {
+    font-family: "Poppins", sans-serif;
     width: 100vw;
     display: grid;
     grid-template-columns: 1.8fr 1.2fr;
@@ -95,6 +96,7 @@
 }
 
 .video h3 {
+    font-family: "Poppins", sans-serif;
     width: 23rem;
     white-space: nowrap;
     overflow: hidden;
