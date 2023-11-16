@@ -10,6 +10,9 @@ input[type="number"] {
     border: 1px solid #ccc;
 }
 
+.trans-form{
+    margin-left: 38%;
+}
 
 #submitBtn {
     padding: 12px 24px;

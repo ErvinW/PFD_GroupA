@@ -294,11 +294,12 @@ namespace PFD_GroupA.Controllers
             decimal BankBalance = UIDBank.Balance;
             string RecipientID = transaction["recipient"].ToString();
             string AmountSent = transaction["amount"].ToString();
-			SqlMoney sqlAmountSent = SqlMoney.Parse(AmountSent);
+			decimal sqlAmountSent = decimal.Parse(AmountSent);
             DateTime TransactionDate = DateTime.Now;
             User? user = userContext.Check(RecipientID);
             decimal Balance = accountContext.GetAccountBalance(RecipientID);
             decimal SenderBalance = accountContext.GetAccountBalance(SenderID);
+            string Category = transaction["category"].ToString();   
             if (user != null)
             {
 
