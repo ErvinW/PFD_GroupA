@@ -277,15 +277,16 @@ namespace PFD_GroupA.Controllers
 			string SenderID = UID.UserID;
             string RecipientID = transaction["recipient"].ToString();
             string AmountSent = transaction["amount"].ToString();
+            string Category = transaction["category"].ToString();
 			SqlMoney sqlAmountSent = SqlMoney.Parse(AmountSent);
             DateTime TransactionDate = DateTime.Now;
             User? user = userContext.Check(RecipientID);
             if (user != null)
             {
-                transactionsContext.AddTransaction(SenderID, RecipientID, sqlAmountSent, TransactionDate);
+                transactionsContext.AddTransaction(SenderID, RecipientID, sqlAmountSent, Category, TransactionDate);
 
 			}
-			return View("Index");
+			return RedirectToAction("Index", "User");
         }
     }
 }
