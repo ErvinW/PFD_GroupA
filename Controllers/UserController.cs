@@ -52,7 +52,8 @@ namespace PFD_GroupA.Controllers
             var ID = HttpContext.Session.GetString("AccountObject");
             var UID = JsonSerializer.Deserialize<User>(ID);
             string UserID = UID.UserID;
-
+            decimal balance = accountContext.GetAccountBalance(UserID);
+            HttpContext.Session.SetString("Balance", balance.ToString());
 			UserKeybinds keybinds = keybindContext.GetUserKeybinds(UserID);
 			return View(keybinds);
 			
@@ -71,7 +72,7 @@ namespace PFD_GroupA.Controllers
 			var ID = HttpContext.Session.GetString("AccountObject");
 			var UID = JsonSerializer.Deserialize<User>(ID);
 			string UserID = UID.UserID;
-
+			
 			UserKeybinds keybinds = keybindContext.GetUserKeybinds(UserID);
 			return View(keybinds);
 		}
@@ -286,18 +287,20 @@ namespace PFD_GroupA.Controllers
             DateTime TransactionDate = DateTime.Now;
             User? user = userContext.Check(RecipientID);
             decimal Balance = accountContext.GetAccountBalance(RecipientID);
+            decimal SenderBalance = accountContext.GetAccountBalance(SenderID);
             if (user != null)
             {
 
                 Console.WriteLine(BankBalance);
                 
                     
-                    bool deduction = accountContext.Deduct(SenderID, BankBalance, sqlAmountSent);
+                    bool deduction = accountContext.Deduct(SenderID, SenderBalance, sqlAmountSent);
                     if (deduction == true)
                     {
                         Console.WriteLine(12);
 					    bool increase = accountContext.Increase(RecipientID, Balance, sqlAmountSent);
 					    transactionsContext.AddTransaction(SenderID, RecipientID, sqlAmountSent, Category, TransactionDate);
+                        
 				    }
 
                 else

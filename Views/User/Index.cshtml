@@ -1,4 +1,5 @@
-﻿@model PFD_GroupA.Models.UserKeybinds
+﻿
+@using PFD_GroupA.Models
 @using System.Text.Json
 @{
 	ViewData["Title"] = "USER HOME";
@@ -12,6 +13,8 @@
 	string AccountName = AccountObject.UserName;
 	string AccountID = AccountObject.UserID;
 	string AccountNum = BankObject.BankAccNo;
+	var balan = Context.Session.GetString("Balance");
+	decimal Balance = decimal.Parse(balan);
 	UserKeybinds test = Model;
 	Console.WriteLine(test);
 }
@@ -146,7 +149,7 @@
 					<div class="head">
 						<h3>Total Balance</h3>
 					</div>
-					<h1 class="custom-heading">$9,876.69</h1>
+					<h1 class="custom-heading">$@Balance</h1>
 					<br>
 					<div class="expense-chart">
 						<div class="false-For-Bottom-Text">
