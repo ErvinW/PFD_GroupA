@@ -8,7 +8,12 @@ using System.Reflection;
 using System.Runtime.ConstrainedExecution;
 using System.Diagnostics;
 using System.Data.SqlTypes;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using static Microsoft.AspNetCore.Razor.Language.TagHelperMetadata;
+using Python.Runtime;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+
 
 //using IronPython.Hosting;
 //using Microsoft.Scripting.Hosting;
@@ -18,41 +23,50 @@ namespace PFD_GroupA.Controllers
     public class UserController : Controller
     {
         TransactionsDAL transactionsContext = new TransactionsDAL();
+        AccountDAL accountContext = new AccountDAL();
         UserKeybindsDAL keybindContext = new UserKeybindsDAL();
 		private List<SelectListItem> pageList = new List<SelectListItem>();
         UserDAL userContext = new UserDAL();
-        /*public void RunPythonScript()
-        {
-            var engine = Python.CreateEngine();
-            var searchPaths = engine.GetSearchPaths();
 
-            Console.WriteLine("IronPython Search Paths:");
-            foreach(var path in searchPaths)
+        public async Task RunPythonScript()
+		{
+			string pythonInterpreterPath = @"C:\Users\Katana\AppData\Local\Microsoft\WindowsApps\python.exe";
+            string pythonScriptPath = @"D:\YEAR 2 SEM 2\PFD\Solution\Python Script\pythontest.py";
+
+            ProcessStartInfo startInfo = new ProcessStartInfo
             {
-                Console.WriteLine(path + " lolol");
-            }
+                FileName = pythonInterpreterPath,
+                Arguments = $"\"{pythonScriptPath}\"",
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                CreateNoWindow = true
+            };
 
-            ICollection<string> paths = engine.GetSearchPaths();
-            paths.Add(".");
-            paths.Add("D:\\YEAR 2 SEM 2\\PFD\\Solution\\bin\\Debug\\net6.0\\lib");
-            paths.Add("D:\\YEAR 2 SEM 2\\PFD\\Solution\\bin\\Debug\\net6.0\\DLLs");
-            engine.SetSearchPaths(paths);
-            // Load the Python script
-            var scriptPath = "D:\\YEAR 2 SEM 2\\PFD\\Solution\\Python Script\\pythontest.py"; // Replace this with your script's path
-            var scope = engine.CreateScope();
-            var source = engine.CreateScriptSourceFromFile(scriptPath);
-            source.Execute(scope);
-            //engine.ExecuteFile(scriptPath);
-        }
-        */
+            using (Process process = Process.Start(startInfo))
+            {
+                if (process != null)
+                {
+                    await Task.Run(() =>
+                    {
+                        string output = process.StandardOutput.ReadToEnd();
+                        Console.WriteLine(output);
+                        process.WaitForExit();
+                    });
+                }
+			}
+		}
+        
 		// GET: UserController
 		public ActionResult Index()
         {
-            var ID = HttpContext.Session.GetString("AccountObject");
+			var ID = HttpContext.Session.GetString("AccountObject");
             var UID = JsonSerializer.Deserialize<User>(ID);
             string UserID = UID.UserID;
-
+            decimal balance = accountContext.GetAccountBalance(UserID);
+            HttpContext.Session.SetString("Balance", balance.ToString());
 			UserKeybinds keybinds = keybindContext.GetUserKeybinds(UserID);
+			//RunPythonScript();
 			return View(keybinds);
 			
         }
@@ -70,7 +84,7 @@ namespace PFD_GroupA.Controllers
 			var ID = HttpContext.Session.GetString("AccountObject");
 			var UID = JsonSerializer.Deserialize<User>(ID);
 			string UserID = UID.UserID;
-
+			
 			UserKeybinds keybinds = keybindContext.GetUserKeybinds(UserID);
 			return View(keybinds);
 		}
@@ -273,17 +287,40 @@ namespace PFD_GroupA.Controllers
         public ActionResult CreateTransaction(IFormCollection transaction)
         {
 			var ID = HttpContext.Session.GetString("AccountObject");
+            var IDBank = HttpContext.Session.GetString("BankAcc");
+            var UIDBank = JsonSerializer.Deserialize<Account>(IDBank);
 			var UID = JsonSerializer.Deserialize<User>(ID);
 			string SenderID = UID.UserID;
+            decimal BankBalance = UIDBank.Balance;
             string RecipientID = transaction["recipient"].ToString();
             string AmountSent = transaction["amount"].ToString();
-            string Category = transaction["category"].ToString();
-			SqlMoney sqlAmountSent = SqlMoney.Parse(AmountSent);
+			decimal sqlAmountSent = decimal.Parse(AmountSent);
             DateTime TransactionDate = DateTime.Now;
             User? user = userContext.Check(RecipientID);
+            decimal Balance = accountContext.GetAccountBalance(RecipientID);
+            decimal SenderBalance = accountContext.GetAccountBalance(SenderID);
+            string Category = transaction["category"].ToString();   
             if (user != null)
             {
-                transactionsContext.AddTransaction(SenderID, RecipientID, sqlAmountSent, Category, TransactionDate);
+
+                Console.WriteLine(BankBalance);
+                
+                    
+                    bool deduction = accountContext.Deduct(SenderID, SenderBalance, sqlAmountSent);
+                    if (deduction == true)
+                    {
+                        Console.WriteLine(12);
+					    bool increase = accountContext.Increase(RecipientID, Balance, sqlAmountSent);
+					    transactionsContext.AddTransaction(SenderID, RecipientID, sqlAmountSent, Category, TransactionDate);
+                        
+				    }
+
+                else
+                {
+                    Console.WriteLine("Failed");
+                }
+                   
+			
 
 			}
 			return RedirectToAction("Index", "User");

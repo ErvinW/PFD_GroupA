@@ -733,3 +733,64 @@ nav img {
         min-width: 420px;
     }
 }
+
+.chart-container {
+    margin-top: 105px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    position: relative;
+}
+
+.bar {
+    width: 100px;
+    background-color: #3498db;
+    margin: 0 25px;
+    position: relative;
+    transition: height 0.3s ease;
+    border-radius: 10px;
+    z-index: 2;
+}
+
+    .bar.january {
+        height: 100px; /* January */
+    }
+
+    .bar.february {
+        height: 160px; /* February */
+    }
+
+    .bar.march {
+        height: 240px; /* March */
+    }
+
+    .bar.april {
+        height: 70px; /* April */
+    }
+
+    .bar::before {
+        content: attr(data-label);
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        color: #555;
+        font-size: 14px;
+        bottom: -25px;
+    }
+
+    .bar::after {
+        content: attr(data-amount);
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        color: #fff;
+        font-size: 14px;
+        top: 50%; /* Adjust the positioning */
+        transform: translateY(-100%);
+        z-index: 1;
+        display: none;
+    }
+
+.chart-container:hover .bar::after {
+    display: block;
+}

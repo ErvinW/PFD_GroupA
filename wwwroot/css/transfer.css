@@ -1,1 +1,83 @@
-﻿
+﻿.form-group {
+    margin-bottom: 1rem;
+}
+
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    border: 1px solid #ccc;
+}
+
+.trans-form{
+    margin-left: 38%;
+}
+
+#submitBtn {
+    padding: 12px 24px;
+    background-color: black;
+    color: #fff;
+    border: 2px solid black;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    font-size: 1rem;
+    display: block; /* Set it as a block-level element */
+    margin: 0 auto; /* Center horizontally */
+}
+
+#submitBtn:hover {
+    background: #272833;
+    transform: scale(1.05);
+}
+
+#submitBtn input {
+    display: none;
+}
+
+
+
+.payment-box {
+    margin-top: 20px;
+}
+
+    .payment-box h3 {
+        color: #333;
+        font-size: 1rem;
+        font-weight: 400;
+        margin-bottom: 8px;
+    }
+
+.payment-option {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.payment {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+    .payment input {
+        display: none;
+    }
+
+    .payment label {
+        color: #000;
+        font-weight: bold;
+        padding: 6px 12px; /* Adjust the padding to make the buttons smaller */
+        border: 2px solid #000;
+        border-radius: 20px;
+        font-size: 0.9rem; /* Adjust the font size to make the text smaller */
+    }
+
+    .payment input:checked + label {
+        background-color: #000;
+        color: #fff;
+    }

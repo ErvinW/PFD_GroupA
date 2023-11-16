@@ -3,6 +3,8 @@ using System.Data.SqlClient;
 using System.Security.Cryptography.Xml;
 using PFD_GroupA.Models;
 using System.Text.Json;
+using System.Data.SqlTypes;
+using NuGet.Protocol.Plugins;
 
 
 namespace PFD_GroupA.DAL
@@ -52,6 +54,64 @@ namespace PFD_GroupA.DAL
             return account;
         }
 
+        public bool Deduct(string Sender, decimal Total, decimal Sent)
+        {
+            if (Total >= Sent)
+            {
+				SqlCommand cmd = conn.CreateCommand();
+				cmd.CommandText = @"UPDATE BankAcc
+                                SET Balance = @Balance
+                                WHERE UserID = @UserID";
+				cmd.Parameters.AddWithValue(@"UserID", Sender);
+				cmd.Parameters.AddWithValue(@"Balance", Total - Sent);
+				conn.Open();
+				cmd.ExecuteScalar();
+				conn.Close();
+				return true;
+			}
+           
+            else
+            {
+                return false;
+            }
+
+        }
+
+        public decimal GetAccountBalance(string UserID)
+        {
+			SqlCommand cmd = conn.CreateCommand();
+			cmd.CommandText = @"SELECT Balance FROM BankAcc WHERE UserID = @UserID";
+			cmd.Parameters.AddWithValue(@"UserID", UserID);
+            conn.Open();
+			SqlDataReader reader = cmd.ExecuteReader();
+			decimal balance = 0;
+			while (reader.Read())
+			{
+				balance = reader.GetDecimal(0);
+				break;
+			}
+			conn.Close();
+			return balance;
+			
+           
+		}
+
+
+        public bool Increase(string Recieve, decimal Balance, decimal Sent)
+        {
+            SqlCommand cmd = conn.CreateCommand();
+            cmd.CommandText = @"UPDATE BankAcc
+                                SET Balance = @Balance
+                                WHERE UserID = @UserID";
+            cmd.Parameters.AddWithValue(@"UserID", Recieve);
+            cmd.Parameters.AddWithValue(@"Balance",  Balance + Sent);
+            conn.Open();
+            cmd.ExecuteScalar();
+            conn.Close();
+            return true;
+
+
+        }
 
 
     }

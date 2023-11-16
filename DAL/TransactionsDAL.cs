@@ -61,7 +61,7 @@ namespace PFD_GroupA.DAL
             return transactionList;
         }
 
-        public bool AddTransaction(string SenderAccount, string RecipientAccount, SqlMoney AmountSent, string Category, DateTime TransactionDate)
+        public bool AddTransaction(string SenderAccount, string RecipientAccount, decimal AmountSent, string Category, DateTime TransactionDate)
         {
             SqlCommand cmd = conn.CreateCommand();
             cmd.CommandText = @"INSERT INTO Transactions (SenderAccount, RecipientAccount, AmountSent, Category, TransactionDate)

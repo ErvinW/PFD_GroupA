@@ -17,12 +17,41 @@ namespace PFD_GroupA.Controllers
         private AccountDAL AccountContext = new AccountDAL();
 		private UserKeybindsDAL userKeybindsContext = new UserKeybindsDAL();
 
+		public async Task RunPythonScript()
+		{
+			string pythonInterpreterPath = @"C:\Users\Katana\AppData\Local\Microsoft\WindowsApps\python.exe";
+			string pythonScriptPath = @"D:\YEAR 2 SEM 2\PFD\Solution\Python Script\pythontest.py";
+
+			ProcessStartInfo startInfo = new ProcessStartInfo
+			{
+				FileName = pythonInterpreterPath,
+				Arguments = $"\"{pythonScriptPath}\"",
+				UseShellExecute = false,
+				RedirectStandardOutput = true,
+				RedirectStandardError = true,
+				CreateNoWindow = true
+			};
+
+			using (Process process = Process.Start(startInfo))
+			{
+				if (process != null)
+				{
+					await Task.Run(() =>
+					{
+						string output = process.StandardOutput.ReadToEnd();
+						Console.WriteLine(output);
+						process.WaitForExit();
+					});
+				}
+			}
+		}
 
 
 
-        public IActionResult Index()
+		public IActionResult Index()
 		{
 			HttpContext.Session.Clear();
+			RunPythonScript();
 			return View();
 		}
 
@@ -45,6 +74,7 @@ namespace PFD_GroupA.Controllers
             if (user != null)
 			{
                 Account BankAccount = AccountContext.GetAccount(loginID);
+				//decimal balance = AccountContext.GetAccountBalance(loginID);
                 UserKeybinds userKeybinds = userKeybindsContext.GetUserKeybinds(loginID);
                 //Console.WriteLine(user.UserID);
                 //Store account deets in Session
@@ -57,6 +87,7 @@ namespace PFD_GroupA.Controllers
 				HttpContext.Session.SetString("BankAcc", jsonAccString);
 				HttpContext.Session.SetString("AccountObject", jsonString);
 				HttpContext.Session.SetString("AccountType", "User");
+				//HttpContext.Session.SetString("BankBalance", balance.ToString());
                 return RedirectToAction("Index", "User");
 			}
 			else
