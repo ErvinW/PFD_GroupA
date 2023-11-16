@@ -137,40 +137,47 @@
 					<div class="head">
 						<form asp-action="CreateTransaction" asp-controller="User">
 							<h3>Transaction</h3>
-							<!-- transfer form-->
+							<br>
+							<!-- Transfer Section Start -->
 							<div class="form-group">
 								<label for="recipient">To Account:</label>
 								<input type="text" id="recipient" name="recipient" placeholder="Recipient's Account" required>
 							</div>
-
 							<div class="form-group">
 								<label for="amount">Amount:</label>
 								<input type="number" id="amount" name="amount" placeholder="Amount" required>
 							</div>
+							<div class="payment-box">
+								<h3>Select Transfer Method:</h3>
+								<div class="payment-option">
+									<div class="payment">
+										<input type="radio" id="PayNow" name="Category" value="PayNow" />
+										<label for="PayNow">PayNow</label>
+									</div>
 
-							<input type="radio" id="Advice" name="Category" value="Advice" />
-							<label for="Advice">Advice</label>
+									<div class="payment">
+										<input type="radio" id="Local" name="Category" value="Local" />
+										<label for="Local">Local</label>
+									</div>
 
-							<input type="radio" id="Local" name="Category" value="Local" />
-							<label for="Local">Local</label>
+									<div class="payment">
+										<input type="radio" id="Overseas" name="Category" value="Overseas" />
+										<label for="Overseas">Overseas</label>
+									</div>
 
-							<input type="radio" id="Overseas" name="Category" value="Overseas" />
-							<label for="Overseas">Overseas</label>
+								</div>
+							</div>
 
-							<input type="radio" id="PayNow" name="Category" value="PayNow" />
-							<label for="PayNow">PayNow</label>
-
-
+							<br>
 							<br>
 							<label class="submit-button">
 								<input type="submit" id="submitBtn"/>
 							</label>
 						</form>
-						
-
 					</div>
 				</div>
 			</div>
+			<!-- Transfer Section End -->
 			<!-- Transcaction History Section Start -->
 			<div class="table-data">
 				<div class="order">
