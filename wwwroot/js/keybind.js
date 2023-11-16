@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
         button.previousElementSibling.style.display = "block";
         var selectedKeys = [];
         select_keys();
+        
 
         function select_keys() {
             var key_letters = document.querySelectorAll('.key--letter');
@@ -56,13 +57,25 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
         var doneButton = button.parentElement.querySelector('.done-keybind');
-        doneButton.addEventListener('click', function () {
-            var pageName = doneButton.parentElement.previousElementSibling.previousElementSibling.textContent;
-            sendKeysToServer(selectedKeys, pageName);
+        doneButton.addEventListener('click', function (e) {
+            console.log(selectedKeys.join(' '))
+            if (keybindsExist(selectedKeys) == false) {
+                var pageName = doneButton.parentElement.previousElementSibling.previousElementSibling.textContent;
+                sendKeysToServer(selectedKeys, pageName);
+            }
+            else {
+                console.log(doneButton)
+                console.log(e.target)
+                e.target.style.display = "none";
+                doneButton.nextElementSibling.style.display = "block";
+                doneButton.parentElement.previousElementSibling.innerHTML = '';
+                return
+            }
+
         });
+        
 
         function sendKeysToServer(keys, pageName) {
-            // Include pageName in the data object
             var dataToSend = {
                 keys: keys,
                 pageName: pageName
@@ -88,6 +101,8 @@ document.addEventListener('DOMContentLoaded', function () {
             }, 100);
         }
 
+
+
     }
 
 
@@ -107,7 +122,6 @@ document.addEventListener('DOMContentLoaded', function () {
     function deleteButtonClicked(event) {
         event.preventDefault();
 
-        // Confirm the deletion with the user if needed
         var confirmation = confirm("Are you sure you want to delete?");
         if (!confirmation) {
             return;
@@ -117,15 +131,12 @@ document.addEventListener('DOMContentLoaded', function () {
         
         // Make an AJAX request to the server to call the Delete action
         $.ajax({
-            url: '/User/Delete', // Replace with the actual URL of your Delete action
+            url: '/User/Delete', 
             type: 'POST',
             contentType: 'application/json',
-            data: JSON.stringify(pageName), // Send the itemId to the server
+            data: JSON.stringify(pageName), 
             success: function (response) {
-                // Handle the success response if needed
                 console.log(response);
-                // Redirect to another page or update the UI as necessary
-                window.location.href = '/User/Index'; // Redirect to the Index page, for example
             },
             error: function (error) {
                 console.error('Error deleting data', error);
@@ -141,19 +152,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var editButtons = document.querySelectorAll('.edit-kb-btn');
 
-    // Attach click event handler to each edit button
     editButtons.forEach(function (button) {
         button.addEventListener('click', editButtonClicked);
     });
 
     function editButtonClicked(event) {
         event.preventDefault();
-        console.log(event.target);
-        console.log(event.target.parentElement);
 
         alert("Click on the new keys");
         var button = event.target;
         key_display = button.parentElement.previousElementSibling;
+        var store = key_display.innerHTML
         button.parentElement.previousElementSibling.innerHTML = ``;
         button.style.display = "none"
         button.nextElementSibling.nextElementSibling.style.display = "none";
@@ -162,12 +171,24 @@ document.addEventListener('DOMContentLoaded', function () {
         select_keys();
 
         var doneEditButton = button.nextElementSibling
-        console.log(doneEditButton.classList)
-        doneEditButton.addEventListener('click', function () {
-            var pageName = doneEditButton.parentElement.previousElementSibling.previousElementSibling.textContent;
-            console.log(pageName)
-            sendKeysToServer(selectedKeys, pageName);
+        console.log(store)
+        doneEditButton.addEventListener('click', function (e) {
+            if (keybindsExist(selectedKeys) == false) {
+                var pageName = doneEditButton.parentElement.previousElementSibling.previousElementSibling.textContent;
+                sendKeysToServer(selectedKeys, pageName);
+            }
+            else {
+                doneEditButton.previousElementSibling.style.display = "inline-block";
+                e.target.style.display = "none";
+                doneEditButton.nextElementSibling.style.display = "inline-block";
+                console.log(store)
+                doneEditButton.parentElement.previousElementSibling.innerHTML = store;
+                return
+            }
+            
         });
+
+        
 
         function sendKeysToServer(keys, pageName) {
             // Include pageName in the data object
@@ -231,6 +252,49 @@ document.addEventListener('DOMContentLoaded', function () {
                 }).join(' ');
             }
         }
+    }
+
+    function keybindsExist(keybindToCheck) {
+        var displaykbElements = document.querySelectorAll(".keybind-display");
+        var keybindDisplayList = [];
+
+        displaykbElements.forEach(function (element) {
+            var kbdItems = Array.from(element.querySelectorAll("kbd"));
+            var keybindText = kbdItems.map(function (kbdItem) {
+                return kbdItem.textContent.trim();
+            }).join(' ');
+
+            if (keybindText !== "") {
+                keybindDisplayList.push(keybindText);
+            }
+        });
+
+        console.log(keybindDisplayList)
+        console.log(keybindToCheck);
+        
+        for (var x = 0; x < keybindDisplayList.length; x++) {
+            temp = keybindDisplayList[x].split(' ')
+            if (areListsSimilar(temp, keybindToCheck)) {
+                return true
+            };
+            
+            function areListsSimilar(list1, list2) {
+                // Check if the length of both lists is the same
+                if (list1.length !== list2.length) {
+                    return false;
+                }
+
+                // Sort the lists and compare the sorted arrays
+                var sortedList1 = list1.slice().sort();
+                var sortedList2 = list2.slice().sort();
+
+                // Convert the sorted arrays to strings and compare them    
+                return sortedList1.join('') === sortedList2.join('');
+            }
+            
+
+        }
+        return false
     }
 
 

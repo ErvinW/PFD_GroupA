@@ -207,6 +207,7 @@ nav img {
                 color: var(--dark);
                 white-space: nowrap;
                 overflow-x: hidden;
+                text-decoration: none;
             }
 
         #sidebar .side-menu.top li.active a {

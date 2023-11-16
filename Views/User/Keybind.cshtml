@@ -370,7 +370,7 @@
                         @if (!string.IsNullOrEmpty(Model?.TransferPage))
                         {
                             
-                            <td>
+                            <td class="keybind-display">
                                 @foreach (var item in Model.TransferPage.Split(' '))
                                 {
                                     <kbd>@item</kbd>
@@ -399,7 +399,7 @@
                         @if (!string.IsNullOrEmpty(Model?.HomePage))
                         {
 
-                        <td>
+                        <td class="keybind-display">
                                 @foreach (var item in Model.HomePage.Split(' '))
                                 {
                                 <kbd>@item</kbd>
@@ -427,7 +427,7 @@
                         @if (!string.IsNullOrEmpty(Model?.LogoutFunc))
                         {
 
-                        <td>
+                        <td class="keybind-display">
                                 @foreach (var item in Model.LogoutFunc.Split(' '))
                                 {
                                 <kbd>@item</kbd>
