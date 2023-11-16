@@ -49,7 +49,8 @@ namespace PFD_GroupA.DAL
                         SenderAccount = reader.GetString(0),
                         RecipientAccount = reader.GetString(1),
                         AmountSent = reader.GetDecimal(2),
-                        TransactionDate = reader.GetDateTime(3)
+                        Category = reader.GetString(3),
+                        TransactionDate = reader.GetDateTime(4)
                     }
                     );
 
@@ -60,17 +61,18 @@ namespace PFD_GroupA.DAL
             return transactionList;
         }
 
-        public bool AddTransaction(string SenderAccount, string RecipientAccount, SqlMoney AmountSent, DateTime TransactionDate)
+        public bool AddTransaction(string SenderAccount, string RecipientAccount, SqlMoney AmountSent, string Category, DateTime TransactionDate)
         {
             SqlCommand cmd = conn.CreateCommand();
-            cmd.CommandText = @"INSERT INTO Transactions (TransactionID, SenderAccount, RecipientAccount, AmountSent, TransactionDate)
-                              
-                              VALUES(@RecordID, @senderAccount, @recipientAccount, @amountSent, @transactionDate)";
+            cmd.CommandText = @"INSERT INTO Transactions (SenderAccount, RecipientAccount, AmountSent, Category, TransactionDate)
+                              OUTPUT INSERTED.TransactionID
+                              VALUES(@senderAccount, @recipientAccount, @amountSent, @Category,@transactionDate)";
             cmd.Parameters.AddWithValue("@senderAccount", SenderAccount);
             cmd.Parameters.AddWithValue("@RecipientAccount", RecipientAccount);
             cmd.Parameters.AddWithValue("@AmountSent", AmountSent);
+            cmd.Parameters.AddWithValue("@Category", Category);
             cmd.Parameters.AddWithValue("@TransactionDate", TransactionDate);
-            cmd.Parameters.AddWithValue("@RecordID", 3);
+          
 
             conn.Open();
             cmd.ExecuteScalar();
