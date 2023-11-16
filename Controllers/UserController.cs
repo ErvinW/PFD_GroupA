@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using static Microsoft.AspNetCore.Razor.Language.TagHelperMetadata;
 using Python.Runtime;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 
 //using IronPython.Hosting;
@@ -22,6 +23,7 @@ namespace PFD_GroupA.Controllers
     public class UserController : Controller
     {
         TransactionsDAL transactionsContext = new TransactionsDAL();
+        AccountDAL accountContext = new AccountDAL();
         UserKeybindsDAL keybindContext = new UserKeybindsDAL();
 		private List<SelectListItem> pageList = new List<SelectListItem>();
         UserDAL userContext = new UserDAL();
@@ -61,7 +63,8 @@ namespace PFD_GroupA.Controllers
 			var ID = HttpContext.Session.GetString("AccountObject");
             var UID = JsonSerializer.Deserialize<User>(ID);
             string UserID = UID.UserID;
-
+            decimal balance = accountContext.GetAccountBalance(UserID);
+            HttpContext.Session.SetString("Balance", balance.ToString());
 			UserKeybinds keybinds = keybindContext.GetUserKeybinds(UserID);
 			//RunPythonScript();
 			return View(keybinds);
@@ -81,7 +84,7 @@ namespace PFD_GroupA.Controllers
 			var ID = HttpContext.Session.GetString("AccountObject");
 			var UID = JsonSerializer.Deserialize<User>(ID);
 			string UserID = UID.UserID;
-
+			
 			UserKeybinds keybinds = keybindContext.GetUserKeybinds(UserID);
 			return View(keybinds);
 		}
@@ -208,25 +211,25 @@ namespace PFD_GroupA.Controllers
             }
         }
 
-        // GET: UserController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: UserController/Edit/5
+        // POST: UserController/Edit
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit([FromBody] KeybindRequest keybindRequest)
         {
-            try
+            Account acc = JsonSerializer.Deserialize<Account>(HttpContext.Session.GetString("AccountObject"));
+            UserKeybinds keybinds = keybindContext.GetUserKeybinds(acc.UserID);
+
+
+            // Iterate through properties of the object
+            foreach (var property in keybinds.GetType().GetProperties())
             {
-                return RedirectToAction(nameof(Index));
+                // Check if the property is not UserID
+                if (property.Name == keybindRequest.PageName)
+                {
+                    property.SetValue(keybinds, string.Join(" ", keybindRequest.Keys));
+                }
             }
-            catch
-            {
-                return View();
-            }
+            keybindContext.UpdateKeybinds(keybinds);
+            return Json(new { success = true, message = "Keys received successfully" });
         }
 
        
@@ -236,7 +239,6 @@ namespace PFD_GroupA.Controllers
         [HttpPost]
         public ActionResult Delete([FromBody]string pageName)
         {
-            Console.WriteLine("YOOOOOOO");
             Account acc = JsonSerializer.Deserialize<Account>(HttpContext.Session.GetString("AccountObject"));
             UserKeybinds keybinds = keybindContext.GetUserKeybinds(acc.UserID);
 
@@ -285,19 +287,42 @@ namespace PFD_GroupA.Controllers
         public ActionResult CreateTransaction(IFormCollection transaction)
         {
 			var ID = HttpContext.Session.GetString("AccountObject");
+            var IDBank = HttpContext.Session.GetString("BankAcc");
+            var UIDBank = JsonSerializer.Deserialize<Account>(IDBank);
 			var UID = JsonSerializer.Deserialize<User>(ID);
 			string SenderID = UID.UserID;
+            decimal BankBalance = UIDBank.Balance;
             string RecipientID = transaction["recipient"].ToString();
             string AmountSent = transaction["amount"].ToString();
 			SqlMoney sqlAmountSent = SqlMoney.Parse(AmountSent);
-            System.DateTime TransactionDate = System.DateTime.Now;
+            DateTime TransactionDate = DateTime.Now;
             User? user = userContext.Check(RecipientID);
+            decimal Balance = accountContext.GetAccountBalance(RecipientID);
+            decimal SenderBalance = accountContext.GetAccountBalance(SenderID);
             if (user != null)
             {
-                transactionsContext.AddTransaction(SenderID, RecipientID, sqlAmountSent, TransactionDate);
+
+                Console.WriteLine(BankBalance);
+                
+                    
+                    bool deduction = accountContext.Deduct(SenderID, SenderBalance, sqlAmountSent);
+                    if (deduction == true)
+                    {
+                        Console.WriteLine(12);
+					    bool increase = accountContext.Increase(RecipientID, Balance, sqlAmountSent);
+					    transactionsContext.AddTransaction(SenderID, RecipientID, sqlAmountSent, Category, TransactionDate);
+                        
+				    }
+
+                else
+                {
+                    Console.WriteLine("Failed");
+                }
+                   
+			
 
 			}
-			return View("Index");
+			return RedirectToAction("Index", "User");
         }
     }
 }

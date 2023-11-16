@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     // DELETE //
-    // Add an event listener to the delete button
+
     // Select all delete buttons
     var deleteButtons = document.querySelectorAll('.delete-kb-btn');
 
@@ -113,8 +113,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        console.log(event)
-        var pageName = event.parentElement.previousElementSibling.previousElementSibling.textContent;
+        var pageName = event.target.parentElement.previousElementSibling.previousElementSibling.textContent;
         
         // Make an AJAX request to the server to call the Delete action
         $.ajax({
@@ -136,6 +135,102 @@ document.addEventListener('DOMContentLoaded', function () {
         setTimeout(function () {
             location.reload();
         }, 100);
+    }
+
+    // EDIT //
+
+    var editButtons = document.querySelectorAll('.edit-kb-btn');
+
+    // Attach click event handler to each edit button
+    editButtons.forEach(function (button) {
+        button.addEventListener('click', editButtonClicked);
+    });
+
+    function editButtonClicked(event) {
+        event.preventDefault();
+        console.log(event.target);
+        console.log(event.target.parentElement);
+
+        alert("Click on the new keys");
+        var button = event.target;
+        key_display = button.parentElement.previousElementSibling;
+        button.parentElement.previousElementSibling.innerHTML = ``;
+        button.style.display = "none"
+        button.nextElementSibling.nextElementSibling.style.display = "none";
+        button.nextElementSibling.style.display = "block";
+        var selectedKeys = [];
+        select_keys();
+
+        var doneEditButton = button.nextElementSibling
+        console.log(doneEditButton.classList)
+        doneEditButton.addEventListener('click', function () {
+            var pageName = doneEditButton.parentElement.previousElementSibling.previousElementSibling.textContent;
+            console.log(pageName)
+            sendKeysToServer(selectedKeys, pageName);
+        });
+
+        function sendKeysToServer(keys, pageName) {
+            // Include pageName in the data object
+            var dataToSend = {
+                keys: keys,
+                pageName: pageName
+            };
+            console.log(pageName)
+
+            // Make an AJAX request to the server
+            $.ajax({
+                url: '/User/Edit',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(dataToSend), // Send the updated data object
+                success: function (response) {
+                    console.log(response);
+                    // Handle the response from the server if needed
+                },
+                error: function (error) {
+                    console.error('Error sending keys to the server', error);
+                }
+            });
+
+            setTimeout(function () {
+                location.reload();
+            }, 100);
+        }
+
+
+        function select_keys() {
+            var key_letters = document.querySelectorAll('.key--letter');
+
+            // Remove existing click event listeners from keys
+            key_letters.forEach(function (key) {
+                key.removeEventListener('click', letterClicked);
+            });
+
+            // keyboard keys
+            for (var i = 0; i < key_letters.length; i++) {
+                var key = key_letters[i];
+                key.addEventListener('click', letterClicked);
+            }
+
+            function letterClicked(event) {
+                var clickedKey = event.target.textContent;
+                console.log(clickedKey)
+
+                // Check if the key already exists in the array
+                if (!selectedKeys.includes(clickedKey)) {
+                    selectedKeys.push(clickedKey);
+                    console.log(selectedKeys)
+                    addKeyDisplay(); // Update the displayed keys
+                }
+            }
+
+            function addKeyDisplay() {
+                // Display the selected keys in the #transferkb element
+                key_display.innerHTML = selectedKeys.map(function (key) {
+                    return `<kbd>${key}</kbd>`;
+                }).join(' ');
+            }
+        }
     }
 
 

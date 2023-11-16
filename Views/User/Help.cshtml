@@ -131,32 +131,30 @@
 		</nav>
 	</section>
 	<!-- Search Bar & Light Switch End -->
-	<!--Video tutorial list start-->
-	<main>
-		<div class="head-title">
-			<div class="left">
-				<h1>Tutorial</h1>
+	<!--Video tutorial list Start-->
+	<main class="container">
+		<section class="main-video">
+			<video src="images/home.jpg" controls autoplay muted></video>
+			<h3>Title of the playing Video.</h3>
+		</section>
+
+		<section class="video-playlist">
+			<h3>Title of Video Playlist</h3>
+			<p>10 lessons: &nbsp; &nbsp; 50m 48s</p>
+			<div class="videos">
 			</div>
-		</div>
-	<div class="videogalcontain">
-		<div class="row">
-			<div class="col">
-				<img src="~/images/home.jpg" width="10%">
-			</div>
-		</div>
-	</div>
+		</section>
 	</main>
-	<!-- Video tut end-->
+	<!--Video tutorial list End-->
 	<!-- Javascript Section -->
 	<script>
 		var bindsObject = @Json.Serialize(Model);
 	</script>
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
 	<script src="~/js/dashboard.js" asp-append-version="true"></script>
 	<script src="~/js/chart.js" asp-append-version="true"></script>
 	<script src="~/js/site.js" asp-append-version="true"></script>
-	
+	<script src="~/js/help.js" asp-append-version="true"></script>
 	
 </body>
 </html>

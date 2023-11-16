@@ -1,66 +1,80 @@
-﻿.slider-container {
-    position: relative;
-    width: 10px;
-    overflow: hidden;
-    margin: 0 auto;
+﻿.form-group {
+    margin-bottom: 1rem;
 }
 
-.slider-track {
-    display: flex;
-    flex-direction: column;
-    width: 100%; /* Adjusted width to match the number of profile cards */
-    transition: transform 0.5s ease;
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    border: 1px solid #ccc;
 }
 
-.profile-card {
-    flex: 0 0 100px; /* Fixed width for each profile card */
-    box-sizing: border-box;
-    padding: 10px; /* Adjusted padding */
-    text-align: center;
-    border-radius: 10px; /* Adjusted border-radius */
-    background-color: #eaeaea;
-    margin-right: 10px;
+
+#submitBtn {
+    padding: 12px 24px;
+    background-color: black;
+    color: #fff;
+    border: 2px solid black;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    font-size: 1rem;
+    display: block; /* Set it as a block-level element */
+    margin: 0 auto; /* Center horizontally */
 }
 
-    .profile-card i {
-        font-size: 48px;
-        color: #000;
+#submitBtn:hover {
+    background: #272833;
+    transform: scale(1.05);
+}
+
+#submitBtn input {
+    display: none;
+}
+
+
+
+.payment-box {
+    margin-top: 20px;
+}
+
+    .payment-box h3 {
+        color: #333;
+        font-size: 1rem;
+        font-weight: 400;
+        margin-bottom: 8px;
     }
 
-.prev-btn,
-.next-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: transparent;
-    border: none;
-    color: #000;
-    font-size: 24px;
+.payment-option {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.payment {
+    display: flex;
+    align-items: center;
+    gap: 5px;
     cursor: pointer;
 }
 
-.prev-btn {
-    left: 10px;
-}
-
-.next-btn {
-    right: 10px;
-}
-
-
-
-/* Added styles for scrolling 
-.slider-container:hover .slider-track {
-    animation: scroll 10s linear infinite;
-}
-
-@keyframes scroll {
-    0% {
-        transform: translateX(0);
+    .payment input {
+        display: none;
     }
 
-    100% {
-        transform: translateX(-200%);
+    .payment label {
+        color: #000;
+        font-weight: bold;
+        padding: 6px 12px; /* Adjust the padding to make the buttons smaller */
+        border: 2px solid #000;
+        border-radius: 20px;
+        font-size: 0.9rem; /* Adjust the font size to make the text smaller */
     }
-}
-*/
+
+    .payment input:checked + label {
+        background-color: #000;
+        color: #fff;
+    }

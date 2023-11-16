@@ -46,10 +46,10 @@ namespace PFD_GroupA.DAL
                     transactionList.Add(
                     new Transactions
                     {
-                        TransactionID = reader.GetInt32(0),
-                        SenderAccount = reader.GetString(1),
-                        RecipientAccount = reader.GetString(2),
-                        AmountSent = reader.GetDecimal(3),
+                        SenderAccount = reader.GetString(0),
+                        RecipientAccount = reader.GetString(1),
+                        AmountSent = reader.GetDecimal(2),
+                        Category = reader.GetString(3),
                         TransactionDate = reader.GetDateTime(4)
                     }
                     );
@@ -61,17 +61,18 @@ namespace PFD_GroupA.DAL
             return transactionList;
         }
 
-        public bool AddTransaction(string SenderAccount, string RecipientAccount, SqlMoney AmountSent, DateTime TransactionDate)
+        public bool AddTransaction(string SenderAccount, string RecipientAccount, decimal AmountSent, string Category, DateTime TransactionDate)
         {
             SqlCommand cmd = conn.CreateCommand();
-            cmd.CommandText = @"INSERT INTO Transactions (TransactionID, SenderAccount, RecipientAccount, AmountSent, TransactionDate)
-                              
-                              VALUES(@RecordID, @senderAccount, @recipientAccount, @amountSent, @transactionDate)";
+            cmd.CommandText = @"INSERT INTO Transactions (SenderAccount, RecipientAccount, AmountSent, Category, TransactionDate)
+                              OUTPUT INSERTED.TransactionID
+                              VALUES(@senderAccount, @recipientAccount, @amountSent, @Category,@transactionDate)";
             cmd.Parameters.AddWithValue("@senderAccount", SenderAccount);
             cmd.Parameters.AddWithValue("@RecipientAccount", RecipientAccount);
             cmd.Parameters.AddWithValue("@AmountSent", AmountSent);
+            cmd.Parameters.AddWithValue("@Category", Category);
             cmd.Parameters.AddWithValue("@TransactionDate", TransactionDate);
-            cmd.Parameters.AddWithValue("@RecordID", 3);
+          
 
             conn.Open();
             cmd.ExecuteScalar();
