@@ -77,7 +77,7 @@ recognition.onresult = function (event) {
         window.location.href = '/Home/Index';
     }
 
-    else if (result.toLowerCase().includes('keybind') && !window.location.pathname.endsWith('/Keybind')) {
+    else if ((result.toLowerCase().includes('key bind') || result.toLowerCase().includes('keybind')) && !window.location.pathname.endsWith('/Keybind')) {
         if (window.location.pathname.endsWith('/User')) {
             window.location.href = '/User/Keybind';
         }
