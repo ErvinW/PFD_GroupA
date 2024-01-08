@@ -52,13 +52,13 @@ const recognition = new webkitSpeechRecognition();
 
 recognition.continuous = true;
 recognition.interimResults = false;
-recognition.lang = 'en-US'; 
+recognition.lang = ['en-US', 'ms-MY']; 
 
 recognition.onresult = function (event) {
     const result = event.results[event.results.length - 1][0].transcript;
     console.log(result)
 
-    if (result.toLowerCase().includes('transfer') && !window.location.pathname.endsWith('/Transfer')) { //added extra condition here
+    if ((result.toLowerCase().includes('transfer') || result.toLowerCase().includes('pindah')) && !window.location.pathname.endsWith('/Transfer')) { //added extra condition here
         if (window.location.pathname.endsWith('/User')) {
             window.location.href = '/User/Transfer';
         }
@@ -68,16 +68,16 @@ recognition.onresult = function (event) {
         }
     }
 
-    else if ((result.toLowerCase().includes('home') || result.toLowerCase().includes('index')) && !window.location.pathname.endsWith('/Index')) {
+    else if ((result.toLowerCase().includes('home') || result.toLowerCase().includes('index') || result.toLowerCase().includes('rumah')) && !window.location.pathname.endsWith('/Index')) {
         window.location.href = 'Index';
     }
 
 
-    else if (result.toLowerCase().includes('logout') || result.toLowerCase().includes('log out')) {
+    else if (result.toLowerCase().includes('logout') || result.toLowerCase().includes('log out') || result.toLowerCase().includes('log keluar')) {
         window.location.href = '/Home/Index';
     }
 
-    else if ((result.toLowerCase().includes('key bind') || result.toLowerCase().includes('keybind')) && !window.location.pathname.endsWith('/Keybind')) {
+    else if ((result.toLowerCase().includes('key bind') || result.toLowerCase().includes('keybind') || result.toLowerCase().includes('ikat kunci')) && !window.location.pathname.endsWith('/Keybind')) {
         if (window.location.pathname.endsWith('/User')) {
             window.location.href = '/User/Keybind';
         }
