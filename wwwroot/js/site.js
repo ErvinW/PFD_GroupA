@@ -52,13 +52,13 @@ const recognition = new webkitSpeechRecognition();
 
 recognition.continuous = true;
 recognition.interimResults = false;
-recognition.lang = ['en-US', 'ms-MY', 'zh-CN']; 
+recognition.lang = 'en-US'; 
 
 recognition.onresult = function (event) {
     const result = event.results[event.results.length - 1][0].transcript;
     console.log(result)
 
-    if ((result.toLowerCase().includes('transfer') || result.toLowerCase().includes('pindah') || result.toLowerCase().includes('转账')) && !window.location.pathname.endsWith('/Transfer')) { //added extra condition here
+    if (result.toLowerCase().includes('transfer') && !window.location.pathname.endsWith('/Transfer')) { //added extra condition here
         if (window.location.pathname.endsWith('/User')) {
             window.location.href = '/User/Transfer';
         }
@@ -68,16 +68,16 @@ recognition.onresult = function (event) {
         }
     }
 
-    else if ((result.toLowerCase().includes('home') || result.toLowerCase().includes('index') || result.toLowerCase().includes('rumah') || result.toLowerCase().includes('首页')) && !window.location.pathname.endsWith('/Index')) {
+    else if ((result.toLowerCase().includes('home') || result.toLowerCase().includes('index')) && !window.location.pathname.endsWith('/Index')) {
         window.location.href = 'Index';
     }
 
 
-    else if (result.toLowerCase().includes('logout') || result.toLowerCase().includes('log out') || result.toLowerCase().includes('log keluar') || result.toLowerCase().includes('登出')) {
+    else if (result.toLowerCase().includes('logout') || result.toLowerCase().includes('log out')) {
         window.location.href = '/Home/Index';
     }
 
-    else if ((result.toLowerCase().includes('key bind') || result.toLowerCase().includes('keybind') || result.toLowerCase().includes('ikat kunci') || result.toLowerCase().includes('键绑定')) && !window.location.pathname.endsWith('/Keybind')) {
+    else if ((result.toLowerCase().includes('key bind') || result.toLowerCase().includes('keybind')) && !window.location.pathname.endsWith('/Keybind')) {
         if (window.location.pathname.endsWith('/User')) {
             window.location.href = '/User/Keybind';
         }
