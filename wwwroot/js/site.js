@@ -42,17 +42,36 @@ document.addEventListener("keydown", e => {
 });
 
 
+/*
+//Speech language selection
+let lang = null;
+languages = ['en-US', 'zh-CN']
 
+function assignValue(event) {
+    const value = parseInt(event.target.dataset.value); // Get the value from data-value attribute
+    lang = languages[value]; // Assigning the value to myVariable
+    console.log("Value assigned to myVariable:", lang);
 
+    updateRecognitionLanguage(lang);
+}
 
+function updateRecognitionLanguage(language) {
+    recognition.lang = language;
+    recognition.stop();
+    recognition.start();
+}
+
+const buttons = document.getElementsByClassName("assignValue");
+for (let i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener("click", assignValue);
+}
 
 // Speech to text recognition
 
 const recognition = new webkitSpeechRecognition();
-
 recognition.continuous = true;
 recognition.interimResults = false;
-recognition.lang = 'en-US'; 
+recognition.lang = lang; 
 
 recognition.onresult = function (event) {
     const result = event.results[event.results.length - 1][0].transcript;
@@ -89,8 +108,54 @@ recognition.onresult = function (event) {
 };
 
 recognition.start(); 
+*/
 
+let lang = 'en-US'; // Default language
+const languages = ['en-US', 'zh-CN'];
+const recognition = new webkitSpeechRecognition();
 
+function assignValue(event) {
+    const value = parseInt(event.target.dataset.value);
+    lang = languages[value];
+    updateRecognitionLanguage(lang);
+}
 
+function updateRecognitionLanguage(language) {
+    recognition.lang = language;
+    recognition.stop();
+    recognition.start();
+}
+
+function handleSpeechResult(result) {
+    const lowerCaseResult = result.toLowerCase();
+    const path = window.location.pathname;
+
+    if (lowerCaseResult.includes('transfer') && !path.endsWith('/Transfer')) {
+        window.location.href = path.endsWith('/User') ? '/User/Transfer' : 'Transfer';
+    } else if ((lowerCaseResult.includes('home') || lowerCaseResult.includes('index')) && !path.endsWith('/Index')) {
+        window.location.href = 'Index';
+    } else if (lowerCaseResult.includes('logout') || lowerCaseResult.includes('log out')) {
+        window.location.href = '/Home/Index';
+    } else if ((lowerCaseResult.includes('key bind') || lowerCaseResult.includes('keybind')) && !path.endsWith('/Keybind')) {
+        window.location.href = path.endsWith('/User') ? '/User/Keybind' : 'Keybind';
+    }
+}
+
+recognition.continuous = true; // Enable continuous listening
+recognition.interimResults = true; // Receive interim results
+recognition.lang = lang;
+
+recognition.onresult = function (event) {
+    const result = event.results[event.results.length - 1][0].transcript;
+    console.log(result);
+    handleSpeechResult(result);
+};
+
+const buttons = document.getElementsByClassName("assignValue");
+for (let i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener("click", assignValue);
+}
+
+recognition.start();
 
 

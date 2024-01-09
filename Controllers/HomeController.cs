@@ -17,7 +17,7 @@ namespace PFD_GroupA.Controllers
         private AccountDAL AccountContext = new AccountDAL();
 		private UserKeybindsDAL userKeybindsContext = new UserKeybindsDAL();
 
-		public async Task RunPythonScript()
+		/*public async Task RunPythonScript()
 		{
 			string pythonInterpreterPath = @"C:\Users\ervin\anaconda3\python.exe"; //replace with path of python code editor
 			string pythonScriptPath = @"C:\Users\ervin\NGEE ANN FILES\PFD repo\PFD_GroupA\Python Script\pythontest.py"; //Replace with full path of the python file
@@ -44,14 +44,14 @@ namespace PFD_GroupA.Controllers
 					});
 				}
 			}
-		}
+		}*/
 
 
 
 		public IActionResult Index()
 		{
 			HttpContext.Session.Clear();
-			RunPythonScript();
+			//RunPythonScript();
 			return View();
 		}
 
