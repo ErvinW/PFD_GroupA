@@ -130,7 +130,7 @@ function handleSpeechResult(result) {
     const lowerCaseResult = result.toLowerCase();
     const path = window.location.pathname;
 
-    if (lowerCaseResult.includes('transfer') && !path.endsWith('/Transfer')) {
+    if ((lowerCaseResult.includes('transfer') || result.includes("转移")) && !path.endsWith('/Transfer')) {
         window.location.href = path.endsWith('/User') ? '/User/Transfer' : 'Transfer';
     } else if ((lowerCaseResult.includes('home') || lowerCaseResult.includes('index')) && !path.endsWith('/Index')) {
         window.location.href = 'Index';
