@@ -132,11 +132,11 @@ function handleSpeechResult(result) {
 
     if ((lowerCaseResult.includes('transfer') || result.includes("转移")) && !path.endsWith('/Transfer')) {
         window.location.href = path.endsWith('/User') ? '/User/Transfer' : 'Transfer';
-    } else if ((lowerCaseResult.includes('home') || lowerCaseResult.includes('index')) && !path.endsWith('/Index')) {
+    } else if ((lowerCaseResult.includes('home') || lowerCaseResult.includes('index') || result.includes('首页')) && !path.endsWith('/Index')) {
         window.location.href = 'Index';
-    } else if (lowerCaseResult.includes('logout') || lowerCaseResult.includes('log out')) {
+    } else if (lowerCaseResult.includes('logout') || lowerCaseResult.includes('log out') || result.includes('登出')) {
         window.location.href = '/Home/Index';
-    } else if ((lowerCaseResult.includes('key bind') || lowerCaseResult.includes('keybind')) && !path.endsWith('/Keybind')) {
+    } else if ((lowerCaseResult.includes('key bind') || lowerCaseResult.includes('keybind') || result.includes('键绑定')) && !path.endsWith('/Keybind')) {
         window.location.href = path.endsWith('/User') ? '/User/Keybind' : 'Keybind';
     }
 }
