@@ -111,7 +111,7 @@ recognition.start();
 */
 
 let lang = 'en-US'; // Default language
-const languages = ['en-US', 'zh-CN'];
+const languages = ['en-US', 'ms-MY', 'zh-CN'];
 const recognition = new webkitSpeechRecognition();
 
 function assignValue(event) {
