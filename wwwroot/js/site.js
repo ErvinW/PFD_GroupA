@@ -125,7 +125,12 @@ function updateRecognitionLanguage(language) {
     alert('Voice recognition language switched to ' + language);
     recognition.lang = language;
     recognition.stop();
-    recognition.start();
+    //recognition.start();
+
+    setTimeout(function () {
+        recognition.lang = language;
+        recognition.start();
+    }, 500);
 }
 
 function handleSpeechResult(result) {
