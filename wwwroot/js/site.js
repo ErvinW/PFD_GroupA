@@ -147,6 +147,10 @@ function handleSpeechResult(result) {
         window.location.href = path.endsWith('/User') ? '/User/Keybind' : 'Keybind';
     } else if (lowerCaseResult.includes('chinese') || result.includes('cina')) {
         updateRecognitionLanguage('zh-CN');
+    } else if (lowerCaseResult.includes('malay') || result.includes('马来语')) {
+        updateRecognitionLanguage('ms-MY');
+    } else if (result.includes('bahasa Inggeris') || result.includes('英语')) {
+        updateRecognitionLanguage('en-US');
     }
 }
 
