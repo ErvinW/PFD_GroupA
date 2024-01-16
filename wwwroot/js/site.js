@@ -122,6 +122,7 @@ function assignValue(event) {
 
 function updateRecognitionLanguage(language) {
     console.log(language);
+    alert('Voice recognition language switched to ' + language);
     recognition.lang = language;
     recognition.stop();
     recognition.start();
@@ -139,6 +140,8 @@ function handleSpeechResult(result) {
         window.location.href = '/Home/Index';
     } else if ((lowerCaseResult.includes('key bind') || lowerCaseResult.includes('keybind') || result.includes('键绑定') || result.includes('ikat kunci')) && !path.endsWith('/Keybind')) {
         window.location.href = path.endsWith('/User') ? '/User/Keybind' : 'Keybind';
+    } else if (lowerCaseResult.includes('chinese') || result.includes('cina')) {
+        updateRecognitionLanguage('zh-CN');
     }
 }
 
