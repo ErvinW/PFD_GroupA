@@ -131,13 +131,13 @@ function handleSpeechResult(result) {
     const lowerCaseResult = result.toLowerCase();
     const path = window.location.pathname;
 
-    if ((lowerCaseResult.includes('transfer') || result.includes("转移")) && !path.endsWith('/Transfer')) {
+    if ((lowerCaseResult.includes('transfer') || result.includes("转移") || result.includes('pindah')) && !path.endsWith('/Transfer')) {
         window.location.href = path.endsWith('/User') ? '/User/Transfer' : 'Transfer';
-    } else if ((lowerCaseResult.includes('home') || lowerCaseResult.includes('index') || result.includes('首页')) && !path.endsWith('/Index')) {
+    } else if ((lowerCaseResult.includes('home') || lowerCaseResult.includes('index') || result.includes('首页') || result.includes('rumah')) && !path.endsWith('/Index')) {
         window.location.href = 'Index';
-    } else if (lowerCaseResult.includes('logout') || lowerCaseResult.includes('log out') || result.includes('登出')) {
+    } else if (lowerCaseResult.includes('logout') || lowerCaseResult.includes('log out') || result.includes('登出') || result.includes('log keluar')) {
         window.location.href = '/Home/Index';
-    } else if ((lowerCaseResult.includes('key bind') || lowerCaseResult.includes('keybind') || result.includes('键绑定')) && !path.endsWith('/Keybind')) {
+    } else if ((lowerCaseResult.includes('key bind') || lowerCaseResult.includes('keybind') || result.includes('键绑定') || result.includes('ikat kunci')) && !path.endsWith('/Keybind')) {
         window.location.href = path.endsWith('/User') ? '/User/Keybind' : 'Keybind';
     }
 }
