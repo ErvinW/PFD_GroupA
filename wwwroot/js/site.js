@@ -122,13 +122,11 @@ function assignValue(event) {
 
 function updateRecognitionLanguage(language) {
     console.log(language);
-    alert('Voice recognition language switched to ' + language);
-    recognition.lang = language;
     recognition.stop();
-    //recognition.start();
 
     setTimeout(function () {
         recognition.lang = language;
+        alert('Voice recognition language switched to ' + language);
         recognition.start();
     }, 500);
 }
