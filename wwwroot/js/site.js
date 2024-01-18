@@ -131,6 +131,7 @@ function updateRecognitionLanguage(language) {
     }, 500);
 }
 
+
 function handleSpeechResult(result) {
     const lowerCaseResult = result.toLowerCase();
     const path = window.location.pathname;
