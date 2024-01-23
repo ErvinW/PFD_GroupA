@@ -42,84 +42,18 @@ document.addEventListener("keydown", e => {
 });
 
 
-/*
-//Speech language selection
-let lang = null;
-languages = ['en-US', 'zh-CN']
 
-function assignValue(event) {
-    const value = parseInt(event.target.dataset.value); // Get the value from data-value attribute
-    lang = languages[value]; // Assigning the value to myVariable
-    console.log("Value assigned to myVariable:", lang);
-
-    updateRecognitionLanguage(lang);
-}
-
-function updateRecognitionLanguage(language) {
-    recognition.lang = language;
-    recognition.stop();
-    recognition.start();
-}
-
-const buttons = document.getElementsByClassName("assignValue");
-for (let i = 0; i < buttons.length; i++) {
-    buttons[i].addEventListener("click", assignValue);
-}
-
-// Speech to text recognition
-
-const recognition = new webkitSpeechRecognition();
-recognition.continuous = true;
-recognition.interimResults = false;
-recognition.lang = lang; 
-
-recognition.onresult = function (event) {
-    const result = event.results[event.results.length - 1][0].transcript;
-    console.log(result)
-
-    if (result.toLowerCase().includes('transfer') && !window.location.pathname.endsWith('/Transfer')) { //added extra condition here
-        if (window.location.pathname.endsWith('/User')) {
-            window.location.href = '/User/Transfer';
-        }
-
-        else {
-            window.location.href = 'Transfer';
-        }
-    }
-
-    else if ((result.toLowerCase().includes('home') || result.toLowerCase().includes('index')) && !window.location.pathname.endsWith('/Index')) {
-        window.location.href = 'Index';
-    }
-
-
-    else if (result.toLowerCase().includes('logout') || result.toLowerCase().includes('log out')) {
-        window.location.href = '/Home/Index';
-    }
-
-    else if ((result.toLowerCase().includes('key bind') || result.toLowerCase().includes('keybind')) && !window.location.pathname.endsWith('/Keybind')) {
-        if (window.location.pathname.endsWith('/User')) {
-            window.location.href = '/User/Keybind';
-        }
-
-        else {
-            window.location.href = 'Keybind';
-        }
-    }
-};
-
-recognition.start(); 
-*/
 
 let lang = 'en-US'; // Default language
 const languages = ['en-US', 'zh-CN', 'ms-MY'];
 const recognition = new webkitSpeechRecognition();
 
-function assignValue(event) {
+/*function assignValue(event) {
     const value = event.target.dataset.value;
     lang = languages[value];
     console.log(value);
     updateRecognitionLanguage(lang);
-}
+}*/
 
 function updateRecognitionLanguage(language) {
     console.log(language);
@@ -129,7 +63,7 @@ function updateRecognitionLanguage(language) {
         recognition.lang = language;
         alert('Voice recognition language switched to ' + language);
         recognition.start();
-    }, 500);
+    }, 2);
 }
 
 
@@ -164,11 +98,22 @@ recognition.onresult = function (event) {
     handleSpeechResult(result);
 };
 
-const buttons = document.getElementsByClassName("assignValue");
-for (let i = 0; i < buttons.length; i++) {
-    buttons[i].addEventListener("click", assignValue);
-}
 
 recognition.start();
 
 
+
+document.addEventListener("DOMContentLoaded", function () {
+    const assignValueButtons = document.querySelectorAll(".assignValue");
+
+    function assignValue(event) {
+        const value = event.currentTarget.dataset.value;
+        // Do something with the value, for example, call assignValue function
+        console.log("Value assigned to myVariable:", value);
+        updateRecognitionLanguage(languages[value]);
+    }
+
+    for (const button of assignValueButtons) {
+        button.addEventListener("click", assignValue);
+    }
+});
