@@ -115,8 +115,9 @@ const languages = ['en-US', 'zh-CN', 'ms-MY'];
 const recognition = new webkitSpeechRecognition();
 
 function assignValue(event) {
-    const value = parseInt(event.target.dataset.value);
+    const value = event.target.dataset.value;
     lang = languages[value];
+    console.log(value);
     updateRecognitionLanguage(lang);
 }
 
