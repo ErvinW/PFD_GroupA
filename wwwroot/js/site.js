@@ -45,7 +45,7 @@ document.addEventListener("keydown", e => {
 
 
 let lang = 'en-US'; // Default language
-const languages = ['en-US', 'zh-CN', 'ms-MY'];
+const languages = ['en-US', 'zh-CN', 'ms-MY', 'ta-IN'];
 const recognition = new webkitSpeechRecognition();
 
 /*function assignValue(event) {
