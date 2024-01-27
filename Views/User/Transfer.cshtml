@@ -132,9 +132,23 @@
 						<span class="text">Logout</span>
 					</a>
 				</li>
-				<li>
 			</ul>
 		</nav>
+		<!-- Gesture Recognition -->
+		<section id="demos" class="invisible" style=" position: fixed; bottom:0px">
+			<div id="liveView" class="videoView">
+				<button id="webcamButton" class="" hidden>
+					<!--mdc-button mdc-button--raised-->
+					<span class="mdc-button__ripple" hidden></span>
+					<span class="mdc-button__label" hidden>ENABLE GESTURE</span>
+				</button>
+				<div style="position: absolute; bottom: 0px; z-index: 500;">
+					<video id="webcam" style="width: 270px; height: 240px;" autoplay playsinline></video>
+					<canvas class="output_canvas" id="output_canvas" style="position: absolute; left: 0px; top: 0px; z-index: 501;"></canvas>
+				</div>
+			</div>
+		</section>
+		<!-- Gesture Recognition end-->
 	</section>
 	<!-- Dashboard Side Bar Section End -->
 	<!-- Search Bar & Light Switch Start -->
@@ -280,19 +294,7 @@
 	</section>
 	<!-- Dashboard Section End -->
 
-	<!-- Gesture navigation -->
-	<section id="demos" class="invisible" style="margin-left:20rem" hidden>
-		<div id="liveView" class="videoView">
-			<button id="webcamButton" class="mdc-button mdc-button--raised">
-				<span class="mdc-button__ripple"></span>
-				<span class="mdc-button__label">ENABLE GESTURE</span>
-			</button>
-			<div style="position: relative;">
-				<video id="webcam" style="position: abso" autoplay playsinline></video>
-				<canvas class="output_canvas" id="output_canvas" style="position: absolute; left: 0px; top: 0px;"></canvas>
-			</div>
-		</div>
-	</section>
+	
 
 	<!-- Javascript Section -->
 	<script>

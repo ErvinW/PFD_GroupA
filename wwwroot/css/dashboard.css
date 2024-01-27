@@ -110,7 +110,7 @@ h2#this-month-heading {
     top: 0;
     left: 0;
     width: 280px;
-    height: 100%;
+    height: 65%;
     background: var(--light);
     z-index: 2000;
     font-family: var(--lato);
@@ -827,5 +827,5 @@ nav img {
 
         #sidebar ul.side-menu li.logout {
             order: 2; /* Order for the logout list item, placing it at the bottom */
-            margin-top: 195px; /* Adjust this value to move it further down */
+            margin-top: 10px; /* Adjust this value to move it further down */
         }
