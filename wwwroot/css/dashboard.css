@@ -2,7 +2,6 @@
 
 * {
     margin: 0;
-    padding: 0;
     box-sizing: border-box;
 }
 
@@ -794,3 +793,39 @@ nav img {
 .chart-container:hover .bar::after {
     display: block;
 }
+
+.button-style {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background: var(--light);
+    border: none;
+    border-radius: 48px;
+    font-size: 16px;
+    font-family: var(--lato);
+}
+
+    .button-style img {
+        width: 16px;
+        height: 16px;
+        margin-right: 15px;
+    }
+
+    .button-style:hover {
+        color: var(--blue);
+    }
+
+#sidebar ul.side-menu {
+    display: flex;
+    flex-direction: column;
+}
+
+    #sidebar ul.side-menu li {
+        order: 1; /* Default order for other list items */
+    }
+
+        #sidebar ul.side-menu li.logout {
+            order: 2; /* Order for the logout list item, placing it at the bottom */
+            margin-top: 195px; /* Adjust this value to move it further down */
+        }
