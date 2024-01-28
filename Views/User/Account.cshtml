@@ -46,6 +46,9 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+	<script src="~/js/face-api.min.js"></script>
+	
+
 	<!-- Mediapipe libs -->
 	<link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
 	<script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
@@ -150,7 +153,7 @@
 					<canvas class="output_canvas" id="output_canvas" style="position: absolute; left: 0px; top: 0px; z-index: 501;"></canvas>
 				</div>
 			</div>
-		</section>
+		</section> 
 		<!-- Gesture Recognition end-->
 	</section>
 	<!-- Dashboard Side Bar Section End -->
@@ -179,16 +182,19 @@
 
 	
 	<!-- Search Bar & Light Switch End -->
-	<!-- Dashboard Section Start -->
-	<!-- Dashboard Section End -->
+	<img id="myimg">
+ 	<video id="video" width="600" height="450" style="left:10rem;" autoplay> 
+ 
+
 	<!-- Javascript Section -->
+	<script src="~/js/faceRecognition.js"></script>
 	<script>
 		var bindsObject = @Json.Serialize(Model);
 	</script>
-	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js" ></script>
 	<script type="module" src="~/js/handlandmarker.js" asp-append-version="true"></script>
 	<script src="~/js/dashboard.js" asp-append-version="true"></script>
-	<script src="~/js/chart.js" asp-append-version="true"></script>
+	@* <script src="~/js/chart.js" asp-append-version="true"></script> *@
 	<script src="~/js/site.js" asp-append-version="true"></script>
 
 </body>
