@@ -71,20 +71,22 @@ function handleSpeechResult(result) {
     const lowerCaseResult = result.toLowerCase();
     const path = window.location.pathname;
 
-    if ((lowerCaseResult.includes('transfer') || result.includes("转移") || result.includes('pindah')) && !path.endsWith('/Transfer')) {
+    if ((lowerCaseResult.includes('transfer') || result.includes("转移") || result.includes('pindah') || result.includes('பரிமாற்றம்')) && !path.endsWith('/Transfer')) {
         window.location.href = path.endsWith('/User') ? '/User/Transfer' : 'Transfer';
-    } else if ((lowerCaseResult.includes('home') || lowerCaseResult.includes('index') || result.includes('首页') || result.includes('rumah')) && !path.endsWith('/Index')) {
+    } else if ((lowerCaseResult.includes('home') || lowerCaseResult.includes('index') || result.includes('首页') || result.includes('rumah') || result.includes('வீடு')) && !path.endsWith('/Index')) {
         window.location.href = 'Index';
-    } else if (lowerCaseResult.includes('logout') || lowerCaseResult.includes('log out') || result.includes('登出') || result.includes('log keluar')) {
+    } else if (lowerCaseResult.includes('logout') || lowerCaseResult.includes('log out') || result.includes('登出') || result.includes('log keluar') || result.includes('வெளியேறு')) {
         window.location.href = '/Home/Index';
-    } else if ((lowerCaseResult.includes('key bind') || lowerCaseResult.includes('keybind') || result.includes('键绑定') || result.includes('ikat kunci')) && !path.endsWith('/Keybind')) {
+    } else if ((lowerCaseResult.includes('key bind') || lowerCaseResult.includes('keybind') || result.includes('键绑定') || result.includes('ikat kunci') || result.includes('விசை பிணைப்பு')) && !path.endsWith('/Keybind')) {
         window.location.href = path.endsWith('/User') ? '/User/Keybind' : 'Keybind';
-    } else if (lowerCaseResult.includes('chinese') || result.includes('cina')) {
+    } else if (lowerCaseResult.includes('chinese') || result.includes('cina') || result.includes('சீன')) {
         updateRecognitionLanguage('zh-CN');
-    } else if (lowerCaseResult.includes('malay') || result.includes('马来语')) {
+    } else if (lowerCaseResult.includes('malay') || result.includes('马来语') || result.includes('மலாய்')) {
         updateRecognitionLanguage('ms-MY');
-    } else if (result.includes('bahasa Inggeris') || result.includes('英语')) {
+    } else if (result.includes('inggeris') || result.includes('英语') || result.includes('ஆங்கிலம்')) {
         updateRecognitionLanguage('en-US');
+    } else if (lowerCaseResult.includes('tamil') || result.includes('泰米尔语')) {
+        updateRecognitionLanguage('ta-IN');
     }
 }
 
