@@ -63,6 +63,7 @@ namespace PFD_GroupA.Controllers
             return View();
         }
 
+		/*
 		[HttpPost]
 		public ActionResult ProcessFaceLabel([FromBody] string name)
 		{
@@ -97,9 +98,60 @@ namespace PFD_GroupA.Controllers
 				return RedirectToAction("Index");
 			}
 			
+		}*/
+
+
+		[HttpPost]
+		public ActionResult ProcessFaceLabel([FromBody] string name)
+		{
+			//Console.WriteLine(name);
+			User? user = userContext.FaceRecog(name);
+			Console.WriteLine(user.UserID);
+			if (user != null)
+			{
+				string UloginID = user.UserID;
+				string UPass = user.PinNum;
+				User? userX = userContext.Login(UloginID, UPass);
+				if (userX != null)
+				{
+					Account BankAccount = AccountContext.GetAccount(UloginID);
+					//decimal balance = AccountContext.GetAccountBalance(loginID);
+					UserKeybinds userKeybinds = userKeybindsContext.GetUserKeybinds(UloginID);
+					//Console.WriteLine(user.UserID);
+					//Store account deets in Session
+					var jsonString = JsonSerializer.Serialize(user);
+					//Console.WriteLine(BankAccount.BankAccNo);
+					//Console.WriteLine(userKeybinds.TransferPage);
+					var jsonAccString = JsonSerializer.Serialize(BankAccount);
+					var KeyBinds = JsonSerializer.Serialize(userKeybinds);
+					HttpContext.Session.SetString("KeyBinds", KeyBinds); //
+					HttpContext.Session.SetString("BankAcc", jsonAccString);
+					HttpContext.Session.SetString("AccountObject", jsonString);
+					HttpContext.Session.SetString("AccountType", "User");
+					//HttpContext.Session.SetString("BankBalance", balance.ToString());
+					return RedirectToAction("Index", "User");
+				}
+
+
+				//}
+				else
+				{
+					TempData["Message"] = "Invalid Login Credentials";
+					return RedirectToAction("Index");
+				}
+
+
+			}
+			else
+			{
+				TempData["Message"] = "Invalid Login Credentials";
+				Console.WriteLine("Error");
+				return RedirectToAction("Index");
+			}
+
 		}
 
-		
+
 
 		[HttpPost]
         public ActionResult Login(IFormCollection account)
