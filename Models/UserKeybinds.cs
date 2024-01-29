@@ -28,5 +28,22 @@ namespace PFD_GroupA.Models
 		public string LogoutFunc { get; set; }
 
 
+
+		[Display(Name = "AccountPage")]
+		[StringLength(3, ErrorMessage = "Length cannot exceed 1 character")]
+		public string AccountPage { get; set; }
+
+		[Display(Name = "Cards")]
+		[StringLength(3, ErrorMessage = "Length cannot exceed 1 character")]
+		public string Cards { get; set; }
+
+
+		[Display(Name = "Settings")]
+		[StringLength(3, ErrorMessage = "Length cannot exceed 1 character")]
+		public string Settings { get; set; }
+
+		[Display(Name = "Help")]
+		[StringLength(3, ErrorMessage = "Length cannot exceed 1 character")]
+		public string Help { get; set; }
 	}
 }

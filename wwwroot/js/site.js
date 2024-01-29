@@ -12,13 +12,21 @@ var TransBind = bindsObject.transferPage;
 
 var HomeBind = bindsObject.homePage;
 
-var LogoutBind = bindsObject.logoutFunc
+var LogoutBind = bindsObject.logoutFunc;
 
+var AccountBind = bindsObject.accountPage;
+
+var CardsBind = bindsObject.cards;
+
+var SettingBind = bindsObject.settings;
+
+var HelpBind = bindsObject.help;
 
 
 
 
 document.addEventListener("keydown", e => {
+    console.log(e);
     if (e.key.toUpperCase() === TransBind && !window.location.pathname.endsWith('/Transfer')) {
         if (window.location.pathname.endsWith('/User')) {
             window.location.href = '/User/Transfer';
@@ -27,18 +35,35 @@ document.addEventListener("keydown", e => {
         else {
             window.location.href = 'Transfer';
         }
-        
+
     }
 
 
     else if (e.key.toUpperCase() === HomeBind) {
         window.location.href = 'Index';
-    } 
+    }
 
 
     else if (e.key.toUpperCase() === LogoutBind) {
         window.location.href = '/Home/Index';
     }
+
+    else if (e.key.toUpperCase() == AccountBind) {
+        window.location.href = 'Account';
+    }
+
+    else if (e.key.toUpperCase() == CardsBind) {
+        window.location.href = 'Cards';
+    }
+
+    else if (e.key.toUpperCase() == SettingBind) {
+        window.location.href = 'Settings';
+    }
+
+    else if (e.key.toUpperCase() == HelpBind) {
+        window.location.href = 'Help';
+    }
+
 });
 
 
