@@ -65,8 +65,9 @@ namespace PFD_GroupA.Controllers
             decimal balance = accountContext.GetAccountBalance(UserID);
             HttpContext.Session.SetString("Balance", balance.ToString());
 			UserKeybinds keybinds = keybindContext.GetUserKeybinds(UserID);
-			//RunPythonScript();
-			return View(keybinds);
+            Console.WriteLine("??????");
+            //RunPythonScript();
+            return View(keybinds);
 			
         }
 		public ActionResult Account()
@@ -181,34 +182,6 @@ namespace PFD_GroupA.Controllers
 			return RedirectToAction("Index", "Home");
 		}
 
-
-
-		// GET: UserController/Details/5
-		public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: UserController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: UserController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
         // POST: UserController/Edit
         [HttpPost]

@@ -7,6 +7,7 @@ using System.Text.Json;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Runtime.ConstrainedExecution;
 using System.Security.Principal;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace PFD_GroupA.Controllers
 {
@@ -62,9 +63,45 @@ namespace PFD_GroupA.Controllers
             return View();
         }
 
+		[HttpPost]
+		public ActionResult ProcessFaceLabel([FromBody] string name)
+		{
+            //Console.WriteLine(name);
+            User? user = userContext.FaceRecog(name);
+            Console.WriteLine(user.UserID);
+            if (user != null)
+			{
+                Console.WriteLine("hello");
+                Account BankAccount = AccountContext.GetAccount(user.UserID);
+                //decimal balance = AccountContext.GetAccountBalance(loginID);
+                UserKeybinds userKeybinds = userKeybindsContext.GetUserKeybinds(user.UserID);
+				//Console.WriteLine(user.UserID);
+				//Store account deets in Session
+				var jsonString = JsonSerializer.Serialize(user);
+				//Console.WriteLine(BankAccount.BankAccNo);
+				var jsonAccString = JsonSerializer.Serialize(BankAccount);
+				var KeyBinds = JsonSerializer.Serialize(userKeybinds);
+				HttpContext.Session.SetString("KeyBinds", KeyBinds); //
+				HttpContext.Session.SetString("BankAcc", jsonAccString);
+				HttpContext.Session.SetString("AccountObject", jsonString);
+				HttpContext.Session.SetString("AccountType", "User");
+				//HttpContext.Session.SetString("BankBalance", balance.ToString());
+				Console.WriteLine("world");
+				return RedirectToAction("Index", "User");
 
+			}
+			else
+			{
+				TempData["Message"] = "Invalid Login Credentials";
+                Console.WriteLine("Error");
+				return RedirectToAction("Index");
+			}
+			
+		}
 
-        [HttpPost]
+		
+
+		[HttpPost]
         public ActionResult Login(IFormCollection account)
         {
             string loginID = account["logemail"].ToString().ToLower();
@@ -82,7 +119,7 @@ namespace PFD_GroupA.Controllers
                 //Store account deets in Session
                 var jsonString = JsonSerializer.Serialize(user);
                 //Console.WriteLine(BankAccount.BankAccNo);
-                Console.WriteLine(userKeybinds.TransferPage);
+                //Console.WriteLine(userKeybinds.TransferPage);
                 var jsonAccString = JsonSerializer.Serialize(BankAccount);
                 var KeyBinds = JsonSerializer.Serialize(userKeybinds);
                 HttpContext.Session.SetString("KeyBinds", KeyBinds); //
@@ -92,6 +129,9 @@ namespace PFD_GroupA.Controllers
                 //HttpContext.Session.SetString("BankBalance", balance.ToString());
                 return RedirectToAction("Index", "User");
             }
+            
+
+            //}
             else
             {
                 TempData["Message"] = "Invalid Login Credentials";
@@ -103,4 +143,6 @@ namespace PFD_GroupA.Controllers
 
     }
 }
+
+
 

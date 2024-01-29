@@ -348,3 +348,10 @@ h6 span{
   font-weight: normal; /* This sets the text to normal (non-bold) */
 }
 
+
+#faceLoginBtn{
+    position:absolute;
+    top:35rem;
+    left:10rem;
+}
+
