@@ -101,7 +101,8 @@ function sendRequestAndRedirect(name) {
         contentType: 'application/json',
         data: JSON.stringify(name),
         success: function (response) {
-            console.log(response);
+
+            window.location.href = '/User/Index';
         },
         error: function (error) {
             console.error('Error during AJAX request:', error);

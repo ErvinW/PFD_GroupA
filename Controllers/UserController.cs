@@ -65,7 +65,6 @@ namespace PFD_GroupA.Controllers
             decimal balance = accountContext.GetAccountBalance(UserID);
             HttpContext.Session.SetString("Balance", balance.ToString());
 			UserKeybinds keybinds = keybindContext.GetUserKeybinds(UserID);
-            Console.WriteLine("??????");
             //RunPythonScript();
             return View(keybinds);
 			
