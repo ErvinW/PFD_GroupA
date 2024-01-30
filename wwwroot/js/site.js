@@ -27,6 +27,13 @@ var KeyBind = bindsObject.keybind;
 
 
 document.addEventListener("keydown", e => {
+
+    const isTextInput = e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA';
+
+    // If it's a text input, skip the code execution
+    if (isTextInput) {
+        return;
+    }
     console.log(e);
     if (e.key.toUpperCase() === TransBind && !window.location.pathname.endsWith('/Transfer')) {
         if (window.location.pathname.endsWith('/User')) {
