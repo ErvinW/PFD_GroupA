@@ -17,7 +17,15 @@ namespace PFD_GroupA.Models
         public string RecipientAccount { get; set; }
 
         [Display(Name = "AmountSent")]
-        public SqlMoney AmountSent { get; set; }
+        public decimal AmountSent { get; set; }
+
+        /*public string FormattedAmount
+        {
+            get
+            {
+                return AmountSent.ToDecimal().ToString("C");
+            }
+        }*/
 
 
         [Display(Name = "Category")]

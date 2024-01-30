@@ -16,6 +16,10 @@
 	var balan = Context.Session.GetString("Balance");
 	decimal Balance = decimal.Parse(balan);
 	UserKeybinds test = Model;
+	Console.WriteLine(test);
+
+	var transactionJsonString = Context.Session.GetString("TransactionList");
+	List<Transactions> transactionList = JsonSerializer.Deserialize<List<Transactions>>(transactionJsonString);
 }
 
 <!DOCTYPE html>
@@ -73,7 +77,7 @@
 				<li>
 					<a href="~/User/Account">
 						<i class='bx bx-line-chart'></i>
-						<span class="text"> Account</span>
+						<span class="text">Account</span>
 					</a>
 				</li>
 				<li>
@@ -196,7 +200,7 @@
 					<div class="head">
 						<h3>Total Balance</h3>
 					</div>
-					<h1 class="custom-heading">$@Balance</h1>
+					<h1 class="custom-heading">$@Balance.ToString("0.00")</h1>
 					<br>
 					<div class="expense-chart">
 						<div class="false-For-Bottom-Text">
@@ -227,14 +231,23 @@
 					<table>
 						<thead>
 							<tr>
-								<th>Recent</th>
+								<th>BankNo</th>
 								<th>Amount</th>
 								<th>Date Order</th>
 								<th>Category</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
+							@foreach (var transaction in transactionList)
+							{
+								<tr>
+									<td>@transaction.SenderAccount</td>
+									<td>@transaction.AmountSent.ToString("0.00")</td>
+									<td>@transaction.TransactionDate</td>
+									<td>@transaction.Category</td>
+								</tr>
+							}
+							<!--<tr>
 								<td>
 									<i class="fi fi-rr-coffee"></i>
 									<p>Great Coffee</p>
@@ -277,7 +290,7 @@
 								</td>
 								<td>$103.10</td>
 								<td>04-11-2023</td>
-								<td><span class="status process">Health</span></td>
+								<td><span class="status process">Health</span></td>-->
 							</tr>
 						</tbody>
 					</table>

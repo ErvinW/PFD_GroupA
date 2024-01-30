@@ -66,7 +66,13 @@ namespace PFD_GroupA.Controllers
             HttpContext.Session.SetString("Balance", balance.ToString());
 			UserKeybinds keybinds = keybindContext.GetUserKeybinds(UserID);
             //RunPythonScript();
-            return View(keybinds);
+
+            //Transaction History
+            Account account = accountContext.GetAccount(UserID);
+            List<Transactions> transactions = transactionsContext.GetTransactions(account.BankAccNo);
+            var myTransactions = JsonSerializer.Serialize(transactions);
+            HttpContext.Session.SetString("TransactionList", myTransactions);
+			return View(keybinds);
 			
         }
 		public ActionResult Account()
