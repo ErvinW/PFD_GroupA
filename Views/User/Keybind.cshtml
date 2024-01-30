@@ -493,6 +493,119 @@
                         }
                 </tr>
 
+                <tr>
+                    <td class="display-page-name">@Html.DisplayNameFor(model => model.AccountPage)</td>
+
+                        @if (!string.IsNullOrEmpty(Model?.AccountPage))
+                        {
+
+                        <td class="keybind-display">
+                                @foreach (var item in Model.AccountPage.Split(' '))
+                                {
+                                <kbd>@item</kbd>
+                                }
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-sm btn-primary edit-kb-btn">Edit</button>
+                            <button type="button" class="btn btn-sm btn-primary" style="display:none">Done</button>
+                            <button type="button" class="btn btn-sm btn-danger delete-kb-btn">Delete</button>
+                        </td>
+                        }
+                        else
+                        {
+                        <td></td>
+                        <td>
+                            <button type="button" class="btn btn-sm btn-success done-keybind" style="display:none">Done</button>
+                            <button type="button" class="btn btn-sm btn-success add-keybind">Add</button>
+                        </td>
+                        }
+                </tr>
+
+                <tr>
+                    <td class="display-page-name">@Html.DisplayNameFor(model => model.Cards)</td>
+
+                        @if (!string.IsNullOrEmpty(Model?.Cards))
+                        {
+
+                        <td class="keybind-display">
+                                @foreach (var item in Model.Cards.Split(' '))
+                                {
+                                <kbd>@item</kbd>
+                                }
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-sm btn-primary edit-kb-btn">Edit</button>
+                            <button type="button" class="btn btn-sm btn-primary" style="display:none">Done</button>
+                            <button type="button" class="btn btn-sm btn-danger delete-kb-btn">Delete</button>
+                        </td>
+                        }
+                        else
+                        {
+                        <td></td>
+                        <td>
+                            <button type="button" class="btn btn-sm btn-success done-keybind" style="display:none">Done</button>
+                            <button type="button" class="btn btn-sm btn-success add-keybind">Add</button>
+                        </td>
+                        }
+                </tr>
+
+                <tr>
+                    <td class="display-page-name">@Html.DisplayNameFor(model => model.Settings)</td>
+
+                        @if (!string.IsNullOrEmpty(Model?.Settings))
+                        {
+
+                        <td class="keybind-display">
+                                @foreach (var item in Model.Settings.Split(' '))
+                                {
+                                <kbd>@item</kbd>
+                                }
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-sm btn-primary edit-kb-btn">Edit</button>
+                            <button type="button" class="btn btn-sm btn-primary" style="display:none">Done</button>
+                            <button type="button" class="btn btn-sm btn-danger delete-kb-btn">Delete</button>
+                        </td>
+                        }
+                        else
+                        {
+                        <td></td>
+                        <td>
+                            <button type="button" class="btn btn-sm btn-success done-keybind" style="display:none">Done</button>
+                            <button type="button" class="btn btn-sm btn-success add-keybind">Add</button>
+                        </td>
+                        }
+                </tr>
+
+
+                <tr>
+                    <td class="display-page-name">@Html.DisplayNameFor(model => model.Help)</td>
+
+                        @if (!string.IsNullOrEmpty(Model?.Help))
+                        {
+
+                        <td class="keybind-display">
+                                @foreach (var item in Model.Help.Split(' '))
+                                {
+                                <kbd>@item</kbd>
+                                }
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-sm btn-primary edit-kb-btn">Edit</button>
+                            <button type="button" class="btn btn-sm btn-primary" style="display:none">Done</button>
+                            <button type="button" class="btn btn-sm btn-danger delete-kb-btn">Delete</button>
+                        </td>
+                        }
+                        else
+                        {
+                        <td></td>
+                        <td>
+                            <button type="button" class="btn btn-sm btn-success done-keybind" style="display:none">Done</button>
+                            <button type="button" class="btn btn-sm btn-success add-keybind">Add</button>
+                        </td>
+                        }
+                </tr>
+
                 </form>
             </tbody>
         </table>

@@ -132,7 +132,7 @@ async function predictWebcam() {
                 }
                 else {
                     console.log("NEXT")
-                    if (window.location.pathname.endsWith('/User')) {
+                    if (window.location.pathname.endsWith('/User') || window.location.pathname.endsWith('/User/Index')) {
                         window.location.href = '/User/Account';
                     }
                     if (window.location.pathname.endsWith('/Account')) {

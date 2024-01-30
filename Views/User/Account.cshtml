@@ -182,9 +182,15 @@
 
 	
 	<!-- Search Bar & Light Switch End -->
-	<img id="myimg">
- 	<video id="video" width="600" height="450" style="left:10rem;" autoplay> 
- 
+	
+	<!-- Firebase Picture Upload -->
+	<div style="position:absolute; top:20rem; left:20rem">
+		<img id="" src=""/>
+		<input type="file" class="inputFile" id="fileInp" onchange="getFile(event)" accept="image/png, image/jpeg" />
+		<label for="fileInp">+</label>
+		<span class="fileText"></span>
+		<button onclick="uploadImage()">UPLOAD IMAGE</button>
+	</div>
 
 	<!-- Javascript Section -->
 	<script src="~/js/faceRecognition.js"></script>
@@ -196,6 +202,8 @@
 	<script src="~/js/dashboard.js" asp-append-version="true"></script>
 	@* <script src="~/js/chart.js" asp-append-version="true"></script> *@
 	<script src="~/js/site.js" asp-append-version="true"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase.js"></script>
+	<script src="~/js/firebaseUploadPic.js" asp-append-version="true"></script>
 
 </body>
 </html>

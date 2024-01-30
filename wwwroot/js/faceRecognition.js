@@ -24,7 +24,7 @@ function startWebcam() {
 
 function getLabeledFaceDescriptions() {
     // Define face labels and load face descriptors
-    const labels = ["xinyin", "keene", "xuewen"];
+    const labels = ["xinyin", "keene", "xuewen", "bide"];
     return Promise.all(
         labels.map(async (label) => {
             const descriptions = [];
