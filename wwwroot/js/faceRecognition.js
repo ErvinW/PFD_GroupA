@@ -1,11 +1,31 @@
-const video = document.getElementById("video");
+const firebaseConfig = {
+    apiKey: "AIzaSyA8D6m8lic69e3HofRwXf-EyCDfYfbCIjI",
+    authDomain: "portfolio-development-b3405.firebaseapp.com",
+    databaseURL: "https://portfolio-development.firebaseio.com",
+    projectId: "portfolio-development-b3405",
+    storageBucket: "portfolio-development-b3405.appspot.com",
+    messagingSenderId: "142117257651",
+    appId: "1:142117257651:web:baa0d0e31f2c765a3d0bc6",
+    measurementId: "G-TB3PZRDSH8"
+};
 
-// Load face detection and recognition models
-Promise.all([
-    faceapi.nets.ssdMobilenetv1.loadFromUri("../models"),
-    faceapi.nets.faceLandmark68Net.loadFromUri("../models"),
-    faceapi.nets.faceRecognitionNet.loadFromUri("../models"),
-]).then(startWebcam);
+firebase.initializeApp(firebaseConfig);
+
+const video = document.getElementById("video");
+let imageList = [];
+
+imageList = retrievePics().then(images => {
+    imageList = images;
+    console.log(imageList);
+    Promise.all([
+        faceapi.nets.ssdMobilenetv1.loadFromUri("../models"),
+        faceapi.nets.faceLandmark68Net.loadFromUri("../models"),
+        faceapi.nets.faceRecognitionNet.loadFromUri("../models"),
+    ]).then(startWebcam);
+    console.log(imageList);
+}).catch(error => {
+    console.error("Error", error);
+})
 
 function startWebcam() {
     // Start webcam and set video source
@@ -22,55 +42,31 @@ function startWebcam() {
         });
 }
 
-//function getLabeledFaceDescriptions() {
-//    // Define face labels and load face descriptors
-//    const labels = ["xinyin", "keene", "xuewen", "bide"];
-//    return Promise.all(
-//        labels.map(async (label) => {
-//            const descriptions = [];
-
-//            // Local
-//            for (let i = 1; i <= 1; i++) {
-//                const img = await faceapi.fetchImage(`../labels/${label}.png`);
-//                const detections = await faceapi
-//                    .detectSingleFace(img)
-//                    .withFaceLandmarks()
-//                    .withFaceDescriptor();
-//                descriptions.push(detections.descriptor);
-//            }
-
-//            // Test Firebase
-
-
-
-//            return new faceapi.LabeledFaceDescriptors(label, descriptions);
-//        })
-//    );
-//}
-
-
-
-
 function getLabeledFaceDescriptions() {
-    // Define face labels and load face descriptors
-    const labels = ["xinyin", "keene", "xuewen", "bide"];
+    // Load face descriptors for dynamically retrieved filenames
     return Promise.all(
-        labels.map(async (label) => {
+        imageList.map(async (image, index) => {
+            const label = image.blobName.split('.')[0]; // Extract label from filename
             const descriptions = [];
 
-            // Local
-            for (let i = 1; i <= 1; i++) {
-                const img = await faceapi.fetchImage(`../labels/${label}.png`);
-                const detections = await faceapi
-                    .detectSingleFace(img)
-                    .withFaceLandmarks()
-                    .withFaceDescriptor();
-                descriptions.push(detections.descriptor);
-            }
+            // Use the image from imageList for the specified label
+            const imgBlob = image.blob;
+            const imageUrl = URL.createObjectURL(imgBlob);
+
+            const img = await faceapi.fetchImage(imageUrl);
+
+            const detections = await faceapi
+                .detectSingleFace(img)
+                .withFaceLandmarks()
+                .withFaceDescriptor();
+
+            descriptions.push(detections.descriptor);
+
             return new faceapi.LabeledFaceDescriptors(label, descriptions);
         })
     );
 }
+
 
 
 video.addEventListener("play", async () => {
@@ -108,7 +104,6 @@ video.addEventListener("play", async () => {
                     label: result,
                 });
                 let name = result.label.toString();
-                console.log(name);
                 sendRequestAndRedirect(name);
 
                 drawBox.draw(canvas);
@@ -123,8 +118,6 @@ video.addEventListener("play", async () => {
     }, 1000);
 });
 
-
-
 function sendRequestAndRedirect(name) {
     $.ajax({
         url: '/Home/ProcessFaceLabel',
@@ -132,11 +125,66 @@ function sendRequestAndRedirect(name) {
         contentType: 'application/json',
         data: JSON.stringify(name),
         success: function (response) {
-
             window.location.href = '/User/Index';
         },
         error: function (error) {
             console.error('Error during AJAX request:', error);
         }
+    });
+}
+
+async function retrievePics() {
+    const storageRef = firebase.storage().ref("images");
+    let picList = [];
+    const pics = await storageRef.listAll();
+
+    const picPromise = pics.items.map(async (imageRef) => {
+        const imageUrl = await imageRef.getDownloadURL();
+        const imageName = imageRef.name;
+
+        const arrayBuffer = await fetch(imageUrl).then((res) => res.arrayBuffer());
+        const blob = new Blob([arrayBuffer]);
+
+        const pngBlob = await convertToPNG(blob);
+
+        picList.push({
+            blob: pngBlob,
+            blobName: imageName,
+        });
+    });
+
+    await Promise.all(picPromise); // Wait for all promises to be resolved
+
+    console.log(picList[0]?.pngBlob); // Make sure to check for undefined
+    console.log(picList[0]?.imageName);
+
+    return picList;
+}
+
+async function convertToPNG(blob) {
+    const img = new Image();
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+
+    const loadImage = (url) =>
+        new Promise((resolve) => {
+            img.onload = () => {
+                resolve();
+            };
+            img.src = url;
+        });
+
+    await loadImage(URL.createObjectURL(blob));
+    canvas.width = img.width;
+    canvas.height = img.height;
+    ctx.drawImage(img, 0, 0);
+
+    // Convert the image to PNG format
+    return new Promise((resolve) => {
+        canvas.toBlob((pngBlob) => {
+            // Use the converted PNG blob as needed
+            console.log("Converted to PNG:", pngBlob);
+            resolve(pngBlob);
+        }, "image/png");
     });
 }
