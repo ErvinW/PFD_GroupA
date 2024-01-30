@@ -12,13 +12,22 @@ var TransBind = bindsObject.transferPage;
 
 var HomeBind = bindsObject.homePage;
 
-var LogoutBind = bindsObject.logoutFunc
+var LogoutBind = bindsObject.logoutFunc;
 
+var AccountBind = bindsObject.accountPage;
 
+var CardsBind = bindsObject.cards;
+
+var SettingBind = bindsObject.settings;
+
+var HelpBind = bindsObject.help;
+
+var KeyBind = bindsObject.keybind;
 
 
 
 document.addEventListener("keydown", e => {
+    console.log(e);
     if (e.key.toUpperCase() === TransBind && !window.location.pathname.endsWith('/Transfer')) {
         if (window.location.pathname.endsWith('/User')) {
             window.location.href = '/User/Transfer';
@@ -27,18 +36,39 @@ document.addEventListener("keydown", e => {
         else {
             window.location.href = 'Transfer';
         }
-        
+
     }
 
 
     else if (e.key.toUpperCase() === HomeBind) {
         window.location.href = 'Index';
-    } 
+    }
 
 
     else if (e.key.toUpperCase() === LogoutBind) {
         window.location.href = '/Home/Index';
     }
+
+    else if (e.key.toUpperCase() == AccountBind) {
+        window.location.href = '/User/Account';
+    }
+
+    else if (e.key.toUpperCase() == CardsBind) {
+        window.location.href = '/User/Cards';
+    }
+
+    else if (e.key.toUpperCase() == SettingBind) {
+        window.location.href = '/User/Settings';
+    }
+
+    else if (e.key.toUpperCase() == HelpBind) {
+        window.location.href = '/User/Help';
+    }
+
+    else if (e.key.toUpperCase() == KeyBind) {
+        window.location.href = '/User/Keybind';
+    }
+
 });
 
 
@@ -56,11 +86,12 @@ const recognition = new webkitSpeechRecognition();
 }*/
 
 function updateRecognitionLanguage(language) {
+    sessionStorage.setItem('DefaultLang', language);
     console.log(language);
     recognition.stop();
 
     setTimeout(function () {
-        recognition.lang = language;
+        recognition.lang = sessionStorage.getItem("DefaultLang");
         alert('Voice recognition language switched to ' + language);
         recognition.start();
     }, 2);
@@ -90,9 +121,18 @@ function handleSpeechResult(result) {
     }
 }
 
+
+let deflang = sessionStorage.getItem('DefaultLang');
 recognition.continuous = true; // Enable continuous listening
 recognition.interimResults = true; // Receive interim results
-recognition.lang = lang;
+
+if (deflang == null) {
+    recognition.lang = lang;
+}
+else {
+    recognition.lang = deflang;
+}
+
 
 recognition.onresult = function (event) {
     const result = event.results[event.results.length - 1][0].transcript;

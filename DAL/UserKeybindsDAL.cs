@@ -52,7 +52,12 @@ namespace PFD_GroupA.DAL
 						userBinds.UserID = reader.GetString(0);
 						userBinds.TransferPage = reader.GetString(1);
 						userBinds.HomePage = reader.GetString(2);
-						userBinds.LogoutFunc = reader.GetString(3);	
+						userBinds.LogoutFunc = reader.GetString(3);
+						userBinds.AccountPage = reader.GetString(4);
+						userBinds.Cards = reader.GetString(5);
+						userBinds.Settings = reader.GetString(6);
+						userBinds.Help = reader.GetString(7);
+						userBinds.Keybind = reader.GetString(8);
 						break;
 					}
 				}
@@ -69,11 +74,16 @@ namespace PFD_GroupA.DAL
             Console.WriteLine("trans:"+ userBinds.TransferPage);
             Console.WriteLine("home:" + userBinds.HomePage);
             //Define parameters
-            cmd.CommandText = @"UPDATE UserKeybinds SET TransferPage=@transferPage, HomePage=@homePage, LogoutFunc=@logoutFunc WHERE UserID=@loginID";
+            cmd.CommandText = @"UPDATE UserKeybinds SET TransferPage=@transferPage, HomePage=@homePage, LogoutFunc=@logoutFunc, AccountPage=@accountPage, Cards=@cards, Settings=@settings, Help=@help WHERE UserID=@loginID";
 			cmd.Parameters.AddWithValue("@transferPage", userBinds.TransferPage);
 			cmd.Parameters.AddWithValue("@homePage", userBinds.HomePage);
 			cmd.Parameters.AddWithValue("@logoutFunc", userBinds.LogoutFunc);
 			cmd.Parameters.AddWithValue("@loginID", userBinds.UserID);
+			cmd.Parameters.AddWithValue("@accountPage", userBinds.AccountPage);
+			cmd.Parameters.AddWithValue("@cards", userBinds.Cards);
+			cmd.Parameters.AddWithValue("@settings", userBinds.Settings);
+			cmd.Parameters.AddWithValue("@help", userBinds.Help);
+			cmd.Parameters.AddWithValue("@keybind", userBinds.Keybind);
 
 			//Open connection
 			conn.Open();
