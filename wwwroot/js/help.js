@@ -5,62 +5,49 @@ const video_playlist = document.querySelector('.video-playlist .videos');
 let data = [
     {
         'id': 'a1',
-        'title': 'manipulate text background',
-        'name': 'manipulate text background.mp4',
+        'title': 'Home Page Run-Through',
+        'name': 'Home Page.mp4',
         'duration': '2:47',
     },
     {
         'id': 'a2',
-        'title': 'build gauge with css',
-        'name': 'build gauge with css.mp4',
+        'title': 'Using the  Voice Navigation Feature',
+        'name': 'Voice Navigation.mp4',
         'duration': '2:45',
     },
     {
         'id': 'a3',
-        'title': '3D popup card',
-        'name': '3D popup card.mp4',
+        'title': 'Site Navigation using Gestures',
+        'name': 'Gestures.mp4',
         'duration': '24:49',
     },
 
     {
         'id': 'a4',
-        'title': 'customize HTML5 form elements',
-        'name': 'customize HTML5 form elements.mp4',
+        'title': 'Keybind Tutorial and Customization',
+        'name': 'Keybind.mp4',
         'duration': '3:59',
     },
     {
         'id': 'a5',
-        'title': 'custom select box',
-        'name': 'custom select box.mp4',
+        'title': 'Eye Tracker Tutorial',
+        'name': 'Eye Tracker.mp4',
         'duration': '4:25',
     },
     {
         'id': 'a6',
-        'title': 'embed google map to contact form',
-        'name': 'embed google map to contact form.mp4',
+        'title': 'Feedback form tutorial',
+        'name': 'Feedbackform.mp4',
         'duration': '5:33',
     },
-    {
-        'id': 'a7',
-        'title': 'password strength checker javascript web app',
-        'name': 'password strength checker javascript web app.mp4',
-        'duration': '0:29',
-    },
-
-    {
-        'id': 'a8',
-        'title': 'custom range slider',
-        'name': 'custom range slider.mp4',
-        'duration': '1:12',
-    },
-    {
-        'id': 'a9',
-        'title': 'animated shopping cart',
-        'name': 'animated shopping cart.mp4',
-        'duration': '3:38',
-    },
+   
 
 ];
+
+// Update the video playlist title dynamically
+const videoPlaylistTitle = document.querySelector('.video-playlist h3');
+videoPlaylistTitle.id = 'video-playlist-title';
+
 
 data.forEach((video, i) => {
     let video_element = `

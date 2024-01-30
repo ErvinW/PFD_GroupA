@@ -29,6 +29,8 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+	<script src="~/js/face-api.min.js"></script>
 </head>
 <body>
 
@@ -136,6 +138,16 @@
 		</div>
 	</div>
 	<!-- Login Page End -->
+
+	<img id="myimg">
+	<video id="video" width="420" height="350" style="top:8rem; position:fixed" autoplay></video>
+	@* <button id="faceLoginBtn">Login With Face</button> *@
+
+
+	@* <button id="retrieve">RETRIEVE</button>
+	<img id="myimg"> *@
+
+
 	<!-- Javascript Section -->
 	<script src="~/js/login.js" asp-append-version="true"></script>
 	<script>
@@ -155,6 +167,10 @@
 			}
 		});
 	</script>
-
+		<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+		<!-- Javascript Section -->
+		<script src="~/js/faceRecognition.js" asp-append-version="true"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase.js"></script>
+	<script src="~/js/firebaseUploadPic.js" asp-append-version="true"></script>
 </body>
 </html>

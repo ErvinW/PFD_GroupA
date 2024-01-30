@@ -84,10 +84,12 @@ let lastVideoTime = -1;
 let results = undefined;
 console.log(video);
 async function predictWebcam() {
-    canvasElement.style.width = video.videoWidth;;
-    canvasElement.style.height = video.videoHeight;
-    canvasElement.width = video.videoWidth;
-    canvasElement.height = video.videoHeight;
+    
+
+    canvasElement.style.width = 270;
+    canvasElement.style.height = 240;
+    canvasElement.width = 270;
+    canvasElement.height = 240;
 
     
     let startTimeMs = performance.now();
@@ -103,7 +105,7 @@ async function predictWebcam() {
                 color: "#00FF00",
                 lineWidth: 5
             });
-            drawLandmarks(canvasCtx, landmarks, { color: "#FF0000", lineWidth: 2 });
+            /*drawLandmarks(canvasCtx, landmarks, { color: "#FF0000", lineWidth: 2 });*/
 
 
             if (Math.abs(results.landmarks[0][12].x - prevx) > 0.5) {
@@ -130,7 +132,7 @@ async function predictWebcam() {
                 }
                 else {
                     console.log("NEXT")
-                    if (window.location.pathname.endsWith('/User')) {
+                    if (window.location.pathname.endsWith('/User') || window.location.pathname.endsWith('/User/Index')) {
                         window.location.href = '/User/Account';
                     }
                     if (window.location.pathname.endsWith('/Account')) {

@@ -176,3 +176,15 @@
 .show-answer .btn-plus {
     display: none;
 }
+
+.main-video {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .main-video video {
+        width: 100%;
+        max-width: 800px; /* Adjust the maximum width as needed */
+        border-radius: .5rem;
+    }

@@ -26,4 +26,17 @@
     <Folder Include="wwwroot\videos\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\js\models\age_gender_model-shard1" />
+    <None Include="wwwroot\js\models\face_expression_model-shard1" />
+    <None Include="wwwroot\js\models\face_landmark_68_model-shard1" />
+    <None Include="wwwroot\js\models\face_landmark_68_tiny_model-shard1" />
+    <None Include="wwwroot\js\models\face_recognition_model-shard1" />
+    <None Include="wwwroot\js\models\face_recognition_model-shard2" />
+    <None Include="wwwroot\js\models\mtcnn_model-shard1" />
+    <None Include="wwwroot\js\models\ssd_mobilenetv1_model-shard1" />
+    <None Include="wwwroot\js\models\ssd_mobilenetv1_model-shard2" />
+    <None Include="wwwroot\js\models\tiny_face_detector_model-shard1" />
+  </ItemGroup>
+
 </Project>

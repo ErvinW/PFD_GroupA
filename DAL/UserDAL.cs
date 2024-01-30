@@ -97,5 +97,38 @@ namespace PFD_GroupA.DAL
             conn.Close();
             return user;
         }
+
+        public User FaceRecog(string name)
+        {
+			SqlCommand cmd = conn.CreateCommand();
+			//Specify the SELECT SQL statement 
+			cmd.CommandText = @"SELECT * FROM UserAccount where UserName = @name";
+			cmd.Parameters.AddWithValue("@name", name);
+			//Open a database connection
+			conn.Open();
+			//Execute the SELECT SQL through a DataReader
+			SqlDataReader reader = cmd.ExecuteReader();
+			//Read all records until the end
+			User? user = null;
+			if (reader.HasRows)
+			{
+				while (reader.Read())
+				{
+					// Password comparison is case-sensitive
+					if (reader.GetString(1).ToLower() == name)
+					{
+						user = new User();
+						user.UserID = reader.GetString(0);
+						user.UserName = reader.GetString(1);
+						user.PinNum = reader.GetString(2);
+						break;
+					}
+				}
+			}
+
+			reader.Close();
+			conn.Close();
+			return user;
+		}
     }
 }

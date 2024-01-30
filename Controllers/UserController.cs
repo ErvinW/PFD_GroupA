@@ -105,12 +105,12 @@ namespace PFD_GroupA.Controllers
 		public ActionResult Help()
 		{
 			var ID = HttpContext.Session.GetString("AccountObject");
-            //	var UID = JsonSerializer.Deserialize<User>(ID);
-            //	string UserID = UID.UserID;
+            var UID = JsonSerializer.Deserialize<User>(ID);
+            string UserID = UID.UserID;
 
-            //	UserKeybinds keybinds = keybindContext.GetUserKeybinds(UserID);
-            //	return View(keybinds);
-            return View();
+            UserKeybinds keybinds = keybindContext.GetUserKeybinds(UserID);
+            return View(keybinds);
+            // return View();
 
         }
 		public ActionResult Transfer()
@@ -187,34 +187,6 @@ namespace PFD_GroupA.Controllers
 			return RedirectToAction("Index", "Home");
 		}
 
-
-
-		// GET: UserController/Details/5
-		public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: UserController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: UserController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
         // POST: UserController/Edit
         [HttpPost]
