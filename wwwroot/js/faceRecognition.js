@@ -22,12 +22,43 @@ function startWebcam() {
         });
 }
 
+//function getLabeledFaceDescriptions() {
+//    // Define face labels and load face descriptors
+//    const labels = ["xinyin", "keene", "xuewen", "bide"];
+//    return Promise.all(
+//        labels.map(async (label) => {
+//            const descriptions = [];
+
+//            // Local
+//            for (let i = 1; i <= 1; i++) {
+//                const img = await faceapi.fetchImage(`../labels/${label}.png`);
+//                const detections = await faceapi
+//                    .detectSingleFace(img)
+//                    .withFaceLandmarks()
+//                    .withFaceDescriptor();
+//                descriptions.push(detections.descriptor);
+//            }
+
+//            // Test Firebase
+
+
+
+//            return new faceapi.LabeledFaceDescriptors(label, descriptions);
+//        })
+//    );
+//}
+
+
+
+
 function getLabeledFaceDescriptions() {
     // Define face labels and load face descriptors
     const labels = ["xinyin", "keene", "xuewen", "bide"];
     return Promise.all(
         labels.map(async (label) => {
             const descriptions = [];
+
+            // Local
             for (let i = 1; i <= 1; i++) {
                 const img = await faceapi.fetchImage(`../labels/${label}.png`);
                 const detections = await faceapi

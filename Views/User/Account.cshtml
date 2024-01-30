@@ -185,12 +185,22 @@
 	
 	<!-- Firebase Picture Upload -->
 	<div style="position:absolute; top:20rem; left:20rem">
-		<img id="" src=""/>
+		<img id="facePic" src="https://www.bing.com/images/search?view=detailV2&ccid=BUKBU3OE&id=C82C1F7CE9767C7301ED83AF80D449DB25836A73&thid=OIP.BUKBU3OEkRGQRWJrUS4P3QHaHa&mediaurl=https%3a%2f%2fpbs.twimg.com%2fprofile_images%2f428316729220276224%2fEdBZ2Kgp.jpeg&exph=1252&expw=1252&q=random+pic&simid=608053132209580422&FORM=IRPRST&ck=A9D13322893A9A2E845245823E2C33CF&selectedIndex=0&itb=0&idpp=overlayview&ajaxhist=0&ajaxserp=0" />
 		<input type="file" class="inputFile" id="fileInp" onchange="getFile(event)" accept="image/png, image/jpeg" />
 		<label for="fileInp">+</label>
 		<span class="fileText"></span>
 		<button onclick="uploadImage()">UPLOAD IMAGE</button>
+
+		<!-- Firebase Picture Retrieve -->
+		<br>
+		<br>
+		Name
+		<input id="namebox" type="text">
+		<button id="retrieve">RETRIEVE</button>
+		<img id="myimg">
 	</div>
+
+	
 
 	<!-- Javascript Section -->
 	<script src="~/js/faceRecognition.js"></script>
