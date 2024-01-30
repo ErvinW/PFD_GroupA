@@ -5,7 +5,7 @@
 	var AccountString = Context.Session.GetString("AccountObject");
 	var BankAccString = Context.Session.GetString("BankAcc");
 	var type = Context.Session.GetString("AccountType");
-	var Binds = Context.Session.GetString("KeyBinds");<!--
+	var Binds = Context.Session.GetString("KeyBinds");
 	var BindsObject = JsonSerializer.Deserialize<UserKeybinds>(Binds);
 	var AccountObject = JsonSerializer.Deserialize<User>(AccountString);
 	var BankObject = JsonSerializer.Deserialize<Account>(BankAccString);
@@ -13,7 +13,7 @@
 	string AccountID = AccountObject.UserID;
 	string AccountNum = BankObject.BankAccNo;
 	UserKeybinds test = Model;
-	Console.WriteLine(test);-->
+	Console.WriteLine(test);
 }
 
 <!DOCTYPE html>
@@ -179,7 +179,8 @@
 	<main class="container">
 		<section class="main-video">
 			<video src="images/home.jpg" controls autoplay muted></video>
-			<h3>Title of the playing Video.</h3>
+			<!--<video class="main-video-element" controls autoplay muted></video>
+			<h3>Title of the playing Video.</h3>-->
 		</section>
 
 		<section class="video-playlist">
@@ -199,7 +200,7 @@
 
 			<div class="question">
 				<div class="question__title">
-					<p>What services does NP Courier Service offer?</p>
+					<p>What are the default Page Keybinds?</p>
 					<button class="question__button">
 						<span class="btn-plus">
 							<i class="far fa-plus-square"></i>
@@ -210,13 +211,13 @@
 					</button>
 				</div>
 				<p class="question__answer">
-					NP Courier Service offers fast and reliable express parcel delivery services to over 30 countries.
+					To get to the home page the keybind is "h", to get to transfer it is"t", to logout it is "l".
 				</p>
 			</div>
 
 			<div class="question">
 				<div class="question__title">
-					<p>How can I track my parcel?</p>
+					<p>What are the voice shortcuts?</p>
 					<button class="question__button">
 						<span class="btn-plus">
 							<i class="far fa-plus-square"></i>
@@ -227,13 +228,13 @@
 					</button>
 				</div>
 				<p class="question__answer">
-					To track your parcel, simply log in as a user on our website, and you'll have access to our easy-to-use parcel tracking system.
+					To get to the home page the keyword is "home", to get to transfer page it is "transfer", to logout it is "logout".
 				</p>
 			</div>
 
 			<div class="question">
 				<div class="question__title">
-					<p>What is the mission of NP Courier Service?</p>
+					<p>Can I customixe my keyboard shortcuts?</p>
 					<button class="question__button">
 						<span class="btn-plus">
 							<i class="far fa-plus-square"></i>
@@ -244,13 +245,13 @@
 					</button>
 				</div>
 				<p class="question__answer">
-					At NP Courier Service, our mission is to ensure the safe and timely delivery of your parcels. Your satisfaction is the cornerstone of our success, and we are committed to constantly improving our services to provide you with the best experience.
+					Yes! To do that head over to the keybinds page and complete the required steps.
 				</p>
 			</div>
 
 			<div class="question">
 				<div class="question__title">
-					<p>How can I contact NP Courier Service customer support?</p>
+					<p>Is it possible for me to make a feedback?</p>
 					<button class="question__button">
 						<span class="btn-plus">
 							<i class="far fa-plus-square"></i>
@@ -261,13 +262,13 @@
 					</button>
 				</div>
 				<p class="question__answer">
-					You can easily reach our customer support team through phone and email. Our dedicated team is available to assist you with any inquiries or concerns you may have.
+					Yes! You can easily make a feedback through our short feedback form below.
 				</p>
 			</div>
 
 			<div class="question">
 				<div class="question__title">
-					<p>What makes NP Courier Service stand out from other shipping providers?</p>
+					<p>How do i activate the eye tracking/hand gesture features?</p>
 					<button class="question__button">
 						<span class="btn-plus">
 							<i class="far fa-plus-square"></i>
@@ -278,7 +279,24 @@
 					</button>
 				</div>
 				<p class="question__answer">
-					At NP Courier Service, we take pride in our commitment to excellence in service. With an extensive network of front offices and delivery stations, we ensure swift and efficient delivery of your parcels. We continuously strive to improve our services to offer you the best parcel delivery experience. Your satisfaction is our top priority, and we are dedicated to exceeding your expectations.
+				To do that just ensure your camera is turned on and uncovered. For the eye tracking feature do ensure to toggle it on before use, on the other hand the hand gesturing will be always on standby and you can see it track your hand on the bottom left screen.
+				</p>
+			</div>
+
+			<div class="question">
+				<div class="question__title">
+					<p>Is our data secure?</p>
+					<button class="question__button">
+						<span class="btn-plus">
+							<i class="far fa-plus-square"></i>
+						</span>
+						<span class="btn-minus">
+							<i class="far fa-minus-square"></i>
+						</span>
+					</button>
+				</div>
+				<p class="question__answer">
+					Yes, don't worry! We do not save or store any personal data from our customers!
 				</p>
 			</div>
 		</section>
