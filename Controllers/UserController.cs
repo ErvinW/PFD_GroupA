@@ -99,12 +99,12 @@ namespace PFD_GroupA.Controllers
 		public ActionResult Help()
 		{
 			var ID = HttpContext.Session.GetString("AccountObject");
-            //	var UID = JsonSerializer.Deserialize<User>(ID);
-            //	string UserID = UID.UserID;
+            var UID = JsonSerializer.Deserialize<User>(ID);
+            string UserID = UID.UserID;
 
-            //	UserKeybinds keybinds = keybindContext.GetUserKeybinds(UserID);
-            //	return View(keybinds);
-            return View();
+            UserKeybinds keybinds = keybindContext.GetUserKeybinds(UserID);
+            return View(keybinds);
+            // return View();
 
         }
 		public ActionResult Transfer()
