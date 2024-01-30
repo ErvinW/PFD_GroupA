@@ -57,6 +57,7 @@ namespace PFD_GroupA.DAL
 						userBinds.Cards = reader.GetString(5);
 						userBinds.Settings = reader.GetString(6);
 						userBinds.Help = reader.GetString(7);
+						userBinds.Keybind = reader.GetString(8);
 						break;
 					}
 				}
@@ -82,6 +83,7 @@ namespace PFD_GroupA.DAL
 			cmd.Parameters.AddWithValue("@cards", userBinds.Cards);
 			cmd.Parameters.AddWithValue("@settings", userBinds.Settings);
 			cmd.Parameters.AddWithValue("@help", userBinds.Help);
+			cmd.Parameters.AddWithValue("@keybind", userBinds.Keybind);
 
 			//Open connection
 			conn.Open();

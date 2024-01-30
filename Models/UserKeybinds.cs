@@ -45,5 +45,9 @@ namespace PFD_GroupA.Models
 		[Display(Name = "Help")]
 		[StringLength(3, ErrorMessage = "Length cannot exceed 1 character")]
 		public string Help { get; set; }
+
+		[Display(Name = "Keybind")]
+		[StringLength(3, ErrorMessage = "Length cannot exceed 1 character")]
+		public string Keybind { get; set; }
 	}
 }
