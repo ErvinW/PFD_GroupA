@@ -81,11 +81,12 @@ const recognition = new webkitSpeechRecognition();
 }*/
 
 function updateRecognitionLanguage(language) {
+    sessionStorage.setItem('DefaultLang', language);
     console.log(language);
     recognition.stop();
 
     setTimeout(function () {
-        recognition.lang = language;
+        recognition.lang = sessionStorage.getItem("DefaultLang");
         alert('Voice recognition language switched to ' + language);
         recognition.start();
     }, 2);
@@ -115,9 +116,18 @@ function handleSpeechResult(result) {
     }
 }
 
+
+let deflang = sessionStorage.getItem('DefaultLang');
 recognition.continuous = true; // Enable continuous listening
 recognition.interimResults = true; // Receive interim results
-recognition.lang = lang;
+
+if (deflang == null) {
+    recognition.lang = lang;
+}
+else {
+    recognition.lang = deflang;
+}
+
 
 recognition.onresult = function (event) {
     const result = event.results[event.results.length - 1][0].transcript;
