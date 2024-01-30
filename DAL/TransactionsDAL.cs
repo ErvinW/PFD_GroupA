@@ -30,11 +30,11 @@ namespace PFD_GroupA.DAL
         }
 
 
-        public List<Transactions>? GetSenderTransactions(string SenderAccount)
+        public List<Transactions>? GetTransactions(string AccountNo)
         {
             SqlCommand cmd = conn.CreateCommand();
-            cmd.CommandText = @"SELECT * FROM Transactions WHERE SenderAccount = @SenderAccount";
-            cmd.Parameters.AddWithValue(@"SenderAccount", SenderAccount);
+            cmd.CommandText = @"SELECT * FROM Transactions WHERE SenderAccount = @accountNo OR RecipientAccount = @accountNo";
+            cmd.Parameters.AddWithValue(@"accountNo", AccountNo);
             conn.Open();
             SqlDataReader reader = cmd.ExecuteReader();
            List<Transactions> transactionList = new List<Transactions>();
@@ -46,11 +46,11 @@ namespace PFD_GroupA.DAL
                     transactionList.Add(
                     new Transactions
                     {
-                        SenderAccount = reader.GetString(0),
-                        RecipientAccount = reader.GetString(1),
-                        AmountSent = reader.GetDecimal(2),
-                        Category = reader.GetString(3),
-                        TransactionDate = reader.GetDateTime(4)
+                        SenderAccount = reader.GetString(1),
+                        RecipientAccount = reader.GetString(2),
+                        AmountSent = reader.GetDecimal(3),
+                        Category = reader.GetString(4),
+                        TransactionDate = reader.GetDateTime(5)
                     }
                     );
 
