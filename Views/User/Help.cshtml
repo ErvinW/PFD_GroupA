@@ -5,7 +5,7 @@
 	var AccountString = Context.Session.GetString("AccountObject");
 	var BankAccString = Context.Session.GetString("BankAcc");
 	var type = Context.Session.GetString("AccountType");
-	var Binds = Context.Session.GetString("KeyBinds");<!--
+	var Binds = Context.Session.GetString("KeyBinds");
 	var BindsObject = JsonSerializer.Deserialize<UserKeybinds>(Binds);
 	var AccountObject = JsonSerializer.Deserialize<User>(AccountString);
 	var BankObject = JsonSerializer.Deserialize<Account>(BankAccString);
@@ -13,7 +13,7 @@
 	string AccountID = AccountObject.UserID;
 	string AccountNum = BankObject.BankAccNo;
 	UserKeybinds test = Model;
-	Console.WriteLine(test);-->
+	Console.WriteLine(test);
 }
 
 <!DOCTYPE html>
@@ -285,7 +285,7 @@
 	</div>
 	<!-- FAQ End-->
 
-	
+
 
 	<!-- Javascript Section -->
 	<script>
@@ -295,8 +295,7 @@
 	<script type="module" src="~/js/handlandmarker.js" asp-append-version="true"></script>
 	<script src="~/js/dashboard.js" asp-append-version="true"></script>
 	<script src="~/js/chart.js" asp-append-version="true"></script>
-	<script src="~/js/site.js" asp-append-version="true"></script>
 	<script src="~/js/help.js" asp-append-version="true"></script>
-	
+	<script src="~/js/site.js" asp-append-version="true"></script>
 </body>
 </html>

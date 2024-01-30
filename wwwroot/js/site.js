@@ -22,6 +22,7 @@ var SettingBind = bindsObject.settings;
 
 var HelpBind = bindsObject.help;
 
+var KeyBind = bindsObject.keybind;
 
 
 
@@ -49,19 +50,23 @@ document.addEventListener("keydown", e => {
     }
 
     else if (e.key.toUpperCase() == AccountBind) {
-        window.location.href = 'Account';
+        window.location.href = '/User/Account';
     }
 
     else if (e.key.toUpperCase() == CardsBind) {
-        window.location.href = 'Cards';
+        window.location.href = '/User/Cards';
     }
 
     else if (e.key.toUpperCase() == SettingBind) {
-        window.location.href = 'Settings';
+        window.location.href = '/User/Settings';
     }
 
     else if (e.key.toUpperCase() == HelpBind) {
-        window.location.href = 'Help';
+        window.location.href = '/User/Help';
+    }
+
+    else if (e.key.toUpperCase() == KeyBind) {
+        window.location.href = '/User/Keybind';
     }
 
 });
