@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using static Microsoft.AspNetCore.Razor.Language.TagHelperMetadata;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Security.Principal;
 
 
 //using IronPython.Hosting;
@@ -291,7 +292,11 @@ namespace PFD_GroupA.Controllers
                     {
                         Console.WriteLine(12);
 					    bool increase = accountContext.Increase(RecipientID, Balance, sqlAmountSent);
-					    transactionsContext.AddTransaction(SenderID, RecipientID, sqlAmountSent, Category, TransactionDate);
+                        string NSenderID = UIDBank.BankAccNo.ToString();
+                        Account RAccount = accountContext.GetAccount(RecipientID);
+                        string NRecipientID = RAccount.BankAccNo.ToString();
+
+						transactionsContext.AddTransaction(NSenderID, NRecipientID, sqlAmountSent, Category, TransactionDate);
                         
 				    }
 
