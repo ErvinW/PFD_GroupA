@@ -1,43 +1,40 @@
 ﻿import {
-    HandLandmarker,
-    FilesetResolver
+    GestureRecognizer,
+    FilesetResolver,
+    DrawingUtils
 } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.0";
 
 const demosSection = document.getElementById("demos");
-
-let handLandmarker = undefined;
+let gestureRecognizer = undefined;
 let runningMode = "VIDEO";
 let enableWebcamButton = HTMLButtonElement;
 let webcamRunning = true;
-let prevx = null;
 
-// Before we can use HandLandmarker class we must wait for it to finish
-// loading. Machine Learning models can be large and take a moment to
-// get everything needed to run.
-const createHandLandmarker = async () => {
+
+const createGestureRecognizer = async () => {
     const vision = await FilesetResolver.forVisionTasks(
         "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.0/wasm"
     );
-    handLandmarker = await HandLandmarker.createFromOptions(vision, {
+    gestureRecognizer = await GestureRecognizer.createFromOptions(vision, {
         baseOptions: {
-            modelAssetPath: `https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task`,
-            delegate: "GPU"
+            modelAssetPath:
+                "https://storage.googleapis.com/mediapipe-models/gesture_recognizer/gesture_recognizer/float16/1/gesture_recognizer.task",
+            delegate: "CPU"
         },
         runningMode: "VIDEO",
         numHands: 2
     });
     demosSection.classList.remove("invisible");
-    enableCam();
+    enableCam()
 };
-createHandLandmarker();
+createGestureRecognizer();
 
 
 
 const video = document.getElementById("webcam");
-const canvasElement = document.getElementById(
-    "output_canvas"
-);
+const canvasElement = document.getElementById("output_canvas");
 const canvasCtx = canvasElement.getContext("2d");
+//const gestureOutput = document.getElementById("gesture_output");
 
 // Check if webcam access is supported.
 const hasGetUserMedia = () => !!navigator.mediaDevices?.getUserMedia;
@@ -53,113 +50,128 @@ if (hasGetUserMedia()) {
 
 // Enable the live webcam view and start detection.
 function enableCam(event) {
-    if (!handLandmarker) {
-        console.log("Wait! objectDetector not loaded yet.");
+    if (!gestureRecognizer) {
+        alert("Please wait for gestureRecognizer to load");
         return;
     }
 
-
-    /*
-    if (webcamRunning === true) {
-        webcamRunning = false;
-        enableWebcamButton.innerText = "ENABLE PREDICTIONS";
-    } else {
-        webcamRunning = true;
-        enableWebcamButton.innerText = "DISABLE PREDICTIONS";
-    }*/
-
-    // getUsermedia parameters.
     const constraints = {
         video: true
     };
 
-    // Activate the webcam stream.
-    navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
-        video.srcObject = stream;
-        video.addEventListener("loadeddata", predictWebcam);
-    });
+    navigator.mediaDevices.getUserMedia(constraints)
+        .then((stream) => {
+            console.log("yes");
+            video.srcObject = stream;
+            video.addEventListener("loadeddata", predictWebcam);
+        })
+        .catch((error) => {
+            console.error("Error accessing webcam:", error);
+        });
 }
+
+
 
 let lastVideoTime = -1;
 let results = undefined;
-console.log(video);
 async function predictWebcam() {
-    
-
+    console.log("hiii")
     canvasElement.style.width = 270;
     canvasElement.style.height = 240;
     canvasElement.width = 270;
     canvasElement.height = 240;
 
-    
-    let startTimeMs = performance.now();
-    if (lastVideoTime !== video.currentTime) {
+    const webcamElement = document.getElementById("webcam");
+    // Now let's start detecting the stream.
+    let nowInMs = Date.now();
+    if (video.currentTime !== lastVideoTime) {
         lastVideoTime = video.currentTime;
-        results = handLandmarker.detectForVideo(video, startTimeMs);
+        results = gestureRecognizer.recognizeForVideo(video, nowInMs);
     }
+
     canvasCtx.save();
     canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+    const drawingUtils = new DrawingUtils(canvasCtx);
+
+    webcamElement.style.height = 240;
+    webcamElement.style.width = 270;
+
     if (results.landmarks) {
         for (const landmarks of results.landmarks) {
-            drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS, {
-                color: "#00FF00",
-                lineWidth: 5
+            drawingUtils.drawConnectors(
+                landmarks,
+                GestureRecognizer.HAND_CONNECTIONS,
+                {
+                    color: "#00FF00",
+                    lineWidth: 5
+                }
+            );
+            drawingUtils.drawLandmarks(landmarks, {
+                color: "#FF0000",
+                lineWidth: 2
             });
-            /*drawLandmarks(canvasCtx, landmarks, { color: "#FF0000", lineWidth: 2 });*/
-
-
-            if (Math.abs(results.landmarks[0][12].x - prevx) > 0.5) {
-                if (results.landmarks[0][12].x - prevx > 0.5) {
-                    console.log("BACK")
-                    if (window.location.pathname.endsWith('/Account')) {
-                        window.location.href = '/User';
-                    }
-                    if (window.location.pathname.endsWith('/Transfer')) {
-                        window.location.href = '/User/Account';
-                    }
-                    if (window.location.pathname.endsWith('/Cards')) {
-                        window.location.href = '/User/Transfer';
-                    }
-                    if (window.location.pathname.endsWith('/Keybind')) {
-                        window.location.href = '/User/Cards';
-                    }
-                    if (window.location.pathname.endsWith('/Settings')) {
-                        window.location.href = '/User/Keybind';
-                    }
-                    if (window.location.pathname.endsWith('/Help')) {
-                        window.location.href = '/User/Settings';
-                    }
-                }
-                else {
-                    console.log("NEXT")
-                    if (window.location.pathname.endsWith('/User') || window.location.pathname.endsWith('/User/Index')) {
-                        window.location.href = '/User/Account';
-                    }
-                    if (window.location.pathname.endsWith('/Account')) {
-                        window.location.href = '/User/Transfer';
-                    }
-                    if (window.location.pathname.endsWith('/Transfer')) {
-                        window.location.href = '/User/Cards';
-                    }
-                    if (window.location.pathname.endsWith('/Cards')) {
-                        window.location.href = '/User/Keybind';
-                    }
-                    if (window.location.pathname.endsWith('/Keybind')) {
-                        window.location.href = '/User/Settings';
-                    }
-                    if (window.location.pathname.endsWith('/Settings')) {
-                        window.location.href = '/User/Help';
-                    }
-                }
-            }
-            prevx = results.landmarks[0][12].x
         }
-
-
-
     }
     canvasCtx.restore();
+    if (results.gestures.length > 0) {
+        //gestureOutput.style.display = "block";
+        //gestureOutput.style.width = 270;
+        const categoryName = results.gestures[0][0].categoryName;
+        console.log(categoryName)
 
+        //const categoryScore = parseFloat(
+        //    results.gestures[0][0].score * 100
+        //).toFixed(2);
+        //const handedness = results.handednesses[0][0].displayName;
+        //gestureOutput.innerText = `GestureRecognizer: ${categoryName} \n Confidence: ${categoryScore} %\n Handedness: ${handedness}`;
+
+        if (categoryName == 'Pointing_Up') {
+            console.log("BACK")
+            if (window.location.pathname.endsWith('/Account')) {
+                window.location.href = '/User';
+            }
+            if (window.location.pathname.endsWith('/Transfer')) {
+                window.location.href = '/User/Account';
+            }
+            if (window.location.pathname.endsWith('/Cards')) {
+                window.location.href = '/User/Transfer';
+            }
+            if (window.location.pathname.endsWith('/Keybind')) {
+                window.location.href = '/User/Cards';
+            }
+            if (window.location.pathname.endsWith('/Settings')) {
+                window.location.href = '/User/Keybind';
+            }
+            if (window.location.pathname.endsWith('/Help')) {
+                window.location.href = '/User/Settings';
+            }
+        }
+        else if(categoryName == 'Victory'){
+            console.log("NEXT")
+            if (window.location.pathname.endsWith('/User') || window.location.pathname.endsWith('/User/Index')) {
+                window.location.href = '/User/Account';
+            }
+            if (window.location.pathname.endsWith('/Account')) {
+                window.location.href = '/User/Transfer';
+            }
+            if (window.location.pathname.endsWith('/Transfer')) {
+                window.location.href = '/User/Cards';
+            }
+            if (window.location.pathname.endsWith('/Cards')) {
+                window.location.href = '/User/Keybind';
+            }
+            if (window.location.pathname.endsWith('/Keybind')) {
+                window.location.href = '/User/Settings';
+            }
+            if (window.location.pathname.endsWith('/Settings')) {
+                window.location.href = '/User/Help';
+            }
+        }
+
+    } else {
+        //gestureOutput.style.display = "none";
+        console.log("none")
+    }
     // Call this function again to keep predicting when the browser is ready.
     if (webcamRunning === true) {
         window.requestAnimationFrame(predictWebcam);
