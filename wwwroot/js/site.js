@@ -126,6 +126,20 @@ function handleSpeechResult(result) {
     } else if (lowerCaseResult.includes('tamil') || result.includes('泰米尔语')) {
         updateRecognitionLanguage('ta-IN');
     }
+
+    else if (lowerCaseResult.includes('account') || result.includes('账户') || result.includes('akaun') || result.includes('கணக்கு')) {
+        window.location.href = '/User/Account';
+    }
+    else if (lowerCaseResult.includes('cards') || result.includes('卡片') || result.includes('kad') || result.includes('அட்டைகள்')) {
+        window.location.href = '/User/Cards';
+    }
+    else if (lowerCaseResult.includes('help') || result.includes('帮助') || result.includes('bantuan') || result.includes('உதவி')) {
+        window.location.href = '/User/Help';
+    }
+    else if (lowerCaseResult.includes('settings') || result.includes('设置') || result.includes('tetapan') || result.includes('அமைப்புகள்')) {
+        window.location.href = '/User/Settings';
+    }
+
 }
 
 
