@@ -27,35 +27,6 @@ namespace PFD_GroupA.Controllers
         UserKeybindsDAL keybindContext = new UserKeybindsDAL();
 		private List<SelectListItem> pageList = new List<SelectListItem>();
         UserDAL userContext = new UserDAL();
-
-        public async Task RunPythonScript()
-		{
-			string pythonInterpreterPath = @"C:\Users\Katana\AppData\Local\Microsoft\WindowsApps\python.exe";
-            string pythonScriptPath = @"D:\YEAR 2 SEM 2\PFD\Solution\Python Script\pythontest.py";
-
-            ProcessStartInfo startInfo = new ProcessStartInfo
-            {
-                FileName = pythonInterpreterPath,
-                Arguments = $"\"{pythonScriptPath}\"",
-                UseShellExecute = false,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-                CreateNoWindow = true
-            };
-
-            using (Process process = Process.Start(startInfo))
-            {
-                if (process != null)
-                {
-                    await Task.Run(() =>
-                    {
-                        string output = process.StandardOutput.ReadToEnd();
-                        Console.WriteLine(output);
-                        process.WaitForExit();
-                    });
-                }
-			}
-		}
         
 		// GET: UserController
 		public ActionResult Index()
@@ -66,7 +37,6 @@ namespace PFD_GroupA.Controllers
             decimal balance = accountContext.GetAccountBalance(UserID);
             HttpContext.Session.SetString("Balance", balance.ToString());
 			UserKeybinds keybinds = keybindContext.GetUserKeybinds(UserID);
-            //RunPythonScript();
 
             //Transaction History
             Account account = accountContext.GetAccount(UserID);
