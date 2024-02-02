@@ -74,3 +74,21 @@ switchMode.addEventListener('change', function () {
 		document.body.classList.remove('dark');
 	}
 })
+
+
+// JavaScript function to toggle the popup
+function togglePopup() {
+	var popup = document.getElementById('helpPopup');
+	popup.classList.toggle('show');
+}
+
+// Add an event listener to the help icon to trigger the togglePopup function
+document.querySelector('.notification').addEventListener('click', togglePopup);
+
+// Add an event listener to the document to close the popup when clicking outside
+document.addEventListener('click', function (event) {
+	var popup = document.getElementById('helpPopup');
+	if (!event.target.closest('.notification') && !event.target.closest('#helpPopup')) {
+		popup.classList.remove('show');
+	}
+});
