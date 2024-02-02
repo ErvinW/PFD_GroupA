@@ -14,6 +14,9 @@
 	string AccountNum = BankObject.BankAccNo;
 	UserKeybinds test = Model;
 	Console.WriteLine(test);
+
+	var transactionJsonString = Context.Session.GetString("TransactionList");
+	List<Transactions> transactionList = JsonSerializer.Deserialize<List<Transactions>>(transactionJsonString);
 }
 
 
@@ -27,7 +30,8 @@
 
 	<!-- CSS File -->
 	<link rel="stylesheet" href="~/css/dashboard.css" asp-append-version="true" />
-
+	<link rel="stylesheet" href="~/css/transfer.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/css/account.css" asp-append-version="true" />
 
 	<!-- Unicons -->
 	<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
@@ -177,27 +181,101 @@
 				<i class="fa-solid fa-user fa-beat fa-sm" style="color: #3c91e6;"></i>
 			</a>
 		</nav>
+		<!-- Search Bar & Light Switch End -->
+		<!-- Dashboard Section Start -->
+		<main>
 
+			<div class="table-data">
+				<div class="todo">
+					<div class="head">
+						<h3>Profile</h3>
+					</div>
+					
+					<br>
+					<div class="expense-chart">
+						<div class="false-For-Bottom-Text">
+							<div class="mypiechart" id="imageContainer">
+								@*<img src="~/images/nopfp.jpg" alt="Your Image Alt Text" width="250" height="250" id="nopfpImage">*@
+							</div>
+							<div class="custom-body">
+								<div id="fileContainer">
+									@*<img id="facePic" src="https://www.bing.com/images/search?view=detailV2&ccid=BUKBU3OE&id=C82C1F7CE9767C7301ED83AF80D449DB25836A73&thid=OIP.BUKBU3OEkRGQRWJrUS4P3QHaHa&mediaurl=https%3a%2f%2fpbs.twimg.com%2fprofile_images%2f428316729220276224%2fEdBZ2Kgp.jpeg&exph=1252&expw=1252&q=random+pic&simid=608053132209580422&FORM=IRPRST&ck=A9D13322893A9A2E845245823E2C33CF&selectedIndex=0&itb=0&idpp=overlayview&ajaxhist=0&ajaxserp=0" width="250" height="250" />*@
+									<img id="facePic" src="~/images/nopfp.jpg" width="250" height="250" />
+									<br>
+									<div id="fileContainer">
+										<div class="inputFileContainer">
+											<input type="file" class="inputFile" id="fileInp" onchange="getFile(event)" accept="image/png, image/jpeg" />
+										</div>
+									</div>
+									<div class="button-container">
+										<button id="specialButton" onclick="uploadImage()">UPLOAD IMAGE</button>
+									</div>
+
+									<div id="userName" hidden>@AccountName</div>
+									<img src="" id="pfp" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="order">
+					<div class="head">
+						<h3>Transaction History</h3>
+						<i class='bx bx-search'></i>
+						<i class='bx bx-filter'></i>
+					</div>
+					<table>
+						<thead>
+							<tr>
+								<th>BankNo</th>
+								<th>Amount</th>
+								<th>Date Order</th>
+								<th>Category</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var transaction in transactionList)
+							{
+								<tr>
+									<td>@transaction.SenderAccount</td>
+									<td>@transaction.AmountSent.ToString("0.00")</td>
+									<td>@transaction.TransactionDate</td>
+									<td>@transaction.Category</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<br>
+		</main>
 	</section>
 
-	
-	<!-- Search Bar & Light Switch End -->
-	
+	<!-- Gesture Recognition -->
+	<section id="demos" class="invisible" style="z-index:10000">
+		<div id="liveView" class="videoView">
+			<button id="webcamButton" class="mdc-button mdc-button--raised" hidden>
+				<!--mdc-button mdc-button--raised-->
+				<span class="mdc-button__ripple" hidden></span>
+				<span class="mdc-button__label" hidden>ENABLE GESTURE</span>
+			</button>
+			<div style="position: absolute; bottom: 0px; z-index: 500;">
+				<video id="webcam" style="width: 270px; height: 240px;" autoplay playsinline></video>
+				<canvas class="output_canvas" id="output_canvas" style="position: absolute; left: 0px; top: 0px; z-index: 501;"></canvas>
+			</div>
+		</div>
+	</section>
+	<!-- Dashboard Section End -->
 	<!-- Firebase Picture Upload -->
-	<div style="position:absolute; top:20rem; left:20rem">
-		<img id="facePic" src="https://www.bing.com/images/search?view=detailV2&ccid=BUKBU3OE&id=C82C1F7CE9767C7301ED83AF80D449DB25836A73&thid=OIP.BUKBU3OEkRGQRWJrUS4P3QHaHa&mediaurl=https%3a%2f%2fpbs.twimg.com%2fprofile_images%2f428316729220276224%2fEdBZ2Kgp.jpeg&exph=1252&expw=1252&q=random+pic&simid=608053132209580422&FORM=IRPRST&ck=A9D13322893A9A2E845245823E2C33CF&selectedIndex=0&itb=0&idpp=overlayview&ajaxhist=0&ajaxserp=0" />
-		<input type="file" class="inputFile" id="fileInp" onchange="getFile(event)" accept="image/png, image/jpeg" />
-		<label for="fileInp"></label>
-		<span class="fileText"></span>
-		<button onclick="uploadImage()">UPLOAD IMAGE</button>
-
-		<div id="userName" hidden>@AccountName</div>
-		<img src="" id="pfp"/>
-
-	</div>
 
 	
+	
 
+	
+	
+	
 	<!-- Javascript Section -->
 	<script>
 		var bindsObject = @Json.Serialize(Model);
@@ -205,6 +283,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js" ></script>
 	
 	<script src="~/js/dashboard.js" asp-append-version="true"></script>
+	<script src="~/js/account.js" asp-append-version="true"></script>
 	@* <script src="~/js/chart.js" asp-append-version="true"></script> *@
 	<script src="~/js/site.js" asp-append-version="true"></script>
 	<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase.js"></script>

@@ -1,0 +1,128 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+.expense-chart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.false-For-Bottom-Text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.custom-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#fileContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#facePic {
+    width: 250px;
+    height: 250px;
+    margin-bottom: 10px; /* Adjust the margin as needed */
+}
+
+.inputFile {
+    margin-bottom: 10px; /* Adjust the margin as needed */
+}
+
+#chooseFileLabel {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #3498db;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 10px; /* Adjust the margin as needed */
+}
+
+.button-container {
+    display: flex;
+    gap: 10px; /* Adjust the gap between buttons as needed */
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #2ecc71;
+    color: #fff;
+    border: 2px solid #2980b9;
+    cursor: pointer;
+    margin-top: 10px; /* Adjust the margin as needed */
+}
+
+.inputFileContainer {
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+    }
+
+    #fileContainer {
+        text-align: center;
+    }
+
+    #fileInp {
+        font-size: 16px; /* Adjust the font size as needed */
+        padding: 8px; /* Adjust the padding as needed */
+        cursor: pointer;
+        background-color: #3C91E6; /* Set the desired color */
+        color: #fff;
+        border: 2px solid #2980b9;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    #fileInp:hover {
+        background-color: #2980b9;
+    }
+
+    #fileInp::-webkit-file-upload-button {
+        visibility: hidden;
+    }
+
+    #fileInp::before {
+        content: 'Choose File';
+        display: inline-block;
+        background: #3C91E6; /* Set the desired color */
+        color: #fff;
+        border: 2px solid #2980b9;
+        border-radius: 5px;
+        padding: 6px 10px; /* Adjust padding as needed */
+        outline: none;
+        white-space: nowrap;
+        cursor: pointer;
+        font-size: 16px; /* Adjust the font size as needed */
+        transition: background-color 0.3s;
+    }
+
+    #fileInp:hover::before {
+        background-color: #2980b9;
+    }
+
+    #fileText {
+        margin-top: 5px; /* Adjust the margin as needed */
+        font-size: 12px; /* Adjust the font size as needed */
+    }
+
+#specialButton {
+    padding: 10px 20px;
+    background-color: #2ecc71;
+    color: #fff;
+    border: 2px solid #2980b9;
+    border-radius: 5px; /* Add rounded corners */
+    cursor: pointer;
+    margin-top: 10px; /* Adjust the margin as needed */
+    transition: background-color 0.3s;
+}
+
+    #specialButton:hover {
+        background-color: #27ae60;
+    }

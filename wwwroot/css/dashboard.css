@@ -855,7 +855,7 @@ body.dark {
     position: fixed;
     top: 60px; /* Adjust this value to create space between the popup and the navbar */
     right: -100%;
-    width: 300px;
+    width: 500px;
     height: calc(100% - 60px); /* Adjust this value to fill the remaining height */
     background-color: rgba(0, 0, 0, 0.5);
     transition: right 0.3s ease;
