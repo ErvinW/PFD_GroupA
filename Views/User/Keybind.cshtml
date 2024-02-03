@@ -13,6 +13,13 @@
     string AccountName = AccountObject.UserName;
     string AccountID = AccountObject.UserID;
     string AccountNum = BankObject.BankAccNo;
+    var balan = Context.Session.GetString("Balance");
+    decimal Balance = decimal.Parse(balan);
+    UserKeybinds test = Model;
+    Console.WriteLine(test);
+
+    var transactionJsonString = Context.Session.GetString("TransactionList");
+    List<Transactions> transactionList = JsonSerializer.Deserialize<List<Transactions>>(transactionJsonString);
 }
 
 
@@ -27,7 +34,7 @@
     <!-- CSS File -->
     <link rel="stylesheet" href="~/css/dashboard.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/keybind.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/dashboard.css" asp-append-version="true" />
+    
 
     <!-- Unicons -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
