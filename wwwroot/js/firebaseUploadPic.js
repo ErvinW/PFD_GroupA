@@ -33,27 +33,37 @@ function getFile(event) {
 
 function uploadImage() {
     var userNameValue = document.getElementById('userName').innerText;
-    let storageRef = firebase.storage().ref("images/" + userNameValue+".png");
-    let uploadTask = storageRef.put(fileItem);
 
-    uploadTask.on("state_changed", (snapshot) => {
-        console.log(snapshot);
-    }, (error) => {
-        console.log("Error is ", error);
-    }, () => {
-        uploadTask.snapshot.ref.getDownloadURL().then((url) => {
-            let facePic = document.getElementById('facePic');
-
-            facePic.setAttribute('src', url);
-
-            // Resize the image after setting the src
-            facePic.onload = function () {
-                // Set the desired width and height
-                facePic.style.width = '100px';
-                facePic.style.height = '100px';
-            };
+    // Check if the file with the same username already exists
+    let storageRef = firebase.storage().ref("images/" + userNameValue + ".png");
+    storageRef.getDownloadURL()
+        .then((url) => {
+            // File with the same username already exists, handle accordingly
+            alert("Face already exist in database");
         })
-    })
+        .catch(() => {
+            // File with the same username doesn't exist, proceed with the upload
+            let uploadTask = storageRef.put(fileItem);
+
+            uploadTask.on("state_changed", (snapshot) => {
+                console.log(snapshot);
+            }, (error) => {
+                console.log("Error is ", error);
+            }, () => {
+                uploadTask.snapshot.ref.getDownloadURL().then((url) => {
+                    let facePic = document.getElementById('facePic');
+
+                    facePic.setAttribute('src', url);
+
+                    // Resize the image after setting the src
+                    facePic.onload = function () {
+                        // Set the desired width and height
+                        facePic.style.width = '100px';
+                        facePic.style.height = '100px';
+                    };
+                });
+            });
+        });
 }
 
 
