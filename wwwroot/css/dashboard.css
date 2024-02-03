@@ -857,7 +857,6 @@ body.dark {
     right: -100%;
     width: 500px;
     height: calc(100% - 60px); /* Adjust this value to fill the remaining height */
-    background-color: rgba(0, 0, 0, 0.5);
     transition: right 0.3s ease;
     overflow-y: auto;
     border-radius: 10px; /* Adjust this value for the desired roundness of the edges */
@@ -867,6 +866,7 @@ body.dark {
     position: absolute;
     top: 0;
     left: 0;
+    height: 100%;
     padding: 20px;
     background-color: #fff; /* Light mode background color */
     color: #333; /* Light mode text color */
