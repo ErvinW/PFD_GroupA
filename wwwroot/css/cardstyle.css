@@ -295,11 +295,20 @@
 }
 
 @media (max-width: 769px) {
-	
+
 	.checkout {
-		display: block;
-		width: 95%;
-		padding: 20px 15px 20px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin: 0 auto;
+		position: relative;
+		width: 60%;
+		background: white;
+		border-radius: 15px;
+		padding: 60px 45px 30px;
+		box-shadow: 0 10px 40px rgb(0 0 0 / 10%);
+		margin-right: auto;
+		margin-top: 20px;
 	}
 	.credit-card-box {
 		width: 97%;
