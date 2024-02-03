@@ -13,7 +13,15 @@
 	string AccountName = AccountObject.UserName;
 	string AccountID = AccountObject.UserID;
 	string AccountNum = BankObject.BankAccNo;
+	var balan = Context.Session.GetString("Balance");
+	decimal Balance = decimal.Parse(balan);
+	UserKeybinds test = Model;
+	Console.WriteLine(test);
+
+	var transactionJsonString = Context.Session.GetString("TransactionList");
+	List<Transactions> transactionList = JsonSerializer.Deserialize<List<Transactions>>(transactionJsonString);
 }
+
 
 <!DOCTYPE html>
 <html>
@@ -298,50 +306,17 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td>
-									<i class="fi fi-rr-coffee"></i>
-									<p>Great Coffee</p>
-								</td>
-								<td>$23</td>
-								<td>Today</td>
-								<td><span class="status completed">Others</span></td>
+								@foreach (var transaction in transactionList)
+								{
+								<tr>
+									<td>@transaction.SenderAccount</td>
+									<td>@transaction.AmountSent.ToString("0.00")</td>
+									<td>@transaction.TransactionDate</td>
+									<td>@transaction.Category</td>
+								</tr>
+								}
 							</tr>
-							<tr>
-								<td>
-									<i class="fi fi-rr-hamburger-soda"></i>
-									<p>Central Burger Cafe and Restaurant</p>
-								</td>
-								<td>$53.60</td>
-								<td>11-11-2023</td>
-								<td><span class="status completed">Others</span></td>
-							</tr>
-							<tr>
-								<td>
-									<i class="fi fi-rr-computer"></i>
-									<p>Computer Stuff</p>
-								</td>
-								<td>$1569.69</td>
-								<td>08-11-2023</td>
-								<td><span class="status pending">Education</span></td>
-							</tr>
-							<tr>
-								<td>
-									<i class="fi fi-rr-pizza-slice"></i>
-									<p>Pizza Heaven</p>
-								</td>
-								<td>$33.30</td>
-								<td>05-11-2023</td>
-								<td><span class="status completed">Others</span></td>
-							</tr>
-							<tr>
-								<td>
-									<i class="fi fi-rr-cream"></i>
-									<p>Soap & Skin</p>
-								</td>
-								<td>$103.10</td>
-								<td>04-11-2023</td>
-								<td><span class="status process">Health</span></td>
-							</tr>
+							
 						</tbody>
 					</table>
 				</div>

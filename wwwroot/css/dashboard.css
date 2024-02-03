@@ -115,7 +115,7 @@ h2#this-month-heading {
     top: 0;
     left: 0;
     width: 280px;
-    height: 55%;
+    height: 45%;
     background: var(--light);
     z-index: 2000;
     font-family: var(--lato);
