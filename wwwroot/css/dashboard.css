@@ -866,7 +866,6 @@ body.dark {
     position: absolute;
     top: 0;
     left: 0;
-    height: 100%;
     padding: 20px;
     background-color: #fff; /* Light mode background color */
     color: #333; /* Light mode text color */
