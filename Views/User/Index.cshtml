@@ -110,30 +110,6 @@
 						<span class="text">Help</span>
 					</a>
 				</li>
-				<li>
-					<button class="assignValue button-style" data-value="0">
-						<img src="/images/us.png" alt="">
-						<span class="text">English</span>
-					</button>
-				</li>
-				<li>
-					<button class="assignValue button-style" data-value="1">
-						<img src="/images/cn.png" alt="">
-						<span class="text">Chinese</span>
-					</button>
-				</li>
-				<li>
-					<button class="assignValue button-style" data-value="2">
-						<img src="/images/my.png" alt="">
-						<span class="text">Malay</span>
-					</button>
-				</li>
-				<li>
-					<button class="assignValue button-style" data-value="3">
-						<img src="/images/in.png" alt="">
-						<span class="text">Tamil</span>
-					</button>
-				
 			</ul>
 		</nav>
 		
@@ -151,6 +127,30 @@
 					<button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
 				</div>
 			</form>
+			<li>
+				<button class="assignValue button-style" data-value="0">
+					<img src="/images/us.png" alt="">
+					<span class="text">English</span>
+				</button>
+			</li>
+			<li>
+				<button class="assignValue button-style" data-value="1">
+					<img src="/images/cn.png" alt="">
+					<span class="text">Chinese</span>
+				</button>
+			</li>
+			<li>
+				<button class="assignValue button-style" data-value="2">
+					<img src="/images/my.png" alt="">
+					<span class="text">Malay</span>
+				</button>
+			</li>
+			<li>
+				<button class="assignValue button-style" data-value="3">
+					<img src="/images/in.png" alt="">
+					<span class="text">Tamil</span>
+				</button>
+			</li>
 			<input type="checkbox" id="switch-mode" hidden>
 			<label for="switch-mode" class="switch-mode"></label>
 			<a href="#" class="notification">
@@ -412,10 +412,10 @@
 	<!-- Gesture Recognition -->
 	<section id="demos" class="invisible" style="z-index:10000">
 		<div id="liveView" class="videoView">
-			<button id="webcamButton" class="mdc-button mdc-button--raised" hidden>
+			<button id="webcamButton" class="mdc-button mdc-button--raised" style="display: none;">
 				<!--mdc-button mdc-button--raised-->
-				<span class="mdc-button__ripple" hidden></span>
-				<span class="mdc-button__label" hidden>ENABLE GESTURE</span>
+				<span class="mdc-button__ripple" style="display: none;"></span>
+				<span class="mdc-button__label" style="display: none;">ENABLE GESTURE</span>
 			</button>
 			<div style="position: absolute; bottom: 0px; z-index: 500;">
 				<video id="webcam" style="width: 270px; height: 240px;" autoplay playsinline></video>
@@ -423,7 +423,7 @@
 			</div>
 		</div>
 	</section>
-	<!-- Gesture Recognition end-->
+	<!-- Dashboard Section End -->
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
