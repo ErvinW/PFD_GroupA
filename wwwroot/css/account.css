@@ -50,13 +50,17 @@
     gap: 10px; /* Adjust the gap between buttons as needed */
 }
 
-button {
+#uniqueSpecialBtn {
     padding: 10px 20px;
     background-color: #2ecc71;
     color: #fff;
     border: 2px solid #2980b9;
     cursor: pointer;
     margin-top: 10px; /* Adjust the margin as needed */
+}
+
+#uniqueSpecialBtn:hover {
+    background-color: #27ae60;
 }
 
 .inputFileContainer {
