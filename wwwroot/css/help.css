@@ -1,42 +1,58 @@
-﻿
-
-.container {
+﻿.container {
     font-family: "Poppins", sans-serif;
     width: 100vw;
-    display: grid;
-    grid-template-columns: 1.8fr 1.2fr;
-    gap: 1rem;
-    padding: .5rem 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-transform: capitalize;
 }
 
 @media screen and (max-width: 990px) {
     .container {
-        grid-template-columns: 1fr;
+        flex-direction: column;
     }
 }
 
 .main-video, .video-playlist {
-    width: 100%;
+    width: 80%; /* Adjust the width as needed */
     height: 30rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto; /* Center the container */
 }
 
-    .main-video .title {
-        margin-top: 1rem;
+    .main-video video {
+        width: 100%;
+        max-width: 800px; /* Adjust the maximum width as needed */
+        border-radius: .5rem;
     }
 
     .video-playlist .title {
-        padding-left: 1rem;
+        text-align: center;
     }
 
     .video-playlist > p {
         padding: 1rem;
         color: var(--secondary);
+        text-align: center;
     }
 
     .video-playlist .videos {
         height: 70%;
         overflow-y: auto;
+        text-align: center;
+    }
+
+    /* Add this style to center the iframe */
+    .main-video iframe {
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Optional: Center the text within the video playlist */
+    .video-playlist h3, .video-playlist p {
+        text-align: center;
     }
 
         .video-playlist .videos::-webkit-scrollbar {
@@ -84,12 +100,8 @@
     transform: translateY(-50%);
     width: 1.5rem;
     height: 1.5rem;
-    filter: invert(100%);
 }
 
-.video-playlist .videos .video.active img {
-    filter: invert(100%) sepia(100%) saturate(2000%) hue-rotate(360deg);
-}
 
 .video p {
     margin-left: 2.5rem;
@@ -188,3 +200,8 @@
         max-width: 800px; /* Adjust the maximum width as needed */
         border-radius: .5rem;
     }
+
+iframe {
+    margin-left: 31%;
+}
+
