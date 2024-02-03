@@ -27,7 +27,8 @@
 
 	<!-- CSS File -->
 	<link rel="stylesheet" href="~/css/dashboard.css" asp-append-version="true" />
-	
+	<link rel="stylesheet" href="~/css/setting.css" asp-append-version="true" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
 	<!-- Unicons -->
 	<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
@@ -230,9 +231,240 @@
 		</nav>
 		<!-- Search Bar & Light Switch End -->
 		<!-- Dashboard Section Start -->
-		
+		<main>
 
-	
+			<div class="container light-style flex-grow-1 container-p-y py-3">
+				<h4 class="font-weight-bold py-3 mb-4">
+					Account settings
+				</h4>
+				<div class="card overflow-hidden">
+					<div class="row no-gutters row-bordered row-border-light">
+						<div class="col-md-3 pt-0">
+							<div class="list-group list-group-flush account-settings-links">
+								<a class="list-group-item list-group-item-action active" data-toggle="list" href="#account-general">General</a>
+								<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-change-password">Change password</a>
+								<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-info">Info</a>
+								<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-social-links">Social links</a>
+								<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-connections">Connections</a>
+								<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-notifications">Notifications</a>
+							</div>
+						</div>
+						<div class="col-md-9">
+							<div class="tab-content">
+								<div class="tab-pane fade active show" id="account-general">
+									<!-- General settings content -->
+									<hr class="border-light m-0">
+									<div class="card-body">
+										<div class="form-group">
+											<label class="form-label">Username</label>
+											<input type="text" class="form-control mb-1" value= @AccountName>
+										</div>
+										<div class="form-group">
+											<label class="form-label">Name</label>
+											<input type="text" class="form-control" value=@AccountName>
+										</div>
+										<div class="form-group">
+											<label class="form-label">E-mail</label>
+											<input type="text" class="form-control mb-1" value="">
+											<div class="alert alert-warning mt-3">
+												Your email is not confirmed. Please check your inbox.<br>
+												<a href="javascript:void(0)">Resend confirmation</a>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="form-label">Company</label>
+											<input type="text" class="form-control" value="">
+										</div>
+									</div>
+								</div>
+								<div class="tab-pane fade" id="account-change-password">
+									<!-- Change password content -->
+									<div class="card-body pb-2">
+										<div class="form-group">
+											<label class="form-label">Current password</label>
+											<input type="password" class="form-control">
+										</div>
+										<div class="form-group">
+											<label class="form-label">New password</label>
+											<input type="password" class="form-control">
+										</div>
+										<div class="form-group">
+											<label class="form-label">Repeat new password</label>
+											<input type="password" class="form-control">
+										</div>
+									</div>
+								</div>
+								<div class="tab-pane fade" id="account-info">
+									<!-- Info content -->
+									<div class="card-body pb-2">
+										<div class="form-group">
+											<label class="form-label">Bio</label>
+											<textarea class="form-control" rows="5"></textarea>
+										</div>
+										<div class="form-group">
+											<label class="form-label">Birthday</label>
+											<input type="text" class="form-control" value="">
+										</div>
+										<div class="form-group">
+											<label class="form-label">Country</label>
+											<select class="custom-select">
+												<option>Malaysia</option>
+												<option selected>Singapore</option>
+												<option>China</option>
+												<option>Indonesia</option>
+												<option>USA</option>
+											</select>
+										</div>
+									</div>
+									<hr class="border-light m-0">
+									<div class="card-body pb-2">
+										<h6 class="mb-4">Contacts</h6>
+										<div class="form-group">
+											<label class="form-label">Phone</label>
+											<input type="text" class="form-control" value="">
+										</div>
+										<div class="form-group">
+											<label class="form-label">Website</label>
+											<input type="text" class="form-control" value>
+										</div>
+									</div>
+								</div>
+								<div class="tab-pane fade" id="account-social-links">
+									<!-- Social links content -->
+									<div class="card-body pb-2">
+										<div class="form-group">
+											<label class="form-label">Twitter</label>
+											<input type="text" class="form-control" value="https://twitter.com/user">
+										</div>
+										<div class="form-group">
+											<label class="form-label">Facebook</label>
+											<input type="text" class="form-control" value="https://www.facebook.com/user">
+										</div>
+										<div class="form-group">
+											<label class="form-label">Google+</label>
+											<input type="text" class="form-control" value>
+										</div>
+										<div class="form-group">
+											<label class="form-label">LinkedIn</label>
+											<input type="text" class="form-control" value>
+										</div>
+										<div class="form-group">
+											<label class="form-label">Instagram</label>
+											<input type="text" class="form-control" value="https://www.instagram.com/user">
+										</div>
+									</div>
+								</div>
+								<div class="tab-pane fade" id="account-connections">
+									<!-- Connections content -->
+									<div class="card-body">
+										<button type="button" class="btn btn-twitter">Connect to <strong>Twitter</strong></button>
+									</div>
+									<hr class="border-light m-0">
+									<div class="card-body">
+										<h5 class="mb-2">
+											<a href="javascript:void(0)" class="float-right text-muted text-tiny"><i class="ion ion-md-close"></i> Remove</a>
+											<i class="ion ion-logo-google text-google"></i>
+											You are connected to Google:
+										</h5>
+										<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f9979498818e9c9595b994989095d79a9694">[email&#160;protected]</a>
+									</div>
+									<hr class="border-light m-0">
+									<div class="card-body">
+										<button type="button" class="btn btn-facebook">Connect to <strong>Facebook</strong></button>
+									</div>
+									<hr class="border-light m-0">
+									<div class="card-body">
+										<button type="button" class="btn btn-instagram">Connect to <strong>Instagram</strong></button>
+									</div>
+								</div>
+								<div class="tab-pane fade" id="account-notifications">
+									<!-- Notifications content -->
+									<div class="card-body pb-2">
+										<h6 class="mb-4">Notification Preferences</h6>
+										<div class="form-group">
+											<label class="switcher">
+												<input type="checkbox" class="switcher-input" checked>
+												<span class="switcher-indicator">
+													<span class="switcher-yes"></span>
+													<span class="switcher-no"></span>
+												</span>
+												<span class="switcher-label">Email me when I receive new notifications</span>
+											</label>
+										</div>
+										<div class="form-group">
+											<label class="switcher">
+												<input type="checkbox" class="switcher-input" checked>
+												<span class="switcher-indicator">
+													<span class="switcher-yes"></span>
+													<span class="switcher-no"></span>
+												</span>
+												<span class="switcher-label">Receive push notifications for important updates</span>
+											</label>
+										</div>
+									</div>
+									<hr class="border-light m-0">
+									<div class="card-body pb-2">
+										<h6 class="mb-4">News</h6>
+										<div class="form-group">
+											<label class="switcher">
+												<input type="checkbox" class="switcher-input" checked>
+												<span class="switcher-indicator">
+													<span class="switcher-yes"></span>
+													<span class="switcher-no"></span>
+												</span>
+												<span class="switcher-label">News and announcements</span>
+											</label>
+										</div>
+										<div class="form-group">
+											<label class="switcher">
+												<input type="checkbox" class="switcher-input">
+												<span class="switcher-indicator">
+													<span class="switcher-yes"></span>
+													<span class="switcher-no"></span>
+												</span>
+												<span class="switcher-label">Weekly product updates</span>
+											</label>
+										</div>
+										<div class="form-group">
+											<label class="switcher">
+												<input type="checkbox" class="switcher-input" checked>
+												<span class="switcher-indicator">
+													<span class="switcher-yes"></span>
+													<span class="switcher-no"></span>
+												</span>
+												<span class="switcher-label">Weekly blog digest</span>
+											</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="text-right mt-3">
+					<button type="button" class="btn btn-primary">Save changes</button>&nbsp;
+					<button type="button" class="btn btn-default">Cancel</button>
+				</div>
+			</div>
+
+			<br>
+		</main>
+	</section>
+
+	<!-- Gesture Recognition -->
+	<section id="demos" class="invisible" style="z-index:10000">
+		<div id="liveView" class="videoView">
+			<button id="webcamButton" class="mdc-button mdc-button--raised" style="display: none;">
+				<!--mdc-button mdc-button--raised-->
+				<span class="mdc-button__ripple" style="display: none;"></span>
+				<span class="mdc-button__label" style="display: none;">ENABLE GESTURE</span>
+			</button>
+			<div style="position: absolute; bottom: 0px; z-index: 500;">
+				<video id="webcam" style="width: 270px; height: 240px;" autoplay playsinline></video>
+				<canvas class="output_canvas" id="output_canvas" style="position: absolute; left: 0px; top: 0px; z-index: 501;"></canvas>
+			</div>
+		</div>
+	</section>
 	<!-- Dashboard Section End -->
 	
 
@@ -245,6 +477,8 @@
 	<script src="~/js/dashboard.js" asp-append-version="true"></script>
 	<script src="~/js/chart.js" asp-append-version="true"></script>
 	<script src="~/js/site.js" asp-append-version="true"></script>
-
+	<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
