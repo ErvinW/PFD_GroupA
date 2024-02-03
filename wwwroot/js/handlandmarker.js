@@ -75,7 +75,6 @@ function enableCam(event) {
 let lastVideoTime = -1;
 let results = undefined;
 async function predictWebcam() {
-    console.log("hiii")
     canvasElement.style.width = 270;
     canvasElement.style.height = 240;
     canvasElement.width = 270;
@@ -103,12 +102,12 @@ async function predictWebcam() {
                 GestureRecognizer.HAND_CONNECTIONS,
                 {
                     color: "#00FF00",
-                    lineWidth: 5
+                    lineWidth: 2
                 }
             );
             drawingUtils.drawLandmarks(landmarks, {
                 color: "#FF0000",
-                lineWidth: 2
+                lineWidth: 1
             });
         }
     }
@@ -168,9 +167,6 @@ async function predictWebcam() {
             }
         }
 
-    } else {
-        //gestureOutput.style.display = "none";
-        console.log("none")
     }
     // Call this function again to keep predicting when the browser is ready.
     if (webcamRunning === true) {
