@@ -115,14 +115,18 @@ h2#this-month-heading {
     top: 0;
     left: 0;
     width: 280px;
-    height: 45%;
+    height: 60%;
     background: var(--light);
     z-index: 2000;
     font-family: var(--lato);
     transition: .3s ease;
     overflow-x: hidden;
     scrollbar-width: none;
+    /* Rounded corners */
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
+
 
 nav img {
     width: 150px;
